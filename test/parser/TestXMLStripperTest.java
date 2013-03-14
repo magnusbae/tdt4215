@@ -15,18 +15,23 @@ public class TestXMLStripperTest {
 	public void testStripAllXML() throws Exception{
 	
 		File f = new File("test/parser/T1.6.htm");
+		System.out.println(f.getAbsolutePath());
 		BufferedReader r = new BufferedReader(new FileReader(f));
 		String parse = "";
 		
 		
 		while(!r.ready()){}
 		String read = r.readLine();
-		while(read != null){
+		do{
 			parse += read;
 			read = r.readLine();
-		}
+		}while(read != null);
+		r.close();
+		
 		XMLStripper stripper = new XMLStripper();
 		String parsed = stripper.stripAllXML(parse);
 		System.out.println(parsed);
+		assertNotNull(parsed);
+		assertTrue(!parsed.equals(""));
 	}
 }

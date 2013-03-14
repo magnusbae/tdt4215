@@ -9,7 +9,7 @@ public class XMLStripper {
 	 * @return A string containing only text/non-XML markup
 	 */
 	public String stripAllXML(String XMLString){
-		String strippedString = XMLString.replaceAll("<.+>", "");
+		String strippedString = XMLString.replaceAll("<.+?>", "");
 		return strippedString;
 		
 	}
