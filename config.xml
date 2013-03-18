@@ -1,4 +1,5 @@
 <config><collection><uri>
-	</uri><directory>
-		http://idi.ntnu.no/emner/tdt4215/
-	</directory></collection><tokenizer><format>html</format><id>yes</id><categories>yes</categories><title>yes</title><body>yes</body><allsmall>yes</allsmall><sentenceboundary>"."</sentenceboundary><paragraphboundary>":"</paragraphboundary><result>"tokenized.xml"</result></tokenizer></config>
+	</uri>
+	<directory>test/parser/T1.6.htm</directory>
+	
+	</collection><tokenizer><format>html</format><id>yes</id><categories>yes</categories><title>yes</title><body>yes</body><allsmall>yes</allsmall><sentenceboundary>"."</sentenceboundary><paragraphboundary>":"</paragraphboundary><result>"tokenized.xml"</result></tokenizer></config>
