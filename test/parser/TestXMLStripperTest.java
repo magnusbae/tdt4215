@@ -31,7 +31,7 @@ public class TestXMLStripperTest {
 //		XMLStripper stripper = new XMLStripper();
 //		String parsed = stripper.stripAllXML(parse);
 		
-		XMLParser xp = new XMLParser(new File("config.xml"), false);
+		XMLParser xp = new XMLParser(new File("config.xml"), true);
 		
 //		System.out.println(parsed);
 //		assertNotNull(parsed);
