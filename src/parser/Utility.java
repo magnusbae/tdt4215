@@ -12,7 +12,7 @@ public class Utility {
 			String sCurrentLine;
 			br = new BufferedReader(new FileReader(fileName));
 			while ((sCurrentLine = br.readLine()) != null) {
-				sb.append(sCurrentLine);
+				sb.append(sCurrentLine+" ");
 			}
 			
 		} catch (IOException e) {

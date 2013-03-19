@@ -1,22 +1,23 @@
 package parser;
 
+import Datatypes.Case;
+
 public class CaseReader {
 	public static void main(String[] args) {
-		String[] cases = readCases();
+		Case[] cases = readCases();
 		cases = parseCases(cases);
-		for(String s:cases)
-			System.out.println(s);
+			
 	}
 	
-	public static String[] readCases(){
-		String[] returns = new String[8];
+	public static Case[] readCases(){
+		Case[] returns = new Case[8];
 		for(int i = 1; i<9;i++){
-			String file = Utility.readFile("Data/Case"+i);
-			returns[i-1] = file;
+			String file = Utility.readFile("Data/Cases/Case"+i);
+			returns[i-1] = new Case(file);
 		}
 		return returns;
 	}
-	public static String[] parseCases(String[] cases){
+	public static Case[] parseCases(Case[] cases){
 		return cases;
 		
 	}
