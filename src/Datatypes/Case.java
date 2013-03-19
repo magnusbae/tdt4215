@@ -8,7 +8,8 @@ import java.util.ArrayList;
 import snowball.ext.norwegianStemmer;
 
 public class Case {
-	String caseText; 
+	String caseText = "";
+	ArrayList<String> sentences = new ArrayList<String>();
 	public Case(String caseText){
 		ArrayList<String> stopWords = new ArrayList<String>();
 		BufferedReader br = null;
@@ -31,7 +32,12 @@ public class Case {
 
 		String input = "";
 		for(char ch:caseText.toCharArray()){
-			if ((!Character.isLetter(ch) && !Character.isDigit(ch)) || Character.getType(ch) == 9) {
+			String sentence = "";
+			if ((!Character.isLetter(ch) && !Character.isDigit(ch))) {
+				boolean sentenceStop = false;
+				if(!Character.isWhitespace(ch)){
+					sentenceStop = true;
+				}
 				if (input.length() > 0) {
 					boolean stopword = false;
 					for(String word:stopWords)
@@ -44,10 +50,16 @@ public class Case {
 					if(!stopword){
 						stemmer.setCurrent(input);
 						stemmer.stem();
-							if(this.caseText == null){
-								this.caseText = stemmer.getCurrent();
-							}else{
-								this.caseText += " . " + stemmer.getCurrent();
+						String current = stemmer.getCurrent();
+							if(!sentenceStop){
+								sentence += current + " . ";
+								this.caseText += current + " . ";
+								
+							}else {
+								sentence += current;
+								sentences.add(sentence);
+								sentence = "";
+								this.caseText += current + " : ";
 							}
 						input="";
 					}
@@ -56,6 +68,5 @@ public class Case {
 				input += Character.toLowerCase(ch);
 			}
 		}
-		System.out.println(this.caseText);
 	}
 }
