@@ -1,6 +1,6 @@
 package parser;
 
-import Datatypes.Case;
+import datatypes.Case;
 
 public class CaseReader {
 	public static void main(String[] args) {
