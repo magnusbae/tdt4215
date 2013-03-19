@@ -7,7 +7,9 @@ public class ICD10 {
 	ArrayList<String> synonyms = new ArrayList<>();
 	String ICDCode;
 	String label;
-	
+	public ICD10(){
+		
+	};
 	public String getSynonyms() {
 		String returns = "";
 		for(String syn:synonyms)

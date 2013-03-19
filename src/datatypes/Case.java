@@ -69,4 +69,16 @@ public class Case {
 			}
 		}
 	}
+	public String getCaseText() {
+		return caseText;
+	}
+	public void setCaseText(String caseText) {
+		this.caseText = caseText;
+	}
+	public ArrayList<String> getSentences() {
+		return sentences;
+	}
+	public void setSentences(ArrayList<String> sentences) {
+		this.sentences = sentences;
+	}
 }

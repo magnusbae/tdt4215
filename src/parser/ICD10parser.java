@@ -13,7 +13,9 @@ import datatypes.ICD10;
 
 public class ICD10parser{
 
-	private ArrayList<ICD10> parsedICDs;
+	private ArrayList<ICD10> parsedICDs = new ArrayList<>();
+	public ICD10parser() {
+	}
 	public void addCode(ICD10 code) throws FileNotFoundException
 	{	
 		parsedICDs.add(code);
@@ -38,7 +40,7 @@ public class ICD10parser{
 		digester.addCallMethod("rdf:RDF/owl:Class/synonym", "addSynonym", 0);
 
 		// call 'addCode' method when the next 'rdf:RDF/owl:Class' pattern is seen
-		digester.addSetNext("rdf:RDF/owl:Class/",   "addCode" );
+		digester.addSetNext("rdf:RDF/owl:Class/", "addCode" );
 
 		// now that rules and actions are configured, start the parsing process
 		File input = new File(icdPath);

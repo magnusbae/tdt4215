@@ -54,17 +54,53 @@ import java.util.Date;
  * Run it with no command-line arguments for usage information.
  */
 public class IndexFiles {
+	public Analyzer getAnalyzer() {
+		return analyzer;
+	}
 
-	private IndexFiles() {}
+	public void setAnalyzer(Analyzer analyzer) {
+		this.analyzer = analyzer;
+	}
+
+	public Directory getDir() {
+		return dir;
+	}
+
+	public void setDir(Directory dir) {
+		this.dir = dir;
+	}
+
+	public ArrayList<ICD10> getIcd10s() {
+		return icd10s;
+	}
+
+	public void setIcd10s(ArrayList<ICD10> icd10s) {
+		this.icd10s = icd10s;
+	}
+
+	public IndexWriter getIndexer() {
+		return indexer;
+	}
+
+	public void setIndexer(IndexWriter indexer) {
+		this.indexer = indexer;
+	}
+
+	Analyzer analyzer;
+	Directory dir;
+	ArrayList<ICD10> icd10s;
+	IndexWriter indexer;
+	public IndexFiles() {}
 
 	/** Index all text files under a directory. */
 	public void index(){
 		try {
 			ICD10parser parser = new ICD10parser("Data/icd10no.owl");
-			ArrayList<ICD10> icd10s = parser.getParsedICDs();
-			Directory dir = new RAMDirectory();
-			IndexWriterConfig iwc = new IndexWriterConfig(Version.LUCENE_CURRENT, new NorwegianAnalyzer(Version.LUCENE_CURRENT));
-			IndexWriter indexer = new IndexWriter(dir, iwc);
+			icd10s = parser.getParsedICDs();
+			dir = new RAMDirectory();
+			analyzer = new NorwegianAnalyzer(Version.LUCENE_CURRENT);
+			IndexWriterConfig iwc = new IndexWriterConfig(Version.LUCENE_CURRENT, analyzer);
+			indexer = new IndexWriter(dir, iwc);
 			for(ICD10 i:icd10s){
 				Document doc = new Document();
 				doc.add(new StringField("ICDCode", i.getICDCode(), Field.Store.YES));
