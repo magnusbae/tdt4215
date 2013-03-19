@@ -14,27 +14,26 @@ public class TestXMLStripperTest {
 	@Test
 	public void testStripAllXML() throws Exception{
 	
-//		File f = new File("test/parser/T1.6.htm");
-//		System.out.println(f.getAbsolutePath());
-//		BufferedReader r = new BufferedReader(new FileReader(f));
-//		String parse = "";
-//		
+		File f = new File("test/parser/T1.6.htm");
+		System.out.println(f.getAbsolutePath());
+		BufferedReader r = new BufferedReader(new FileReader(f));
+		String parse = "";
 		
-//		while(!r.ready()){}
-//		String read = r.readLine();
-//		do{
-//			parse += read;
-//			read = r.readLine();
-//		}while(read != null);
-//		r.close();
-//		
-//		XMLStripper stripper = new XMLStripper();
-//		String parsed = stripper.stripAllXML(parse);
 		
-		XMLParser xp = new XMLParser(new File("config.xml"), true);
+
+		while(!r.ready()){}
+		String read = r.readLine();
+		do{
+			parse += read;
+			read = r.readLine();
+		}while(read != null);
+		r.close();
+
 		
-//		System.out.println(parsed);
-//		assertNotNull(parsed);
-//		assertTrue(!parsed.equals(""));
+		XMLStripper stripper = new XMLStripper();
+		String parsed = stripper.stripAllXML(parse);
+		System.out.println(parsed);
+		assertNotNull(parsed);
+		assertTrue(!parsed.equals(""));
 	}
 }
