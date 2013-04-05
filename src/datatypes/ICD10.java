@@ -13,7 +13,7 @@ public class ICD10 {
 	public String getSynonyms() {
 		String returns = "";
 		for(String syn:synonyms)
-			returns+=syn;
+			returns+=" " +syn;
 		return returns;
 	}
 	public void setSynonyms(ArrayList<String> synonyms) {
@@ -33,5 +33,9 @@ public class ICD10 {
 	}
 	public void setICDCode(String iCDCode) {
 		ICDCode = iCDCode;
+	}
+	@Override
+	public String toString() {
+		return ICDCode + ": " + label + ": " + synonyms;
 	}
 }

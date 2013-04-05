@@ -102,13 +102,19 @@ public class IndexFiles {
 			indexer = new IndexWriter(dir, iwc);
 			for(ICD10 i:icd10s){
 				Document doc = new Document();
-				doc.add(new StringField("ICDCode", i.getICDCode(), Field.Store.YES));
-				doc.add(new TextField("label", i.getLabel(), Field.Store.YES));
-				doc.add(new TextField("synonyms", i.getSynonyms(), Field.Store.YES));
+				if(i.getICDCode()!=null)
+					doc.add(new StringField("ICDCode", i.getICDCode(), Field.Store.YES));
+				if(i.getLabel()!=null)
+					doc.add(new TextField("label", i.getLabel(), Field.Store.YES));
+				if(i.getSynonyms() != null){
+					doc.add(new TextField("synonyms", i.getSynonyms(), Field.Store.YES));
+					if(i.getSynonyms().contains("Hekseskudd"))
+					System.out.println("Added:" + i.getSynonyms());
+				}
 				indexer.addDocument(doc);
 			}
 			indexer.close();
-		} catch (IOException | SAXException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 
 		}

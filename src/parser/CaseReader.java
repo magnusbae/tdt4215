@@ -1,5 +1,9 @@
 package parser;
 
+import org.apache.lucene.analysis.Analyzer;
+import org.apache.lucene.analysis.no.NorwegianAnalyzer;
+import org.apache.lucene.util.Version;
+
 import datatypes.Case;
 
 public class CaseReader {

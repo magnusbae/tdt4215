@@ -16,7 +16,7 @@ public class Main {
 		for(Case c:cases)
 			for(String s:c.getSentences())
 				sf.Search(s, index.getDir(), index.getAnalyzer());
-		
-		
+
+
 	}
 }

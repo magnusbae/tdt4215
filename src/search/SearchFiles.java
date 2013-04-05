@@ -30,6 +30,7 @@ import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.index.DirectoryReader;
 import org.apache.lucene.index.IndexReader;
+import org.apache.lucene.queryparser.classic.MultiFieldQueryParser;
 import org.apache.lucene.queryparser.classic.ParseException;
 import org.apache.lucene.queryparser.classic.QueryParser;
 import org.apache.lucene.search.IndexSearcher;
@@ -46,19 +47,24 @@ public class SearchFiles {
 
   public SearchFiles() {}
   public Document Search(String searchString, Directory index, Analyzer analyzer){
-	try {
-		Query q = new QueryParser(Version.LUCENE_CURRENT, "title", analyzer).parse(searchString);
+	
+	  try {
+		QueryParser q = new MultiFieldQueryParser(Version.LUCENE_CURRENT
+                , new String[] {"labels","synonyms"},
+                analyzer);
+		
 		int hitsPerPage = 10;
 		IndexReader reader = IndexReader.open(index);
 		IndexSearcher searcher = new IndexSearcher(reader);
+		
 		TopScoreDocCollector collector = TopScoreDocCollector.create(hitsPerPage, true);
-		searcher.search(q, collector);
+		searcher.search(q.parse(searchString), collector);
 		ScoreDoc[] hits = collector.topDocs().scoreDocs;
 		System.out.println("Found " + hits.length + " hits.");
 		for(int i=0;i<hits.length;++i) {
 		    int docId = hits[i].doc;
 		    Document d = searcher.doc(docId);
-		    System.out.println((i + 1) + ". " + d.get("isbn") + "\t" + d.get("title"));
+		    System.out.println(d.toString());
 		}
 	} catch (ParseException | IOException e) {
 		e.printStackTrace();
