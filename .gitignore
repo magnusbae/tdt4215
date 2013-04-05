@@ -1,10 +1,14 @@
+#For this project#
+tokenized.xml
+
+#General#
 *.class
 *.project
 *.classpath
 
 # folders #
-/bin
-
+bin/
+.settings/
 
 # Package Files #
 *.jar
