@@ -30,7 +30,7 @@ public class ICD10parser{
 		parsedICDs = new ArrayList<ICD10>();
 		Digester digester = new Digester();
 		digester.setValidating(true);
-
+		
 		digester.addObjectCreate("rdf:RDF", ICD10parser.class );
 		digester.addObjectCreate("rdf:RDF/owl:Class", ICD10.class );
 
