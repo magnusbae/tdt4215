@@ -5,7 +5,20 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+
 import org.apache.commons.digester3.Digester;
+import org.semanticweb.HermiT.Reasoner;
+import org.semanticweb.owlapi.apibinding.OWLManager;
+import org.semanticweb.owlapi.model.IRI;
+import org.semanticweb.owlapi.model.OWLOntology;
+import org.semanticweb.owlapi.model.OWLOntologyCreationException;
+import org.semanticweb.owlapi.model.OWLOntologyManager;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 
@@ -26,26 +39,14 @@ public class ICD10parser{
 	}
 
 	public ICD10parser(String icdPath) throws IOException, SAXException {
-
-		parsedICDs = new ArrayList<ICD10>();
-		Digester digester = new Digester();
-		digester.setValidating(true);
-		
-		digester.addObjectCreate("rdf:RDF", ICD10parser.class );
-		digester.addObjectCreate("rdf:RDF/owl:Class", ICD10.class );
-
-		// set different properties of owl:Class instance using specified methods
-		digester.addCallMethod("rdf:RDF/owl:Class/rdfs:label", "setLabel", 0);
-		digester.addCallMethod("rdf:RDF/owl:Class/code_formatted", "setICDCode", 0);
-		digester.addCallMethod("rdf:RDF/owl:Class/synonym", "addSynonym", 0);
-
-		// call 'addCode' method when the next 'rdf:RDF/owl:Class' pattern is seen
-		digester.addSetNext("rdf:RDF/owl:Class/", "addCode" );
-
-		// now that rules and actions are configured, start the parsing process
-		File input = new File(icdPath);
-		digester.clear();
-		ICD10parser parse = (ICD10parser) digester.parse(input);
-
+		  OWLOntologyManager m=OWLManager.createOWLOntologyManager();
+		  OWLOntology o;
+		try {
+			o = m.loadOntologyFromOntologyDocument(new File("Data/icd10no.owl"));
+			Reasoner hermit=new Reasoner(o);
+		} catch (OWLOntologyCreationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }
