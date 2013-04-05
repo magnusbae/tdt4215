@@ -92,7 +92,6 @@ public class IndexFiles {
 	IndexWriter indexer;
 	public IndexFiles() {}
 
-	/** Index all text files under a directory. */
 	public void index(){
 		try {
 			ICD10parser parser = new ICD10parser("Data/icd10no.owl");
