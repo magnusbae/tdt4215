@@ -30,7 +30,14 @@ public class NLH {
 		text = value;
 	}
 	public void addText(String ownText) {
+		System.out.println(ownText);
 		text+=ownText + " ";
 
+	}
+	public String getText() {
+		return text;
+	}
+	public String getSynonyms(){
+		return synonyms;
 	}
 }

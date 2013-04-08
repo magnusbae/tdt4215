@@ -38,9 +38,11 @@ import org.xml.sax.SAXException;
 
 import datatypes.Atc;
 import datatypes.ICD10;
+import datatypes.NLH;
 
 import parser.AtcParser;
 import parser.ICD10parser;
+import parser.NLHParser;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -90,6 +92,7 @@ public class IndexFiles {
 	ArrayList<ICD10> icd10s;
 	ArrayList<Atc> atcs;
 	IndexWriter indexer;
+	private ArrayList<NLH> NLHs;
 	public IndexFiles(Directory dir, Analyzer ana) {
 		this.dir = dir;
 		this.analyzer = ana;
@@ -118,6 +121,31 @@ public class IndexFiles {
 
 		}
 	}
+	
+	public void indexNLH(){
+		try {
+			NLHParser parser = new NLHParser();
+			NLHs = parser.getParsedNLHs();
+			IndexWriterConfig iwc = new IndexWriterConfig(Version.LUCENE_CURRENT, analyzer);
+			indexer = new IndexWriter(dir, iwc);
+			for(NLH i:NLHs){
+				Document doc = new Document();
+				if(i.getChapter()!=null)
+					doc.add(new StringField("Chapter", i.getChapter(), Field.Store.YES));
+				if(i.getText()!=null)
+					doc.add(new TextField("label", i.getText(), Field.Store.YES));
+				if(i.getSynonyms() != null){
+					doc.add(new TextField("synonyms", i.getSynonyms(), Field.Store.YES));
+				}
+				indexer.addDocument(doc);
+			}
+			indexer.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+
+		}
+	}
+	
 	public void indexAtc(){
 		try {
 			AtcParser parser = new AtcParser("Data/atc.owl");

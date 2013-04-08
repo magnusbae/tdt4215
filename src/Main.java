@@ -21,28 +21,32 @@ public class Main {
 		Case[] cases = CaseReader.readCases();
 		Directory dirICD10;
 		Directory dirAtc;
+		Directory dirNLH;
 		Analyzer ana = new NorwegianAnalyzer(Version.LUCENE_CURRENT);
 		try {
 			dirICD10 = new SimpleFSDirectory(new File("Index/icd10"));
 			dirAtc = new SimpleFSDirectory(new File("Index/atc"));
+			dirNLH = new SimpleFSDirectory(new File("Index/NLH"));
 			IndexFiles indexICD10 = new IndexFiles(dirICD10, ana);
-//			indexICD10.indexICD10();
+			//			indexICD10.indexICD10();
 			IndexFiles indexAtc = new IndexFiles(dirAtc, ana);
-//			indexAtc.indexAtc();
-			new NLHParser("");
+			//			indexAtc.indexAtc();
+			IndexFiles indexNLH = new IndexFiles(dirNLH, ana);
+			indexNLH.indexNLH();
 			SearchFiles sf = new SearchFiles();
 			Case c = cases[0];
-//			for(Case c:cases)
-//				for(String s:c.getSentences()){
+			//			for(Case c:cases)
+			//				for(String s:c.getSentences()){
 			String s = c.getCaseText();
+			sf.Search(s, dirNLH, ana);
 			sf.Search(s, dirICD10, ana);
-					sf.Search(s, dirAtc, ana);
-//				}
-			
+			sf.Search(s, dirAtc, ana);
+			//				}
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+
 
 	}
 }

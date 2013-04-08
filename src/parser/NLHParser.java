@@ -8,14 +8,17 @@ import java.util.ArrayList;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+import org.jsoup.nodes.Node;
+import org.jsoup.nodes.TextNode;
 import org.jsoup.select.Elements;
+import org.jsoup.select.NodeVisitor;
 
 import datatypes.NLH;
 
 public class NLHParser {
 	private ArrayList<NLH> parsedNLH;
 
-	public NLHParser(String filename) {
+	public NLHParser() {
 		parsedNLH = new ArrayList<NLH>();
 
 		FileInputStream is;
@@ -23,11 +26,11 @@ public class NLHParser {
 		try {
 			File folder = new File("Data/NLH/T/");
 			File[] listOfFiles = folder.listFiles();
-			
+
 			for (File file : listOfFiles) {
-			    if (file.isFile()) {
-			        NLHParser.parse(file.getName());
-			    }
+				if (file.isFile()) {
+					parse(file.getName());
+				}
 			}
 
 		} catch (Exception e) {
@@ -35,20 +38,26 @@ public class NLHParser {
 		}
 	}
 
-	private static void parse(String name) throws IOException {
+	private void parse(String name) throws IOException {
 		FileInputStream fs = new FileInputStream("Data/NLH/T/"+name);
 		Document doc = Jsoup.parse(fs, "UTF-8", "");
-
-		Elements chapters = doc.select("H2");
-		for(Element c:chapters){
+		
+		final ArrayList<NLH> chapters = new ArrayList<NLH>();
+		doc.traverse(new NodeVisitor() {
+			String text = "";
 			NLH chapter = new NLH();
-			for(Element e:c.getAllElements()){
-				chapter.setChapter(e.ownText());
-				for(Element i:e.getElementsByAttribute("defa")){
-					chapter.addText(i.ownText());
+			public void head(Node node, int depth) {
+				if(node.getClass() == TextNode.class){
+					text+= ((TextNode) node).text();
 				}
 			}
-		}		
+			public void tail(Node node, int depth) {
+				if(node.nodeName().equals("defa")){
+					chapter.addText(text);
+					text = "";
+				}
+			}
+		});
 	}
 
 	public ArrayList<NLH> getParsedNLHs() {
