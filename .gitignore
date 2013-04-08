@@ -5,6 +5,7 @@ tokenized.xml
 *.class
 *.project
 *.classpath
+*.DS_Store
 
 # folders #
 bin/

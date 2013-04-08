@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<com.yattasolutions.uml.diagrams.classifier:ClassDiagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:com.yattasolutions.uml.diagrams.classifier="http://ns.yatta-solutions.com/umllab/diagrams/classifier/1.1.0" xmi:id="_MvuKAKA2EeKY1JUH1aorKw">
+  <modelElement href="tdt4215.uml#_IzhaMKA2EeKY1JUH1aorKw"/>
+  <nodes xsi:type="com.yattasolutions.uml.diagrams.classifier:PackageVisual" xmi:id="_M9jxsKA2EeKY1JUH1aorKw" name="search">
+    <modelElement href="tdt4215.uml#_JSeAAaA2EeKY1JUH1aorKw"/>
+    <visualProperties xmi:id="_M9jxsaA2EeKY1JUH1aorKw" position="586.0,123.0" size="-1.0,-1.0"/>
+  </nodes>
+  <nodes xsi:type="com.yattasolutions.uml.diagrams.classifier:PackageVisual" xmi:id="_M9mN8KA2EeKY1JUH1aorKw" name="javax">
+    <modelElement href="tdt4215.uml#_JT0q4KA2EeKY1JUH1aorKw"/>
+    <visualProperties xmi:id="_M9mN8aA2EeKY1JUH1aorKw" position="736.0,123.0" size="-1.0,-1.0"/>
+  </nodes>
+  <nodes xsi:type="com.yattasolutions.uml.diagrams.classifier:PackageVisual" xmi:id="_M9k_0KA2EeKY1JUH1aorKw" name="snowball">
+    <modelElement href="tdt4215.uml#_JS6E4KA2EeKY1JUH1aorKw"/>
+    <visualProperties xmi:id="_M9k_0aA2EeKY1JUH1aorKw" position="-529.0,219.0" size="-1.0,-1.0"/>
+  </nodes>
+  <nodes xsi:type="com.yattasolutions.uml.diagrams.classifier:PackageVisual" xmi:id="_M9ijkKA2EeKY1JUH1aorKw" name="parser">
+    <modelElement href="tdt4215.uml#_JSeAAKA2EeKY1JUH1aorKw"/>
+    <visualProperties xmi:id="_M9ijkaA2EeKY1JUH1aorKw" position="-523.0,313.0" size="-1.0,-1.0"/>
+  </nodes>
+  <nodes xsi:type="com.yattasolutions.uml.diagrams.classifier:PackageVisual" xmi:id="_M9gHUKA2EeKY1JUH1aorKw" name="org">
+    <modelElement href="tdt4215.uml#_JSbjwKA2EeKY1JUH1aorKw"/>
+    <visualProperties xmi:id="_M9gHUaA2EeKY1JUH1aorKw" position="-519.0,53.0" size="-1.0,-1.0"/>
+  </nodes>
+  <nodes xsi:type="com.yattasolutions.uml.diagrams.classifier:PackageVisual" xmi:id="_M9ncEKA2EeKY1JUH1aorKw" name="com">
+    <modelElement href="tdt4215.uml#_JT1R8KA2EeKY1JUH1aorKw"/>
+    <visualProperties xmi:id="_M9ncEaA2EeKY1JUH1aorKw" position="-524.0,123.0" size="-1.0,-1.0"/>
+  </nodes>
+  <nodes xsi:type="com.yattasolutions.uml.diagrams.classifier:ClassifierVisual" xmi:id="_M9W9YKA2EeKY1JUH1aorKw" name="Main">
+    <modelElement href="tdt4215.uml#_JdinkKA2EeKY1JUH1aorKw"/>
+    <visualProperties xmi:id="_M9XkcKA2EeKY1JUH1aorKw" position="-352.0,65.0" size="-1.0,-1.0"/>
+    <visibility xmi:id="_M9XkcaA2EeKY1JUH1aorKw" label="+"/>
+    <operations xmi:id="_M9XkcqA2EeKY1JUH1aorKw" name="main" staticOperation="true">
+      <modelElement href="tdt4215.uml#_JdlD0KA2EeKY1JUH1aorKw"/>
+      <visibility xmi:id="_M9Xkc6A2EeKY1JUH1aorKw" label="+"/>
+      <parameters xmi:id="_M9XkdKA2EeKY1JUH1aorKw" name="args">
+        <modelElement href="tdt4215.uml#_JdlD0aA2EeKY1JUH1aorKw"/>
+        <type xmi:id="_M9XkdaA2EeKY1JUH1aorKw" name="String">
+          <modelElement href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        </type>
+      </parameters>
+    </operations>
+  </nodes>
+  <nodes xsi:type="com.yattasolutions.uml.diagrams.classifier:PackageVisual" xmi:id="_M9b14KA2EeKY1JUH1aorKw" name="java">
+    <modelElement href="tdt4215.uml#_JSU2EKA2EeKY1JUH1aorKw"/>
+    <visualProperties xmi:id="_M9b14aA2EeKY1JUH1aorKw" position="-351.0,141.0" size="-1.0,-1.0"/>
+  </nodes>
+  <nodes xsi:type="com.yattasolutions.uml.diagrams.classifier:PackageVisual" xmi:id="_M9hVcKA2EeKY1JUH1aorKw" name="datatypes">
+    <modelElement href="tdt4215.uml#_JSdY8aA2EeKY1JUH1aorKw"/>
+    <visualProperties xmi:id="_M9hVcaA2EeKY1JUH1aorKw" position="-352.0,223.0" size="-1.0,-1.0"/>
+  </nodes>
+</com.yattasolutions.uml.diagrams.classifier:ClassDiagram>
