@@ -45,32 +45,40 @@ import org.apache.lucene.util.Version;
 /** Simple command-line based search demo. */
 public class SearchFiles {
 
-  public SearchFiles() {}
-  public Document Search(String searchString, Directory index, Analyzer analyzer){
-	
-	  try {
-		QueryParser q = new MultiFieldQueryParser(Version.LUCENE_CURRENT
-                , new String[] {"labels","synonyms"},
-                analyzer);
-		
-		int hitsPerPage = 10;
-		IndexReader reader = IndexReader.open(index);
-		IndexSearcher searcher = new IndexSearcher(reader);
-		
-		TopScoreDocCollector collector = TopScoreDocCollector.create(hitsPerPage, true);
-		searcher.search(q.parse(searchString), collector);
-		ScoreDoc[] hits = collector.topDocs().scoreDocs;
-		System.out.println("Found " + hits.length + " hits.");
-		for(int i=0;i<hits.length;++i) {
-		    int docId = hits[i].doc;
-		    Document d = searcher.doc(docId);
-		    System.out.println(d.toString());
+	public SearchFiles() {}
+	public Document Search(String searchString, Directory index, Analyzer analyzer){
+
+		try {
+			QueryParser q = new MultiFieldQueryParser(Version.LUCENE_CURRENT
+					, new String[] {"labels","synonyms"},
+					analyzer);
+
+			int hitsPerPage = 10;
+			IndexReader reader = IndexReader.open(index);
+			IndexSearcher searcher = new IndexSearcher(reader);
+
+			TopScoreDocCollector collector = TopScoreDocCollector.create(hitsPerPage, true);
+			searcher.search(q.parse(searchString), collector);
+			ScoreDoc[] hits = collector.topDocs().scoreDocs;
+			System.out.println("Found " + hits.length + " hits.");
+			if(hits.length<3){
+				for(int i=0;i<hits.length;++i) {
+					int docId = hits[i].doc;
+					Document d = searcher.doc(docId);
+					System.out.println(d.toString());
+				}}
+			else{
+				for(int i=0;i<3;++i) {
+					int docId = hits[i].doc;
+					Document d = searcher.doc(docId);
+					System.out.println(d.toString());
+				}
+			}
+		} catch (ParseException | IOException e) {
+			e.printStackTrace();
 		}
-	} catch (ParseException | IOException e) {
-		e.printStackTrace();
+
+		return null;
+
 	}
-	
-	return null;
-	  
-  }
 }

@@ -11,24 +11,23 @@ public class Case {
 	String caseText = "";
 	ArrayList<String> sentences = new ArrayList<String>();
 	public Case(String caseText){
-		//		ArrayList<String> stopWords = new ArrayList<String>();
-		//		BufferedReader br = null;
-		//		try {
-		//			String s;
-		//			br = new BufferedReader(new FileReader("Data/norwegianStopwords.txt"));
-		//			while ((s = br.readLine()) != null) {
-		//				stopWords.add(s);
-		//			}
-		//		} catch (IOException e) {
-		//			e.printStackTrace();
-		//		} finally {
-		//			try {
-		//				if (br != null)br.close();
-		//			} catch (IOException ex) {
-		//				ex.printStackTrace();
-		//			}
-		//		}
-		//		norwegianStemmer stemmer = new norwegianStemmer();
+		ArrayList<String> stopWords = new ArrayList<String>();
+		BufferedReader br = null;
+		try {
+			String s;
+			br = new BufferedReader(new FileReader("Data/norwegianStopwords.txt"));
+			while ((s = br.readLine()) != null) {
+				stopWords.add(s);
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (br != null)br.close();
+			} catch (IOException ex) {
+				ex.printStackTrace();
+			}
+		}
 
 		String input = "";
 		String sentence = "";
@@ -39,18 +38,28 @@ public class Case {
 					sentenceStop = true;
 				}
 				if (input.length() > 0) {
-					String current = input;
-					if(!sentenceStop){
-						sentence += current + " ";
-						this.caseText += current + " . ";
+					boolean stopword = false;
+					for(String word:stopWords)
+						if(word.equals(input)){
+							stopword = true;
+							input="";
+							break;
+						}
 
-					}else {
-						sentence += current;
-						sentences.add(sentence);
-						sentence = "";
-						this.caseText += current + " : ";
+					if(!stopword){
+						String current = input;
+							if(!sentenceStop){
+								sentence += current + " . ";
+								this.caseText += current + " . ";
+								
+							}else {
+								sentence += current;
+								sentences.add(sentence);
+								sentence = "";
+								this.caseText += current + " : ";
+							}
+						input="";
 					}
-					input="";
 				}
 			} else {
 				input += Character.toLowerCase(ch);
