@@ -42,7 +42,6 @@ import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
 import org.apache.lucene.util.Version;
 
-/** Simple command-line based search demo. */
 public class SearchFiles {
 
 	public SearchFiles() {}
@@ -50,7 +49,7 @@ public class SearchFiles {
 
 		try {
 			QueryParser q = new MultiFieldQueryParser(Version.LUCENE_CURRENT
-					, new String[] {"labels","synonyms"},
+					, new String[] {"label","synonyms"},
 					analyzer);
 
 			int hitsPerPage = 10;

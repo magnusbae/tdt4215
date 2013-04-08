@@ -36,8 +36,10 @@ import org.apache.lucene.store.SimpleFSDirectory;
 import org.apache.lucene.util.Version;
 import org.xml.sax.SAXException;
 
+import datatypes.Atc;
 import datatypes.ICD10;
 
+import parser.AtcParser;
 import parser.ICD10parser;
 
 import java.io.BufferedReader;
@@ -86,13 +88,14 @@ public class IndexFiles {
 	Analyzer analyzer;
 	Directory dir;
 	ArrayList<ICD10> icd10s;
+	ArrayList<Atc> atcs;
 	IndexWriter indexer;
 	public IndexFiles(Directory dir, Analyzer ana) {
 		this.dir = dir;
 		this.analyzer = ana;
 	}
 
-	public void index(){
+	public void indexICD10(){
 		try {
 			ICD10parser parser = new ICD10parser("Data/icd10no.owl");
 			icd10s = parser.getParsedICDs();
@@ -107,6 +110,26 @@ public class IndexFiles {
 				if(i.getSynonyms() != null){
 					doc.add(new TextField("synonyms", i.getSynonyms(), Field.Store.YES));
 				}
+				indexer.addDocument(doc);
+			}
+			indexer.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+
+		}
+	}
+	public void indexAtc(){
+		try {
+			AtcParser parser = new AtcParser("Data/atc.owl");
+			atcs = parser.getParsedAtcs();
+			IndexWriterConfig iwc = new IndexWriterConfig(Version.LUCENE_CURRENT, analyzer);
+			indexer = new IndexWriter(dir, iwc);
+			for(Atc i:atcs){
+				Document doc = new Document();
+				if(i.getAtcCode()!=null)
+					doc.add(new StringField("Atccode", i.getAtcCode(), Field.Store.YES));
+				if(i.getLabel()!=null)
+					doc.add(new TextField("label", i.getLabel(), Field.Store.YES));
 				indexer.addDocument(doc);
 			}
 			indexer.close();

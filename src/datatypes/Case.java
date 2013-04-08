@@ -56,7 +56,7 @@ public class Case {
 								sentence += current;
 								sentences.add(sentence);
 								sentence = "";
-								this.caseText += current + " : ";
+								this.caseText += current + "  ";
 							}
 						input="";
 					}

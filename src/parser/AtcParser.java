@@ -26,14 +26,14 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 
-import datatypes.ICD10;
+import datatypes.Atc;
 
-public class ICD10parser{
+public class AtcParser{
 
-    private ArrayList<ICD10> parsedICDs;
+    private ArrayList<Atc> parsedAtcs;
 
-    public ICD10parser(String filename) {
-        parsedICDs = new ArrayList<ICD10>();
+    public AtcParser(String filename) {
+        parsedAtcs = new ArrayList<Atc>();
         
         FileInputStream is;
         
@@ -44,7 +44,7 @@ public class ICD10parser{
             onto.read(is, "RDF/XML");
 
             StmtIterator stit = onto.listStatements();
-            ICD10 icd10 = new ICD10();
+            Atc atc = new Atc();
             while (stit.hasNext()) {
 
                 Statement stmt = stit.nextStatement(); // get next statement
@@ -53,30 +53,29 @@ public class ICD10parser{
                 RDFNode object = stmt.getObject(); // get the object
 
                 // Create new object
-                if (icd10.getICDCode() == null) {
-                	icd10.setICDCode(subject.getLocalName());
+                if (atc.getAtcCode() == null) {
+                	atc.setAtccode(subject.getLocalName());
                 }
                 
                 // Add object to list when no more statements
-                if (!icd10.getICDCode().equals(subject.getLocalName())){
-                    parsedICDs.add(icd10);
-                    icd10 = new ICD10();
+                if (!atc.getAtcCode().equals(subject.getLocalName())){
+                    parsedAtcs.add(atc);
+                    System.out.println(subject.getLocalName());
+                    atc = new Atc();
                 }
                 // Add label and synonyms
                 if (predicate.getLocalName().equals("label") || predicate.getLocalName().equals("synonym")||predicate.getLocalName().equals("seeAlso")||predicate.getLocalName().equals("underterm")) {
-                    
                 	String value = object.toString();
 
                 	if(value.contains("http")){
-                    	int i = value.indexOf("http");
+                    	int i = value.lastIndexOf("http");
                     	value = value.substring(0, i - 2);
                     }
+//                	System.out.println("added: " + value);
                    
                     if (predicate.getLocalName().equals("label")){
-                        icd10.setLabel(value);
-                    }
-                    else if (predicate.getLocalName().equals("synonym")||predicate.getLocalName().equals("seeAlso")||predicate.getLocalName().equals("underterm")){
-                        icd10.addSynonym(value);
+                    	System.out.println(value);
+                        atc.setLabel(value);
                     }
                 }
             }
@@ -86,7 +85,7 @@ public class ICD10parser{
         }
     }
 
-    public ArrayList<ICD10> getParsedICDs() {
-        return parsedICDs;
+    public ArrayList<Atc> getParsedAtcs() {
+        return parsedAtcs;
     }
 }
