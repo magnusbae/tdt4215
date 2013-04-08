@@ -10,6 +10,7 @@ import org.apache.lucene.util.Version;
 
 import datatypes.Case;
 import parser.CaseReader;
+import parser.NLHParser;
 import search.IndexFiles;
 import search.SearchFiles;
 
@@ -28,6 +29,7 @@ public class Main {
 //			indexICD10.indexICD10();
 			IndexFiles indexAtc = new IndexFiles(dirAtc, ana);
 //			indexAtc.indexAtc();
+			new NLHParser("");
 			SearchFiles sf = new SearchFiles();
 			Case c = cases[0];
 //			for(Case c:cases)
