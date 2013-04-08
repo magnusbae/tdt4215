@@ -32,6 +32,7 @@ import org.apache.lucene.index.Term;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
 import org.apache.lucene.store.RAMDirectory;
+import org.apache.lucene.store.SimpleFSDirectory;
 import org.apache.lucene.util.Version;
 import org.xml.sax.SAXException;
 
@@ -48,12 +49,8 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Date;
 
-/** Index all text files under a directory.
- * <p>
- * This is a command-line application demonstrating simple Lucene indexing.
- * Run it with no command-line arguments for usage information.
- */
 public class IndexFiles {
+	
 	public Analyzer getAnalyzer() {
 		return analyzer;
 	}
@@ -90,14 +87,15 @@ public class IndexFiles {
 	Directory dir;
 	ArrayList<ICD10> icd10s;
 	IndexWriter indexer;
-	public IndexFiles() {}
+	public IndexFiles(Directory dir, Analyzer ana) {
+		this.dir = dir;
+		this.analyzer = ana;
+	}
 
 	public void index(){
 		try {
 			ICD10parser parser = new ICD10parser("Data/icd10no.owl");
 			icd10s = parser.getParsedICDs();
-			dir = new RAMDirectory();
-			analyzer = new NorwegianAnalyzer(Version.LUCENE_CURRENT);
 			IndexWriterConfig iwc = new IndexWriterConfig(Version.LUCENE_CURRENT, analyzer);
 			indexer = new IndexWriter(dir, iwc);
 			for(ICD10 i:icd10s){
@@ -108,8 +106,6 @@ public class IndexFiles {
 					doc.add(new TextField("label", i.getLabel(), Field.Store.YES));
 				if(i.getSynonyms() != null){
 					doc.add(new TextField("synonyms", i.getSynonyms(), Field.Store.YES));
-					if(i.getSynonyms().contains("Hekseskudd"))
-					System.out.println("Added:" + i.getSynonyms());
 				}
 				indexer.addDocument(doc);
 			}
