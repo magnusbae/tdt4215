@@ -53,27 +53,34 @@ public class NLHParser {
 			String text = "";
 			String name = "";
 			NLH chapter = new NLH();
+			NLH mainChapter = new NLH();
 			public void head(Node node, int depth) {
 				if(node instanceof Element)
-					if(((Element)node).tagName().equalsIgnoreCase("H2") || ((Element)node).tagName().equalsIgnoreCase("H3")){
+					if((((Element)node).tagName().equalsIgnoreCase("H3"))){
 						chapter = new NLH();
 						parsedNLH.add(chapter);
 						name = "";
 						getName = true;
+					}else if (((Element)node).tagName().equalsIgnoreCase("H2")){
+						mainChapter = new NLH();
+						parsedNLH.add(mainChapter);
+						name = "";
+						getName = true;
 					}
-					if(node.hasAttr("class")){
-						if(node.attr("class").equals("defa")){
-							text = "";
-							recordText = true;
-							added = false;
-						}else{
-							if(!added){
-								chapter.addText(text);
-								added = true;
-							}
-							recordText = false;
+				if(node.hasAttr("class")){
+					if(node.attr("class").equals("defa")){
+						text = "";
+						recordText = true;
+						added = false;
+					}else{
+						if(!added){
+							chapter.addText(text);
+							mainChapter.addText(text);
+							added = true;
 						}
+						recordText = false;
 					}
+				}
 				if(node.getClass() == TextNode.class){
 					if(recordText)
 						text+= ((TextNode) node).text();
@@ -82,11 +89,16 @@ public class NLHParser {
 				}
 			}
 			public void tail(Node node, int depth) {
-				if(node instanceof Element)
-					if(((Element)node).tagName().equalsIgnoreCase("H2") || ((Element)node).tagName().equalsIgnoreCase("H3")){
+				if(node instanceof Element){
+					if(((Element)node).tagName().equalsIgnoreCase("H3")){
 						chapter.setChapter(name);
 						getName = false;
 					}
+					if(((Element)node).tagName().equalsIgnoreCase("H2")){
+						mainChapter.setChapter(name);
+						getName = false;
+					}
+				}
 			}
 		});
 	}

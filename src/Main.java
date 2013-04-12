@@ -32,7 +32,7 @@ public class Main {
 			IndexFiles indexAtc = new IndexFiles(dirAtc, ana);
 			//			indexAtc.indexAtc();
 			IndexFiles indexNLH = new IndexFiles(dirNLH, ana);
-//			indexNLH.indexNLH();
+			indexNLH.indexNLH();
 			SearchFiles sf = new SearchFiles();
 						for(Case c:cases){
 //							for(String s:c.getSentences()){
