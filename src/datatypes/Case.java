@@ -5,8 +5,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import snowball.ext.norwegianStemmer;
-
 public class Case {
 	String caseText = "";
 	ArrayList<String> sentences = new ArrayList<String>();
