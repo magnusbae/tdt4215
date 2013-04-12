@@ -63,14 +63,6 @@ public class IndexFiles {
 		this.analyzer = analyzer;
 	}
 
-	public Directory getDir() {
-		return dir;
-	}
-
-	public void setDir(Directory dir) {
-		this.dir = dir;
-	}
-
 	public ArrayList<ICD10> getIcd10s() {
 		return icd10s;
 	}
@@ -88,13 +80,17 @@ public class IndexFiles {
 	}
 
 	Analyzer analyzer;
-	Directory dir;
+	Directory dirAtc, dirNLH, dirICD;
+	
 	ArrayList<ICD10> icd10s;
 	ArrayList<Atc> atcs;
+	ArrayList<NLH> NLHs;
+	
 	IndexWriter indexer;
-	private ArrayList<NLH> NLHs;
-	public IndexFiles(Directory dir, Analyzer ana) {
-		this.dir = dir;
+	public IndexFiles(Directory dir, Directory dirAtc, Directory dirNLH, Analyzer ana) {
+		this.dirAtc = dirAtc;
+		this.dirNLH = dirNLH;
+		this.dirICD = dir;
 		this.analyzer = ana;
 	}
 
@@ -103,7 +99,7 @@ public class IndexFiles {
 			ICD10parser parser = new ICD10parser("Data/icd10no.owl");
 			icd10s = parser.getParsedICDs();
 			IndexWriterConfig iwc = new IndexWriterConfig(Version.LUCENE_CURRENT, analyzer);
-			indexer = new IndexWriter(dir, iwc);
+			indexer = new IndexWriter(dirICD, iwc);
 			for(ICD10 i:icd10s){
 				Document doc = new Document();
 				if(i.getICDCode()!=null)
@@ -127,19 +123,19 @@ public class IndexFiles {
 			NLHParser parser = new NLHParser();
 			NLHs = parser.getParsedNLHs();
 			IndexWriterConfig iwc = new IndexWriterConfig(Version.LUCENE_CURRENT, analyzer);
-			indexer = new IndexWriter(dir, iwc);
+			indexer = new IndexWriter(dirNLH, iwc);
 			for(NLH i:NLHs){
 				Document doc = new Document();
 				if(i.getChapter()!=null){
 					doc.add(new StringField("Chapter", i.getChapter(), Field.Store.YES));
-				}else{
-					System.out.println(i.getSynonyms());
 				}
 				if(i.getText()!=null)
 					doc.add(new TextField("label", i.getText(), Field.Store.YES));
 				if(i.getSynonyms() != null){
+					
 					doc.add(new TextField("synonyms", i.getSynonyms(), Field.Store.YES));
 				}
+				
 				indexer.addDocument(doc);
 			}
 			indexer.close();
@@ -154,7 +150,7 @@ public class IndexFiles {
 			AtcParser parser = new AtcParser("Data/atc.owl");
 			atcs = parser.getParsedAtcs();
 			IndexWriterConfig iwc = new IndexWriterConfig(Version.LUCENE_CURRENT, analyzer);
-			indexer = new IndexWriter(dir, iwc);
+			indexer = new IndexWriter(dirAtc, iwc);
 			for(Atc i:atcs){
 				Document doc = new Document();
 				if(i.getAtcCode()!=null)

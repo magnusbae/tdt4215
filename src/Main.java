@@ -27,20 +27,18 @@ public class Main {
 			dirICD10 = new SimpleFSDirectory(new File("Index/icd10"));
 			dirAtc = new SimpleFSDirectory(new File("Index/atc"));
 			dirNLH = new SimpleFSDirectory(new File("Index/NLH"));
-			IndexFiles indexICD10 = new IndexFiles(dirICD10, ana);
-			//			indexICD10.indexICD10();
-			IndexFiles indexAtc = new IndexFiles(dirAtc, ana);
-			//			indexAtc.indexAtc();
-			IndexFiles indexNLH = new IndexFiles(dirNLH, ana);
-			indexNLH.indexNLH();
+			IndexFiles index = new IndexFiles(dirICD10,dirAtc,dirNLH, ana);
+			index.indexICD10();
+			index.indexAtc();
+			index.indexNLH();
 			SearchFiles sf = new SearchFiles();
-						for(Case c:cases){
-//							for(String s:c.getSentences()){
+			for(Case c:cases){
+				//							for(String s:c.getSentences()){
 				String s = c.getCaseText();
 				sf.Search(s, dirNLH, ana);
-//				sf.Search(s, dirICD10, ana);
-//				sf.Search(s, dirAtc, ana);
-								}
+				//				sf.Search(s, dirICD10, ana);
+				//				sf.Search(s, dirAtc, ana);
+			}
 
 		} catch (IOException e) {
 			e.printStackTrace();
