@@ -130,8 +130,11 @@ public class IndexFiles {
 			indexer = new IndexWriter(dir, iwc);
 			for(NLH i:NLHs){
 				Document doc = new Document();
-				if(i.getChapter()!=null)
+				if(i.getChapter()!=null){
 					doc.add(new StringField("Chapter", i.getChapter(), Field.Store.YES));
+				}else{
+					System.out.println(i.getSynonyms());
+				}
 				if(i.getText()!=null)
 					doc.add(new TextField("label", i.getText(), Field.Store.YES));
 				if(i.getSynonyms() != null){

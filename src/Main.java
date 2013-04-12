@@ -32,16 +32,15 @@ public class Main {
 			IndexFiles indexAtc = new IndexFiles(dirAtc, ana);
 			//			indexAtc.indexAtc();
 			IndexFiles indexNLH = new IndexFiles(dirNLH, ana);
-			indexNLH.indexNLH();
+//			indexNLH.indexNLH();
 			SearchFiles sf = new SearchFiles();
-			Case c = cases[0];
-			//			for(Case c:cases)
-			//				for(String s:c.getSentences()){
-			String s = c.getCaseText();
-			sf.Search(s, dirNLH, ana);
-			sf.Search(s, dirICD10, ana);
-			sf.Search(s, dirAtc, ana);
-			//				}
+						for(Case c:cases){
+//							for(String s:c.getSentences()){
+				String s = c.getCaseText();
+				sf.Search(s, dirNLH, ana);
+//				sf.Search(s, dirICD10, ana);
+//				sf.Search(s, dirAtc, ana);
+								}
 
 		} catch (IOException e) {
 			e.printStackTrace();

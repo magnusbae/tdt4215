@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import org.hamcrest.core.IsInstanceOf;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -20,42 +21,72 @@ public class NLHParser {
 
 	public NLHParser() {
 		parsedNLH = new ArrayList<NLH>();
-
-		FileInputStream is;
-
 		try {
 			File folder = new File("Data/NLH/T/");
 			File[] listOfFiles = folder.listFiles();
 
 			for (File file : listOfFiles) {
 				if (file.isFile()) {
-					parse(file.getName());
+					parse(file.getName(), "Data/NLH/T/");
 				}
 			}
+			folder = new File("Data/NLH/L/");
+			listOfFiles = folder.listFiles();
 
+			for (File file : listOfFiles) {
+				if (file.isFile()) {
+					parse(file.getName(), "Data/NLH/L/");
+				}
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
-	private void parse(String name) throws IOException {
-		FileInputStream fs = new FileInputStream("Data/NLH/T/"+name);
+	boolean recordText = false;
+	boolean added = true;
+	boolean getName = false;
+	private void parse(String name, String dir) throws IOException {
+		FileInputStream fs = new FileInputStream(dir+name);
 		Document doc = Jsoup.parse(fs, "UTF-8", "");
-		
-		final ArrayList<NLH> chapters = new ArrayList<NLH>();
 		doc.traverse(new NodeVisitor() {
 			String text = "";
+			String name = "";
 			NLH chapter = new NLH();
 			public void head(Node node, int depth) {
+				if(node instanceof Element)
+					if(((Element)node).tagName().equalsIgnoreCase("H2") || ((Element)node).tagName().equalsIgnoreCase("H3")){
+						chapter = new NLH();
+						parsedNLH.add(chapter);
+						name = "";
+						getName = true;
+					}
+					if(node.hasAttr("class")){
+						if(node.attr("class").equals("defa")){
+							text = "";
+							recordText = true;
+							added = false;
+						}else{
+							if(!added){
+								chapter.addText(text);
+								added = true;
+							}
+							recordText = false;
+						}
+					}
 				if(node.getClass() == TextNode.class){
-					text+= ((TextNode) node).text();
+					if(recordText)
+						text+= ((TextNode) node).text();
+					if(getName)
+						name+=((TextNode)node).text();
 				}
 			}
 			public void tail(Node node, int depth) {
-				if(node.nodeName().equals("defa")){
-					chapter.addText(text);
-					text = "";
-				}
+				if(node instanceof Element)
+					if(((Element)node).tagName().equalsIgnoreCase("H2") || ((Element)node).tagName().equalsIgnoreCase("H3")){
+						chapter.setChapter(name);
+						getName = false;
+					}
 			}
 		});
 	}

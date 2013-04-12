@@ -64,13 +64,13 @@ public class SearchFiles {
 				for(int i=0;i<hits.length;++i) {
 					int docId = hits[i].doc;
 					Document d = searcher.doc(docId);
-					System.out.println(d.toString());
+					System.out.println(d.getField("Chapter"));
 				}}
 			else{
 				for(int i=0;i<3;++i) {
 					int docId = hits[i].doc;
 					Document d = searcher.doc(docId);
-					System.out.println(d.toString());
+					System.out.println(d.getField("Chapter"));
 				}
 			}
 		} catch (ParseException | IOException e) {

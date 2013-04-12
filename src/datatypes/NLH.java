@@ -15,13 +15,13 @@ public class NLH {
 		return chapter;
 	}
 	public void setChapter(String localName) {
-		if(localName.contains(" ")){
-			chapter = localName.substring(0, localName.indexOf(" "));
-			synonyms += " " + localName.substring(localName.indexOf(" "));
-		}else if(localName.contains(""+((char)160))){
+		if(localName.contains(""+((char)160))){
 			chapter = localName.substring(0, localName.indexOf(((char)160)));
 			synonyms += " " + localName.substring(localName.indexOf(((char)160)));
-		}
+		}else if(localName.contains(" ")){
+			chapter = localName.substring(0, localName.indexOf(" "));
+			synonyms += " " + localName.substring(localName.indexOf(" "));
+		} 
 		else {
 			chapter = localName;
 		}
@@ -30,7 +30,6 @@ public class NLH {
 		text = value;
 	}
 	public void addText(String ownText) {
-		System.out.println(ownText);
 		text+=ownText + " ";
 
 	}
