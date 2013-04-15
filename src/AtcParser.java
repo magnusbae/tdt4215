@@ -1,4 +1,5 @@
-package parser;
+
+
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -26,7 +27,6 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 
-import datatypes.Atc;
 
 public class AtcParser{
 

@@ -1,4 +1,5 @@
-package parser;
+
+
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -8,7 +9,6 @@ import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.no.NorwegianAnalyzer;
 import org.apache.lucene.util.Version;
 
-import datatypes.Case;
 
 public class CaseReader {
 	public static void main(String[] args) {

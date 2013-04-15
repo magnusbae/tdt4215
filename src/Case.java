@@ -1,4 +1,4 @@
-package datatypes;
+
 
 import java.io.BufferedReader;
 import java.io.FileReader;

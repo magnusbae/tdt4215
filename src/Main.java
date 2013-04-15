@@ -8,11 +8,6 @@ import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.SimpleFSDirectory;
 import org.apache.lucene.util.Version;
 
-import datatypes.Case;
-import parser.CaseReader;
-import parser.NLHParser;
-import search.IndexFiles;
-import search.SearchFiles;
 
 
 public class Main {
@@ -27,18 +22,23 @@ public class Main {
 			dirICD10 = new SimpleFSDirectory(new File("Index/icd10"));
 			dirAtc = new SimpleFSDirectory(new File("Index/atc"));
 			dirNLH = new SimpleFSDirectory(new File("Index/NLH"));
+
 			IndexFiles index = new IndexFiles(dirICD10,dirAtc,dirNLH, ana);
 			index.indexICD10();
 			index.indexAtc();
 			index.indexNLH();
+
+		
 			SearchFiles sf = new SearchFiles();
 			for(Case c:cases){
 				//							for(String s:c.getSentences()){
 				String s = c.getCaseText();
 				sf.Search(s, dirNLH, ana);
-				//				sf.Search(s, dirICD10, ana);
-				//				sf.Search(s, dirAtc, ana);
-			}
+
+				sf.Search(s, dirICD10, ana);
+				sf.Search(s, dirAtc, ana);
+								}
+
 
 		} catch (IOException e) {
 			e.printStackTrace();

@@ -1,4 +1,5 @@
-package parser;
+
+
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -14,7 +15,6 @@ import org.jsoup.nodes.TextNode;
 import org.jsoup.select.Elements;
 import org.jsoup.select.NodeVisitor;
 
-import datatypes.NLH;
 
 public class NLHParser {
 	private ArrayList<NLH> parsedNLH;

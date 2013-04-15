@@ -1,4 +1,4 @@
-package search;
+
 
 /*
  * Licensed to the Apache Software Foundation (ASF) under one or more
@@ -16,6 +16,7 @@ package search;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 import org.apache.lucene.analysis.no.*;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.analysis.*;
@@ -36,13 +37,7 @@ import org.apache.lucene.store.SimpleFSDirectory;
 import org.apache.lucene.util.Version;
 import org.xml.sax.SAXException;
 
-import datatypes.Atc;
-import datatypes.ICD10;
-import datatypes.NLH;
 
-import parser.AtcParser;
-import parser.ICD10parser;
-import parser.NLHParser;
 
 import java.io.BufferedReader;
 import java.io.File;
