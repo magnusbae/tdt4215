@@ -31,7 +31,7 @@ import datatypes.ICD10;
 public class ICD10parser{
 
     private ArrayList<ICD10> parsedICDs;
-
+    private OntModel onto;
     public ICD10parser(String filename) {
         parsedICDs = new ArrayList<ICD10>();
         
@@ -40,7 +40,7 @@ public class ICD10parser{
         try {
             is = new FileInputStream(filename);
             
-            OntModel onto = ModelFactory.createOntologyModel(OntModelSpec.OWL_MEM, null);
+            onto = ModelFactory.createOntologyModel(OntModelSpec.OWL_MEM, null);
             onto.read(is, "RDF/XML");
 
             StmtIterator stit = onto.listStatements();
@@ -89,4 +89,9 @@ public class ICD10parser{
     public ArrayList<ICD10> getParsedICDs() {
         return parsedICDs;
     }
+
+	public OntModel getOnto() {
+		// TODO Auto-generated method stub
+		return onto;
+	}
 }

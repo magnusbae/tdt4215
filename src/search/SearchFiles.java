@@ -52,7 +52,7 @@ public class SearchFiles {
 					, new String[] {"label","synonyms"},
 					analyzer);
 
-			int hitsPerPage = 10;
+			int hitsPerPage = 3;
 			IndexReader reader = IndexReader.open(index);
 			IndexSearcher searcher = new IndexSearcher(reader);
 
@@ -64,12 +64,18 @@ public class SearchFiles {
 				for(int i=0;i<hits.length;++i) {
 					int docId = hits[i].doc;
 					Document d = searcher.doc(docId);
+					//					System.out.println(d.getField("synonyms"));
+					//					System.out.println(d.getField("label"));
+					//					System.out.println(d);
 					System.out.println(d.getField("Chapter"));
 				}}
 			else{
 				for(int i=0;i<3;++i) {
 					int docId = hits[i].doc;
 					Document d = searcher.doc(docId);
+					//					System.out.println(d.getField("synonyms"));
+					//					System.out.println(d.getField("label"));
+					//					System.out.println(d);
 					System.out.println(d.getField("Chapter"));
 				}
 			}

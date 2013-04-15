@@ -16,6 +16,7 @@ package search;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import org.apache.commons.io.FileUtils;
 import org.apache.lucene.analysis.no.*;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.analysis.*;
@@ -25,16 +26,25 @@ import org.apache.lucene.document.FieldType;
 import org.apache.lucene.document.LongField;
 import org.apache.lucene.document.StringField;
 import org.apache.lucene.document.TextField;
+import org.apache.lucene.index.IndexReader;
 import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.IndexWriterConfig.OpenMode;
 import org.apache.lucene.index.IndexWriterConfig;
 import org.apache.lucene.index.Term;
+import org.apache.lucene.queryparser.classic.MultiFieldQueryParser;
+import org.apache.lucene.queryparser.classic.ParseException;
+import org.apache.lucene.queryparser.classic.QueryParser;
+import org.apache.lucene.search.IndexSearcher;
+import org.apache.lucene.search.ScoreDoc;
+import org.apache.lucene.search.TopScoreDocCollector;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
 import org.apache.lucene.store.RAMDirectory;
 import org.apache.lucene.store.SimpleFSDirectory;
 import org.apache.lucene.util.Version;
 import org.xml.sax.SAXException;
+
+import com.hp.hpl.jena.ontology.OntModel;
 
 import datatypes.Atc;
 import datatypes.ICD10;
@@ -54,7 +64,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class IndexFiles {
-	
+
 	public Analyzer getAnalyzer() {
 		return analyzer;
 	}
@@ -81,12 +91,16 @@ public class IndexFiles {
 
 	Analyzer analyzer;
 	Directory dirAtc, dirNLH, dirICD;
-	
+
 	ArrayList<ICD10> icd10s;
 	ArrayList<Atc> atcs;
 	ArrayList<NLH> NLHs;
-	
+	OntModel atcModel;
+	OntModel icd10Model;
+
 	IndexWriter indexer;
+
+
 	public IndexFiles(Directory dir, Directory dirAtc, Directory dirNLH, Analyzer ana) {
 		this.dirAtc = dirAtc;
 		this.dirNLH = dirNLH;
@@ -94,10 +108,21 @@ public class IndexFiles {
 		this.analyzer = ana;
 	}
 
+	public void index(){
+		try {
+			FileUtils.deleteDirectory(new File("Index/"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		indexICD10();
+		indexAtc();
+		indexNLH();
+	}
 	public void indexICD10(){
 		try {
 			ICD10parser parser = new ICD10parser("Data/icd10no.owl");
 			icd10s = parser.getParsedICDs();
+			icd10Model = parser.getOnto();
 			IndexWriterConfig iwc = new IndexWriterConfig(Version.LUCENE_CURRENT, analyzer);
 			indexer = new IndexWriter(dirICD, iwc);
 			for(ICD10 i:icd10s){
@@ -117,7 +142,7 @@ public class IndexFiles {
 
 		}
 	}
-	
+
 	public void indexNLH(){
 		try {
 			NLHParser parser = new NLHParser();
@@ -126,16 +151,15 @@ public class IndexFiles {
 			indexer = new IndexWriter(dirNLH, iwc);
 			for(NLH i:NLHs){
 				Document doc = new Document();
-				if(i.getChapter()!=null){
+				if(i.getChapter()!=null)
 					doc.add(new StringField("Chapter", i.getChapter(), Field.Store.YES));
-				}
 				if(i.getText()!=null)
 					doc.add(new TextField("label", i.getText(), Field.Store.YES));
 				if(i.getSynonyms() != null){
-					
-					doc.add(new TextField("synonyms", i.getSynonyms(), Field.Store.YES));
+					String syn = i.getSynonyms();
+					syn += findSyn(i.getSynonyms());
+					doc.add(new TextField("synonyms", syn, Field.Store.YES));
 				}
-				
 				indexer.addDocument(doc);
 			}
 			indexer.close();
@@ -144,11 +168,42 @@ public class IndexFiles {
 
 		}
 	}
-	
+
+	private String findSyn(String synonyms) throws IOException {
+		if(synonyms.length() < 3)
+			return "";
+		try {
+			QueryParser q = new MultiFieldQueryParser(Version.LUCENE_CURRENT
+					, new String[] {"label","synonyms"},
+					analyzer);
+
+			int hitsPerPage = 3;
+			IndexReader reader = IndexReader.open(dirAtc);
+			IndexSearcher searcher = new IndexSearcher(reader);
+			TopScoreDocCollector collector = TopScoreDocCollector.create(hitsPerPage, true);
+			synonyms = synonyms.replaceAll("[^\\w\\s]"," ");
+			searcher.search(q.parse(QueryParser.escape(synonyms)), collector);
+			ScoreDoc[] hits = collector.topDocs().scoreDocs;
+			if(hits.length != 0){
+				int docId = hits[0].doc;
+				Document d = searcher.doc(docId);
+				String syn = " " + d.get("Atccode") + " " +  d.get("label")+ " ";
+				return syn;
+			}
+			return null;
+		} catch (ParseException | IOException e) {
+			e.printStackTrace();
+		}
+
+		return null;
+
+	}
+
 	public void indexAtc(){
 		try {
 			AtcParser parser = new AtcParser("Data/atc.owl");
 			atcs = parser.getParsedAtcs();
+			atcModel = parser.getOnto();
 			IndexWriterConfig iwc = new IndexWriterConfig(Version.LUCENE_CURRENT, analyzer);
 			indexer = new IndexWriter(dirAtc, iwc);
 			for(Atc i:atcs){
@@ -161,8 +216,6 @@ public class IndexFiles {
 			}
 			indexer.close();
 		} catch (Exception e) {
-			e.printStackTrace();
-
 		}
 	}
 }
