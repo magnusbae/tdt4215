@@ -31,17 +31,20 @@ import org.xml.sax.SAXException;
 
 public class AtcParser{
 
-    private ArrayList<Atc> parsedAtcs;
+	private OntModel onto;
+    public OntModel getOnto() {
+		return onto;
+	}
+	private ArrayList<Atc> parsedAtcs;
 
     public AtcParser(String filename) {
         parsedAtcs = new ArrayList<Atc>();
-        
         FileInputStream is;
         
         try {
             is = new FileInputStream(filename);
             
-            OntModel onto = ModelFactory.createOntologyModel(OntModelSpec.OWL_MEM, null);
+            onto = ModelFactory.createOntologyModel(OntModelSpec.OWL_MEM, null);
             onto.read(is, "RDF/XML");
 
             StmtIterator stit = onto.listStatements();

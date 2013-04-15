@@ -31,20 +31,20 @@ public class Main {
 			dirNLH = new SimpleFSDirectory(new File("Index/NLH"));
 
 			IndexFiles index = new IndexFiles(dirICD10,dirAtc,dirNLH, ana);
-			index.indexICD10();
-			index.indexAtc();
-			index.indexNLH();
 
-		
+			index.index();
+
 			SearchFiles sf = new SearchFiles();
 			for(Case c:cases){
-				//							for(String s:c.getSentences()){
+					//							for(String s:c.getSentences()){
 				String s = c.getCaseText();
 				sf.Search(s, dirNLH, ana);
-
+	
+	
 				sf.Search(s, dirICD10, ana);
 				sf.Search(s, dirAtc, ana);
-								}
+			}
+
 
 
 		} catch (IOException e) {
