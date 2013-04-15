@@ -78,14 +78,16 @@ public class SearchFiles {
 			Arrays.sort(hits, new Comparator<ScoreDoc>() {
 				@Override
 				public int compare(ScoreDoc o1, ScoreDoc o2) {
-					return (int) (o1.score - o2.score);
+					float score = (o2.score-o1.score);
+					score = score*10000;
+					return (int) score;
 				}
 			});
 			
 			for(ScoreDoc c:hits){
 				System.out.println(searcher.doc(c.doc).get("Chapter"));
-				System.out.println(c.score);
-				System.out.println("-----------------------");
+//				System.out.println(c.score);
+//				System.out.println("-----------------------");
 			}
 		} catch (ParseException | IOException e) {
 			e.printStackTrace();
