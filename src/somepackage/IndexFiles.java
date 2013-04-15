@@ -50,11 +50,6 @@ import org.xml.sax.SAXException;
 
 import com.hp.hpl.jena.ontology.OntModel;
 
-import datatypes.Atc;
-import datatypes.ICD10;
-import datatypes.NLH;
-
-
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -172,6 +167,7 @@ public class IndexFiles {
 	}
 
 	private String findSyn(String synonyms) throws IOException {
+		String syn = "";
 		if(synonyms.length() < 3)
 			return "";
 		try {
@@ -189,16 +185,25 @@ public class IndexFiles {
 			if(hits.length != 0){
 				int docId = hits[0].doc;
 				Document d = searcher.doc(docId);
-				String syn = " " + d.get("Atccode") + " " +  d.get("label")+ " ";
+				syn = " " + d.get("Atccode") + " " +  d.get("label")+ " ";
+			}
+			collector = TopScoreDocCollector.create(hitsPerPage, true);
+			reader = IndexReader.open(dirICD);
+			searcher = new IndexSearcher(reader);
+			synonyms = synonyms.replaceAll("[^\\w\\s]"," ");
+			searcher.search(q.parse(QueryParser.escape(synonyms)), collector);
+			hits = collector.topDocs().scoreDocs;
+			if(hits.length != 0){
+				int docId = hits[0].doc;
+				Document d = searcher.doc(docId);
+				syn = " " + d.get("ICDCode") + d.get("synonyms") + " " +  d.get("label")+ " ";
 				return syn;
 			}
 			return null;
 		} catch (ParseException | IOException e) {
 			e.printStackTrace();
 		}
-
 		return null;
-
 	}
 
 	public void indexAtc(){
