@@ -22,6 +22,9 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 
 import org.apache.lucene.analysis.Analyzer;
@@ -59,25 +62,30 @@ public class SearchFiles {
 			TopScoreDocCollector collector = TopScoreDocCollector.create(hitsPerPage, true);
 			searcher.search(q.parse(searchString), collector);
 			ScoreDoc[] hits = collector.topDocs().scoreDocs;
+			System.out.println("");
 			System.out.println("Found " + hits.length + " hits.");
-			if(hits.length<3){
-				for(int i=0;i<hits.length;++i) {
-					int docId = hits[i].doc;
-					Document d = searcher.doc(docId);
-					//					System.out.println(d.getField("synonyms"));
-					//					System.out.println(d.getField("label"));
-					//					System.out.println(d);
-					System.out.println(d.getField("Chapter") + "- " + d.getField("synonyms"));
-				}}
-			else{
-				for(int i=0;i<3;++i) {
-					int docId = hits[i].doc;
-					Document d = searcher.doc(docId);
-					//					System.out.println(d.getField("synonyms"));
-					//					System.out.println(d.getField("label"));
-					//					System.out.println(d);
-					System.out.println(d.getField("Chapter") + "- " + d.getField("synonyms"));
+			System.out.println("-----------------------------------");
+			for(ScoreDoc c:hits){
+				float score = c.score;
+				if(searcher.doc(c.doc).get("Chapter").contains("L"))
+					score *=0.5;
+				if(searcher.doc(c.doc).get("Chapter").lastIndexOf('.') == 5)
+					score *=0.6;
+				else if(searcher.doc(c.doc).get("Chapter").lastIndexOf('.') == 3)
+					score *=0.7;
+				c.score = score;
+			}
+			Arrays.sort(hits, new Comparator<ScoreDoc>() {
+				@Override
+				public int compare(ScoreDoc o1, ScoreDoc o2) {
+					return (int) (o1.score - o2.score);
 				}
+			});
+			
+			for(ScoreDoc c:hits){
+				System.out.println(searcher.doc(c.doc).get("Chapter"));
+				System.out.println(c.score);
+				System.out.println("-----------------------");
 			}
 		} catch (ParseException | IOException e) {
 			e.printStackTrace();
