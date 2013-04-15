@@ -32,10 +32,13 @@ import org.xml.sax.SAXException;
 public class AtcParser{
 
 	private OntModel onto;
-    public OntModel getOnto() {
+    
+	public OntModel getOnto() {
 		return onto;
 	}
+    
 	private ArrayList<Atc> parsedAtcs;
+	Atc atc;
 
     public AtcParser(String filename) {
         parsedAtcs = new ArrayList<Atc>();
@@ -48,7 +51,7 @@ public class AtcParser{
             onto.read(is, "RDF/XML");
 
             StmtIterator stit = onto.listStatements();
-            Atc atc = new Atc();
+            atc = new Atc();
             while (stit.hasNext()) {
 
                 Statement stmt = stit.nextStatement(); // get next statement

@@ -12,11 +12,6 @@ import org.apache.lucene.util.Version;
 
 
 public class CaseReader {
-	public static void main(String[] args) {
-		Case[] cases = readCases();
-		cases = parseCases(cases);
-			
-	}
 	
 	public static Case[] readCases(){
 		Case[] returns = new Case[8];

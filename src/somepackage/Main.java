@@ -19,6 +19,8 @@ public class Main {
 	static Analyzer ana = new NorwegianAnalyzer(Version.LUCENE_CURRENT);
 	static Case[] cases = null;
 	
+	static IndexFiles index;
+	static SearchFiles sf;
 	
 	public static void main(String[] args) {
 		PropertyConfigurator.configure("lib/jena-log4j.properties");
@@ -30,11 +32,11 @@ public class Main {
 			dirAtc = new SimpleFSDirectory(new File("Index/atc"));
 			dirNLH = new SimpleFSDirectory(new File("Index/NLH"));
 
-			IndexFiles index = new IndexFiles(dirICD10,dirAtc,dirNLH, ana);
+			index = new IndexFiles(dirICD10,dirAtc,dirNLH, ana);
 
 			index.index();
 
-			SearchFiles sf = new SearchFiles();
+			sf = new SearchFiles();
 			for(Case c:cases){
 					//							for(String s:c.getSentences()){
 				String s = c.getCaseText();
@@ -49,7 +51,5 @@ public class Main {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
-
 	}
 }

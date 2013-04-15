@@ -46,10 +46,12 @@ import org.apache.lucene.util.Version;
 public class SearchFiles {
 
 	public SearchFiles() {}
+	
+	QueryParser q;
 	public Document Search(String searchString, Directory index, Analyzer analyzer){
 
 		try {
-			QueryParser q = new MultiFieldQueryParser(Version.LUCENE_CURRENT
+			q = new MultiFieldQueryParser(Version.LUCENE_CURRENT
 					, new String[] {"label","synonyms"},
 					analyzer);
 

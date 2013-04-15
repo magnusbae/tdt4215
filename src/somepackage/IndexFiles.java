@@ -61,6 +61,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class IndexFiles {
+	AtcParser parserATC;
 
 	public Analyzer getAnalyzer() {
 		return analyzer;
@@ -115,11 +116,13 @@ public class IndexFiles {
 		indexAtc();
 		indexNLH();
 	}
+	
+	ICD10parser parserICD10;
 	public void indexICD10(){
 		try {
-			ICD10parser parser = new ICD10parser("Data/icd10no.owl");
-			icd10s = parser.getParsedICDs();
-			icd10Model = parser.getOnto();
+			parserICD10 = new ICD10parser("Data/icd10no.owl");
+			icd10s = parserICD10.getParsedICDs();
+			icd10Model = parserICD10.getOnto();
 			IndexWriterConfig iwc = new IndexWriterConfig(Version.LUCENE_CURRENT, analyzer);
 			indexer = new IndexWriter(dirICD, iwc);
 			for(ICD10 i:icd10s){
@@ -140,10 +143,11 @@ public class IndexFiles {
 		}
 	}
 
+	NLHParser parserNLH;
 	public void indexNLH(){
 		try {
-			NLHParser parser = new NLHParser();
-			NLHs = parser.getParsedNLHs();
+			parserNLH = new NLHParser();
+			NLHs = parserNLH.getParsedNLHs();
 			IndexWriterConfig iwc = new IndexWriterConfig(Version.LUCENE_CURRENT, analyzer);
 			indexer = new IndexWriter(dirNLH, iwc);
 			for(NLH i:NLHs){
@@ -208,9 +212,9 @@ public class IndexFiles {
 
 	public void indexAtc(){
 		try {
-			AtcParser parser = new AtcParser("Data/atc.owl");
-			atcs = parser.getParsedAtcs();
-			atcModel = parser.getOnto();
+			parserATC = new AtcParser("Data/atc.owl");
+			atcs = parserATC.getParsedAtcs();
+			atcModel = parserATC.getOnto();
 			IndexWriterConfig iwc = new IndexWriterConfig(Version.LUCENE_CURRENT, analyzer);
 			indexer = new IndexWriter(dirAtc, iwc);
 			for(Atc i:atcs){

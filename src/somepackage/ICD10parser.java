@@ -33,6 +33,8 @@ public class ICD10parser{
 
     private ArrayList<ICD10> parsedICDs;
     private OntModel onto;
+    ICD10 icd10;
+    
     public ICD10parser(String filename) {
         parsedICDs = new ArrayList<ICD10>();
         
@@ -45,7 +47,7 @@ public class ICD10parser{
             onto.read(is, "RDF/XML");
 
             StmtIterator stit = onto.listStatements();
-            ICD10 icd10 = new ICD10();
+            icd10 = new ICD10();
             while (stit.hasNext()) {
 
                 Statement stmt = stit.nextStatement(); // get next statement
