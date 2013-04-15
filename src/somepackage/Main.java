@@ -1,3 +1,4 @@
+package somepackage;
 import java.io.File;
 import java.io.IOException;
 
@@ -10,14 +11,20 @@ import org.apache.lucene.util.Version;
 
 
 
+
 public class Main {
+	static Directory dirICD10;
+	static Directory dirAtc;
+	static Directory dirNLH;
+	static Analyzer ana = new NorwegianAnalyzer(Version.LUCENE_CURRENT);
+	static Case[] cases = null;
+	
+	
 	public static void main(String[] args) {
 		PropertyConfigurator.configure("lib/jena-log4j.properties");
-		Case[] cases = CaseReader.readCases();
-		Directory dirICD10;
-		Directory dirAtc;
-		Directory dirNLH;
-		Analyzer ana = new NorwegianAnalyzer(Version.LUCENE_CURRENT);
+		cases = CaseReader.readCases();
+		
+		
 		try {
 			dirICD10 = new SimpleFSDirectory(new File("Index/icd10"));
 			dirAtc = new SimpleFSDirectory(new File("Index/atc"));

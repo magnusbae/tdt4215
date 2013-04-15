@@ -1,3 +1,4 @@
+package somepackage;
 
 
 import java.io.BufferedReader;
