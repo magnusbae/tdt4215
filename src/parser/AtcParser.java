@@ -63,7 +63,6 @@ public class AtcParser{
                 // Add object to list when no more statements
                 if (!atc.getAtcCode().equals(subject.getLocalName())){
                     parsedAtcs.add(atc);
-                    System.out.println(subject.getLocalName());
                     atc = new Atc();
                 }
                 // Add label and synonyms
@@ -77,7 +76,6 @@ public class AtcParser{
 //                	System.out.println("added: " + value);
                    
                     if (predicate.getLocalName().equals("label")){
-                    	System.out.println(value);
                         atc.setLabel(value);
                     }
                 }
