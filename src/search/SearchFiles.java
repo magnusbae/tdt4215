@@ -67,7 +67,7 @@ public class SearchFiles {
 					//					System.out.println(d.getField("synonyms"));
 					//					System.out.println(d.getField("label"));
 					//					System.out.println(d);
-					System.out.println(d.getField("Chapter"));
+					System.out.println(d.getField("Chapter") + "- " + d.getField("synonyms"));
 				}}
 			else{
 				for(int i=0;i<3;++i) {
@@ -76,7 +76,7 @@ public class SearchFiles {
 					//					System.out.println(d.getField("synonyms"));
 					//					System.out.println(d.getField("label"));
 					//					System.out.println(d);
-					System.out.println(d.getField("Chapter"));
+					System.out.println(d.getField("Chapter") + "- " + d.getField("synonyms"));
 				}
 			}
 		} catch (ParseException | IOException e) {
