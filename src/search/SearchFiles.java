@@ -48,7 +48,7 @@ import org.apache.lucene.util.Version;
 public class SearchFiles {
 
 	public SearchFiles() {}
-	public Document Search(String searchString, Directory index, Analyzer analyzer){
+	public ScoreDoc[] Search(String searchString, Directory index, Analyzer analyzer){
 
 		try {
 			QueryParser q = new MultiFieldQueryParser(Version.LUCENE_CURRENT
@@ -62,9 +62,9 @@ public class SearchFiles {
 			TopScoreDocCollector collector = TopScoreDocCollector.create(hitsPerPage, true);
 			searcher.search(q.parse(searchString), collector);
 			ScoreDoc[] hits = collector.topDocs().scoreDocs;
-			System.out.println("");
-			System.out.println("Found " + hits.length + " hits.");
-			System.out.println("-----------------------------------");
+//			System.out.println("");
+//			System.out.println("Found " + hits.length + " hits.");
+//			System.out.println("-----------------------------------");
 			for(ScoreDoc c:hits){
 				float score = c.score;
 				if(searcher.doc(c.doc).get("Chapter").contains("L"))
@@ -83,12 +83,13 @@ public class SearchFiles {
 					return (int) score;
 				}
 			});
-			for(int i = 0 ; i<4;i++){
-				System.out.println(searcher.doc(hits[i].doc).get("Chapter"));
-				System.out.println(searcher.doc(hits[i].doc));
-				//				System.out.println(hits[i].score);
-//				System.out.println("-----------------------");
-			}
+			return hits;
+//			for(int i = 0 ; i<4;i++){
+//				System.out.println(searcher.doc(hits[i].doc).get("Chapter"));
+//				System.out.println(searcher.doc(hits[i].doc));
+////				System.out.println(hits[i].score);
+////				System.out.println("-----------------------");
+//			}
 		} catch (ParseException | IOException e) {
 			e.printStackTrace();
 		}
