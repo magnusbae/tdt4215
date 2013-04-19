@@ -31,8 +31,8 @@ public class Main {
 			index.index();
 			SearchFiles sf = new SearchFiles();
 			int caseNum = 0;
-			for(Case c:cases){
-//			Case c = cases[0];
+//			for(Case c:cases){
+			Case c = cases[7];
 				//		for(String s:c.getSentences()){
 				caseNum++;
 				System.out.println("");
@@ -41,7 +41,7 @@ public class Main {
 				sf.Search(s, dirNLH, ana);
 				//				sf.Search(s, dirICD10, ana);
 				//				sf.Search(s, dirAtc, ana);
-			}
+//			}
 
 		} catch (IOException e) {
 			e.printStackTrace();
