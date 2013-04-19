@@ -57,7 +57,7 @@ public class MainWindow {
 			}
 		});
 		btnSk.setBounds(10, 86, 420, 28);
-		btnSk.setText("Søk");
+		btnSk.setText("Search");
 		
 	    searchBox = new StyledText(shell, SWT.BORDER | SWT.WRAP | SWT.V_SCROLL);
 		searchBox.addMouseListener(new MouseAdapter() {
@@ -79,13 +79,13 @@ public class MainWindow {
 		});
 		
 		searchBox.setAlwaysShowScrollBars(true);
-		searchBox.setText("Skriv eller lim inn søketekst her");
+		searchBox.setText("Write or paste search text here");
 		textPreSet = true;
 		searchBox.selectAll();
 		searchBox.setBounds(10, 10, 584, 72);
 		
 		resultText = new StyledText(shell, SWT.BORDER | SWT.WRAP | SWT.V_SCROLL);
-		resultText.setText("Resultat");
+		resultText.setText("Result");
 		resultText.setEditable(false);
 		resultText.setBounds(10, 120, 584, 304);
 		
@@ -97,7 +97,7 @@ public class MainWindow {
 			}
 		});
 		searchTestCases.setBounds(437, 86, 157, 28);
-		searchTestCases.setText("Søk i eksempelcaser");
+		searchTestCases.setText("Search example cases");
 
 		shell.open();
 		shell.layout();
