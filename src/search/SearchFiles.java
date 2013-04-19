@@ -22,6 +22,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
@@ -65,11 +66,16 @@ public class SearchFiles {
 //			System.out.println("");
 //			System.out.println("Found " + hits.length + " hits.");
 //			System.out.println("-----------------------------------");
+			ArrayList<Float> orgScores = new ArrayList<Float>();
+			
 			for(ScoreDoc c:hits){
 				float score = c.score;
+				orgScores.add(score);
 				if(searcher.doc(c.doc).get("Chapter").contains("L"))
-					score *=0.7;
-				if(searcher.doc(c.doc).get("Chapter").lastIndexOf('.') <= 5)
+					score *=0.2;
+				if(searcher.doc(c.doc).get("Chapter").lastIndexOf('.') <= 7)
+					score *=0.4;
+				else if(searcher.doc(c.doc).get("Chapter").lastIndexOf('.') <= 5)
 					score *=0.7;
 				else if(searcher.doc(c.doc).get("Chapter").lastIndexOf('.') <= 3)
 					score *=0.8;
@@ -83,15 +89,9 @@ public class SearchFiles {
 					return (int) score;
 				}
 			});
-//			for(int i = 0 ; i<4;i++){
-//				System.out.println(searcher.doc(hits[i].doc).get("Chapter"));
-//				System.out.println(searcher.doc(hits[i].doc));
-//				System.out.println(searcher.explain(q.parse(searchString), hits[i].doc));
-//				System.out.println(hits[i].score);
-//				System.out.println("-----------------------");
-//			}
 			Document[] docs = new Document[hits.length];
 			for(int i = 0; i< hits.length;i++){
+
 				docs[i] = searcher.doc(hits[i].doc);
 			}
 			return docs;
