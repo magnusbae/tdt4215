@@ -56,7 +56,7 @@ public class SearchFiles {
 					analyzer);
 
 			int hitsPerPage = 4;
-			IndexReader reader = IndexReader.open(index);
+			IndexReader reader = DirectoryReader.open(index);
 			IndexSearcher searcher = new IndexSearcher(reader);
 
 			TopScoreDocCollector collector = TopScoreDocCollector.create(hitsPerPage, true);

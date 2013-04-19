@@ -26,6 +26,7 @@ import org.apache.lucene.document.FieldType;
 import org.apache.lucene.document.LongField;
 import org.apache.lucene.document.StringField;
 import org.apache.lucene.document.TextField;
+import org.apache.lucene.index.DirectoryReader;
 import org.apache.lucene.index.IndexReader;
 import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.IndexWriterConfig.OpenMode;
@@ -186,7 +187,8 @@ public class IndexFiles {
 					analyzer);
 
 			int hitsPerPage = 3;
-			IndexReader reader = IndexReader.open(dirAtc);
+			DirectoryReader reader = DirectoryReader.open(dirAtc);
+//			IndexReader reader = IndexReader.open(dirAtc);
 			IndexSearcher searcher = new IndexSearcher(reader);
 			TopScoreDocCollector collector = TopScoreDocCollector.create(hitsPerPage, true);
 			synonyms = synonyms.replaceAll("[^\\w\\s]"," ");
@@ -198,17 +200,21 @@ public class IndexFiles {
 				syn += " " + d.get("Atccode") + " " +  d.get("label")+ " ";
 			}
 			collector = TopScoreDocCollector.create(hitsPerPage, true);
-			reader = IndexReader.open(dirICD);
+			reader.close();
+			reader = DirectoryReader.open(dirICD);
 			searcher = new IndexSearcher(reader);
 			synonyms = synonyms.replaceAll("[^\\w\\s]"," ");
 			searcher.search(q.parse(QueryParser.escape(synonyms)), collector);
 			hits = collector.topDocs().scoreDocs;
+			
 			if(hits.length != 0){
 				int docId = hits[0].doc;
 				Document d = searcher.doc(docId);
 				syn += " " + d.get("ICDCode") + d.get("synonyms") + " " +  d.get("label")+ " ";
+				reader.close();
 				return syn;
 			}
+			reader.close();
 			return null;
 		} catch (ParseException | IOException e) {
 			e.printStackTrace();
