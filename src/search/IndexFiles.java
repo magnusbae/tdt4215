@@ -159,7 +159,9 @@ public class IndexFiles {
 				if(i.getSynonyms() != null){
 					String syn = i.getSynonyms();
 					syn += findSyn(i.getSynonyms());
-					doc.add(new TextField("synonyms", syn, Field.Store.YES));
+					TextField synonymField = new TextField("synonyms", syn, Field.Store.YES);
+//					synonymField.setBoost(1.3f);
+					doc.add(synonymField);
 				}
 				indexer.addDocument(doc);
 			}
@@ -176,6 +178,8 @@ public class IndexFiles {
 			return "";
 		if(synonyms.contains("itt")){
 			syn += " " +synonyms.replace("itt", "ene");
+			syn += " " +synonyms.replace("itt", "er");
+			
 		}
 		synonyms = synonyms.trim();
 		if(synonyms.length() < 3)
