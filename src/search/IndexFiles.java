@@ -174,10 +174,8 @@ public class IndexFiles {
 		if(synonyms.length() < 3)
 			return "";
 		if(synonyms.contains("itt")){
-			synonyms += " " +synonyms.replace("itt", "ene");
-			System.out.println(synonyms);
+			syn += " " +synonyms.replace("itt", "ene");
 		}
-		
 		synonyms = synonyms.trim();
 		if(synonyms.length() < 3)
 			return "";
@@ -197,7 +195,7 @@ public class IndexFiles {
 			if(hits.length != 0){
 				int docId = hits[0].doc;
 				Document d = searcher.doc(docId);
-				syn = " " + d.get("Atccode") + " " +  d.get("label")+ " ";
+				syn += " " + d.get("Atccode") + " " +  d.get("label")+ " ";
 			}
 			collector = TopScoreDocCollector.create(hitsPerPage, true);
 			reader = IndexReader.open(dirICD);
@@ -208,7 +206,7 @@ public class IndexFiles {
 			if(hits.length != 0){
 				int docId = hits[0].doc;
 				Document d = searcher.doc(docId);
-				syn = " " + d.get("ICDCode") + d.get("synonyms") + " " +  d.get("label")+ " ";
+				syn += " " + d.get("ICDCode") + d.get("synonyms") + " " +  d.get("label")+ " ";
 				return syn;
 			}
 			return null;

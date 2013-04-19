@@ -54,6 +54,7 @@ public class NLHParser {
 			String name = "";
 			NLH chapter = new NLH();
 			NLH mainChapter = new NLH();
+			NLH subChapter = new NLH();
 			public void head(Node node, int depth) {
 				if(node instanceof Element)
 					if((((Element)node).tagName().equalsIgnoreCase("H3"))){
@@ -76,6 +77,7 @@ public class NLHParser {
 						if(!added){
 							chapter.addText(text);
 							mainChapter.addText(text);
+							subChapter.addText(text);
 							added = true;
 						}
 						recordText = false;
@@ -93,10 +95,13 @@ public class NLHParser {
 					if(((Element)node).tagName().equalsIgnoreCase("H3")){
 						chapter.setChapter(name);
 						getName = false;
-					}
-					if(((Element)node).tagName().equalsIgnoreCase("H2")){
+					}else if(((Element)node).tagName().equalsIgnoreCase("H2")){
 						mainChapter.setChapter(name);
 						getName = false;
+					}else if (((Element)node).tagName().equalsIgnoreCase("#root")){
+						subChapter.addText(text);
+						chapter.addText(text);
+						mainChapter.addText(text);
 					}
 				}
 			}
