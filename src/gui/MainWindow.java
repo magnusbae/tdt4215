@@ -2,9 +2,7 @@ package gui;
 
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
-import org.eclipse.wb.swt.SWTResourceManager;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.events.SelectionAdapter;
@@ -14,7 +12,12 @@ import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.events.KeyAdapter;
 import org.eclipse.swt.events.KeyEvent;
 
+
 public class MainWindow {
+
+	private static boolean textPreSet;
+	private static StyledText searchBox = null; 
+	private static StyledText resultText = null;
 
 	/**
 	 * Launch the application.
@@ -23,7 +26,6 @@ public class MainWindow {
 	public static void main(String[] args) {
 		Display display = Display.getDefault();
 		Shell shell = new Shell();
-		shell.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_LIGHT_SHADOW));
 		shell.setSize(620, 482);
 		shell.setText("SWT Application");
 		
@@ -31,52 +33,52 @@ public class MainWindow {
 		btnSk.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseUp(MouseEvent e) {
-				
-				//TODO search!
+				search();
 			}
 		});
 		btnSk.setBounds(10, 86, 420, 28);
 		btnSk.setText("Søk");
 		
-		StyledText searchBox = new StyledText(shell, SWT.BORDER);
+	    searchBox = new StyledText(shell, SWT.BORDER);
+		searchBox.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseDown(MouseEvent e) {
+				if (textPreSet){
+					((StyledText)e.getSource()).setText("");
+					textPreSet = false;
+				}
+			}
+		});
 		searchBox.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
-				//TODO search on control + enter
-			}
-		});
-		searchBox.addSelectionListener(new SelectionAdapter() {
-			
-			/*
-			 * Remove text on click.
-			 * (non-Javadoc)
-			 * @see org.eclipse.swt.events.SelectionAdapter#widgetSelected(org.eclipse.swt.events.SelectionEvent)
-			 */
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-//				TODO Remove text
+				if(e.stateMask == SWT.MOD1 && e.keyCode == SWT.CR){ //CR might not be platform independent?
+					search();
+				}
 			}
 		});
 		
-		
-		
+		searchBox.setAlwaysShowScrollBars(true);
 		searchBox.setText("Skriv eller lim inn søketekst her");
+		textPreSet = true;
+		searchBox.selectAll();
 		searchBox.setBounds(10, 10, 584, 72);
 		
-		StyledText styledText_1 = new StyledText(shell, SWT.BORDER);
-		styledText_1.setText("Resultat");
-		styledText_1.setEditable(false);
-		styledText_1.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_LIGHT_SHADOW));
-		styledText_1.setBounds(10, 120, 584, 304);
+		resultText = new StyledText(shell, SWT.BORDER);
+		resultText.setAlwaysShowScrollBars(true);
+		resultText.setText("Resultat");
+		resultText.setEditable(false);
+		resultText.setBounds(10, 120, 584, 304);
 		
-		Button btnNewButton = new Button(shell, SWT.NONE);
-		btnNewButton.addSelectionListener(new SelectionAdapter() {
+		Button searchTestCases = new Button(shell, SWT.NONE);
+		searchTestCases.addMouseListener(new MouseAdapter() {
 			@Override
-			public void widgetSelected(SelectionEvent e) {
+			public void mouseUp(MouseEvent e) {
+				search(true);
 			}
 		});
-		btnNewButton.setBounds(437, 86, 157, 28);
-		btnNewButton.setText("Søk i eksempelcaser");
+		searchTestCases.setBounds(437, 86, 157, 28);
+		searchTestCases.setText("Søk i eksempelcaser");
 
 		shell.open();
 		shell.layout();
@@ -86,4 +88,21 @@ public class MainWindow {
 			}
 		}
 	}
+
+	private static void search(){
+		search(false);
+	}
+	
+	private static void search(boolean cases) {
+		String text;
+		if(!cases){
+			text = searchBox.getText();
+		}else{
+			//todo read cases;
+		}
+		//TODO search!
+	}
+	
+	
+
 }
