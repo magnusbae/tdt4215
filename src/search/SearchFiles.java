@@ -48,7 +48,7 @@ import org.apache.lucene.util.Version;
 public class SearchFiles {
 
 	public SearchFiles() {}
-	public ScoreDoc[] Search(String searchString, Directory index, Analyzer analyzer){
+	public Document[] Search(String searchString, Directory index, Analyzer analyzer){
 
 		try {
 			QueryParser q = new MultiFieldQueryParser(Version.LUCENE_CURRENT
@@ -83,13 +83,18 @@ public class SearchFiles {
 					return (int) score;
 				}
 			});
-			return hits;
 //			for(int i = 0 ; i<4;i++){
 //				System.out.println(searcher.doc(hits[i].doc).get("Chapter"));
 //				System.out.println(searcher.doc(hits[i].doc));
-////				System.out.println(hits[i].score);
-////				System.out.println("-----------------------");
+//				System.out.println(searcher.explain(q.parse(searchString), hits[i].doc));
+//				System.out.println(hits[i].score);
+//				System.out.println("-----------------------");
 //			}
+			Document[] docs = new Document[4];
+			for(int i = 0; i<4;i++){
+				docs[i] = searcher.doc(hits[i].doc);
+			}
+			return docs;
 		} catch (ParseException | IOException e) {
 			e.printStackTrace();
 		}
