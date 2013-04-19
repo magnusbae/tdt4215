@@ -203,9 +203,9 @@ public class MainWindow {
 					}
 				}
 			}else{
-				String s = new Case(searchBox.getText()).getCaseText();
+				String s = searchBox.getText();
 				Document[] doc = sf.Search(s, dirNLH, ana);
-				if (doc != null){
+				if (doc != null && doc.length > 0){
 					for (int i = 0; i < (doc.length >= 4 ? 4 : doc.length); i++){
 						searchResults += doc[i].get("Chapter") + "\n";
 					}

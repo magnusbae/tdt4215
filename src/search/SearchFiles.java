@@ -90,8 +90,8 @@ public class SearchFiles {
 //				System.out.println(hits[i].score);
 //				System.out.println("-----------------------");
 //			}
-			Document[] docs = new Document[4];
-			for(int i = 0; i<4;i++){
+			Document[] docs = new Document[hits.length];
+			for(int i = 0; i< hits.length;i++){
 				docs[i] = searcher.doc(hits[i].doc);
 			}
 			return docs;
