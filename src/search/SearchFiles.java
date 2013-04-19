@@ -55,7 +55,7 @@ public class SearchFiles {
 					, new String[] {"label","synonyms"},
 					analyzer);
 
-			int hitsPerPage = 3;
+			int hitsPerPage = 4;
 			IndexReader reader = IndexReader.open(index);
 			IndexSearcher searcher = new IndexSearcher(reader);
 
@@ -68,11 +68,11 @@ public class SearchFiles {
 			for(ScoreDoc c:hits){
 				float score = c.score;
 				if(searcher.doc(c.doc).get("Chapter").contains("L"))
-					score *=0.5;
-				if(searcher.doc(c.doc).get("Chapter").lastIndexOf('.') == 5)
-					score *=0.6;
-				else if(searcher.doc(c.doc).get("Chapter").lastIndexOf('.') == 3)
 					score *=0.7;
+				if(searcher.doc(c.doc).get("Chapter").lastIndexOf('.') <= 5)
+					score *=0.7;
+				else if(searcher.doc(c.doc).get("Chapter").lastIndexOf('.') <= 3)
+					score *=0.8;
 				c.score = score;
 			}
 			Arrays.sort(hits, new Comparator<ScoreDoc>() {
@@ -83,10 +83,10 @@ public class SearchFiles {
 					return (int) score;
 				}
 			});
-			
-			for(ScoreDoc c:hits){
-				System.out.println(searcher.doc(c.doc).get("Chapter"));
-//				System.out.println(c.score);
+			for(int i = 0 ; i<4;i++){
+				System.out.println(searcher.doc(hits[i].doc).get("Chapter"));
+				System.out.println(searcher.doc(hits[i].doc));
+				//				System.out.println(hits[i].score);
 //				System.out.println("-----------------------");
 			}
 		} catch (ParseException | IOException e) {

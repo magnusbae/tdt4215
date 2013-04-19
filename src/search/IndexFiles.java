@@ -173,6 +173,15 @@ public class IndexFiles {
 		String syn = "";
 		if(synonyms.length() < 3)
 			return "";
+		if(synonyms.contains("itt")){
+			synonyms += " " +synonyms.replace("itt", "ene");
+			System.out.println(synonyms);
+		}
+		
+		synonyms = synonyms.trim();
+		if(synonyms.length() < 3)
+			return "";
+		
 		try {
 			QueryParser q = new MultiFieldQueryParser(Version.LUCENE_CURRENT
 					, new String[] {"label","synonyms"},
