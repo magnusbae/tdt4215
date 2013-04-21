@@ -68,7 +68,7 @@ public class Indexer extends Thread {
 				new Thread() {
 					public void run() {
 						for (final int[] i = new int[1]; i[0] <= maximum; i[0]++) {
-						try {Thread.sleep (100);} catch (Throwable th) {}
+						try {Thread.sleep (150);} catch (Throwable th) {}
 							if (display.isDisposed()) return;
 							display.asyncExec(new Runnable() {
 								MainWindow m = new MainWindow();
