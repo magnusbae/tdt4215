@@ -11,6 +11,7 @@ import org.apache.lucene.search.ScoreDoc;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.SimpleFSDirectory;
 import org.apache.lucene.util.Version;
+import org.eclipse.swt.widgets.Decorations;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.SWT;
@@ -32,12 +33,12 @@ import org.eclipse.swt.widgets.ProgressBar;
 
 public class MainWindow {
 
-	private static boolean textPreSet;
-	private static StyledText searchBox = null; 
-	private static StyledText resultText = null;
-	private static ProgressBar progressBar = null;
-	private static Display display = null;
-	private static Shell shell = null;
+	 static boolean textPreSet;
+	 static StyledText searchBox = null; 
+	 static StyledText resultText = null;
+	 static ProgressBar progressBar = null;
+	 static Display display = null;
+	 static Shell shell = null;
 	
 	/**
 	 * Launch the application.
@@ -47,7 +48,7 @@ public class MainWindow {
 		display = Display.getDefault();
 		shell = new Shell();
 		shell.setSize(620, 482);
-		shell.setText("SWT Application");
+		shell.setText("NLH Searcher");
 		
 		Button btnSk = new Button(shell, SWT.NONE);
 		btnSk.addMouseListener(new MouseAdapter() {
@@ -108,7 +109,7 @@ public class MainWindow {
 		}
 	}
 
-	private static void showProgressBar(boolean b) {
+	static void showProgressBar(boolean b) {
 		if (!b){
 			progressBar.moveBelow(resultText);
 			progressBar.setVisible(false);
@@ -121,6 +122,12 @@ public class MainWindow {
 			progressBar.setVisible(true);
 		}
 	}
+	
+	static String getSearchText(){
+		TextRunner sr = new TextRunner();
+		display.syncExec(sr);
+		return sr.getText();
+	}
 
 	private static void search(){
 		search(false);
@@ -128,98 +135,7 @@ public class MainWindow {
 	
 	private static void search(boolean testCases){
 		showProgressBar(true);
-		PropertyConfigurator.configure("lib/jena-log4j.properties");
-		Case[] cases = CaseReader.readCases();
-		Directory dirICD10;
-		Directory dirAtc;
-		Directory dirNLH;
-		Analyzer ana = new NorwegianAnalyzer(Version.LUCENE_CURRENT);
-		try {
-			dirICD10 = new SimpleFSDirectory(new File("Index/icd10"));
-			dirAtc = new SimpleFSDirectory(new File("Index/atc"));
-			dirNLH = new SimpleFSDirectory(new File("Index/NLH"));
-			final IndexFiles index = new IndexFiles(dirICD10,dirAtc,dirNLH, ana);
-			File f = new File("Index");
-			progressBar.setSelection(10);
-			if (!(f.exists() && f.isDirectory())){
-				resultText.setText("Building index, might take a while");
-				
-				final int maximum = 90;
-				new Thread() {
-					public void run() {
-						for (final int[] i = new int[1]; i[0] <= maximum; i[0]++) {
-						try {Thread.sleep (100);} catch (Throwable th) {}
-							if (display.isDisposed()) return;
-							display.asyncExec(new Runnable() {
-								public void run() {
-								if (progressBar.isDisposed ()) return;
-									progressBar.setSelection(i[0]);
-								}
-							});
-						}
-					}
-				}.start();
-				
-				Thread t = new Thread(){
-					public void run(){
-						index.index();
-					}
-				};
-				t.start();
-				while(t.isAlive()){
-					try {
-						Thread.sleep(100);
-					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				}		
-			}
-			progressBar.setSelection(90);
-			SearchFiles sf = new SearchFiles();
-			int caseNum = 0;
-			
-			String searchResults = "";
-			if(testCases){
-				for(Case c:cases){
-	//			Case c = cases[0];
-					//		for(String s:c.getSentences()){
-					caseNum++;
-					System.out.println("");
-					System.out.println("Case : " + caseNum);
-					String s = c.getCaseText();
-					Document[] doc = sf.Search(s, dirNLH, ana);
-					//				sf.Search(s, dirICD10, ana);
-					//				sf.Search(s, dirAtc, ana);
-					searchResults += "Case nr. " + caseNum + "\n"; 
-					if (doc != null){
-						
-						for (int i = 0; i < (doc.length >= 4 ? 4 : doc.length); i++){
-							searchResults += doc[i].get("Chapter") + "\n";
-						}
-						searchResults += "\n------\n";
-					}else{
-						searchResults += "No results found\n------\n";
-					}
-				}
-			}else{
-				String s = searchBox.getText();
-				Document[] doc = sf.Search(s, dirNLH, ana);
-				if (doc != null && doc.length > 0){
-					for (int i = 0; i < (doc.length >= 4 ? 4 : doc.length); i++){
-						searchResults += doc[i].get("Chapter") + "\n";
-					}
-					searchResults += "\n------\n";
-				}else{
-					searchResults += "No results found\n------\n";
-				}
-			}
-			progressBar.setSelection(99);
-			showProgressBar(false);
-			resultText.setText(searchResults);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
+		Indexer i = new Indexer(display, testCases);
+		i.start();
 	}
 }
