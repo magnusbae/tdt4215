@@ -118,7 +118,7 @@ public class Indexer extends Thread {
 					if (doc != null){
 						
 						for (int i = 0; i < (doc.length >= 4 ? 4 : doc.length); i++){
-							searchResults += doc[i].get("Chapter") + "\n";
+							searchResults += doc[i].get("Chapter") + " -" + doc[i].get("Name") + "\n";
 						}
 						searchResults += "\n------\n";
 					}else{
@@ -130,7 +130,7 @@ public class Indexer extends Thread {
 				Document[] doc = sf.Search(s, dirNLH, ana);
 				if (doc != null && doc.length > 0){
 					for (int i = 0; i < (doc.length >= 4 ? 4 : doc.length); i++){
-						searchResults += doc[i].get("Chapter") + "\n";
+						searchResults += doc[i].get("Chapter") + " -" + doc[i].get("Name") + "\n";
 					}
 					searchResults += "\n------\n";
 				}else{
