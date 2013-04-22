@@ -4,10 +4,12 @@ public class NLH {
 	String chapter;
 	String synonyms = " "; 
 	String text = " ";
+	String name = " ";
 	public NLH(String c, String t, String s) {
 		text = t;
 		chapter = c;
 		synonyms = s;
+		name = s; 
 	}
 	public NLH() {
 	}
@@ -19,6 +21,7 @@ public class NLH {
 			localName = localName.substring(1);
 		if(localName.contains(""+((char)160))){
 			chapter = localName.substring(0, localName.indexOf(((char)160)));
+			name += " " + localName.substring(localName.indexOf(((char)160)));
 			synonyms += " " + localName.substring(localName.indexOf(((char)160)));
 		}else if(localName.contains(" ")){
 			chapter = localName.substring(0, localName.indexOf(" "));
@@ -40,5 +43,8 @@ public class NLH {
 	}
 	public String getSynonyms(){
 		return synonyms;
+	}
+	public String getName(){
+		return name;
 	}
 }

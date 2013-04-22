@@ -156,6 +156,8 @@ public class IndexFiles {
 					doc.add(new StringField("Chapter", i.getChapter(), Field.Store.YES));
 				if(i.getText()!=null)
 					doc.add(new TextField("label", i.getText(), Field.Store.YES));
+				if(i.getText()!=null)
+					doc.add(new TextField("Name", i.getName(), Field.Store.YES));
 				if(i.getSynonyms() != null){
 					String syn = i.getSynonyms();
 					syn += findSyn(i.getSynonyms());
