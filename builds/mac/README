@@ -1,0 +1,8 @@
+Run the program by running from terminal 
+
+$ ./nlhparser
+alternatively:
+$ java -jar -XstartOnFirstThread nlhparser.jar
+
+
+On first run index will be built on first search.
