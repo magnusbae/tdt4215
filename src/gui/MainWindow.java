@@ -29,6 +29,10 @@ import search.IndexFiles;
 import search.SearchFiles;
 import datatypes.Case;
 import org.eclipse.swt.widgets.ProgressBar;
+import org.eclipse.swt.widgets.Spinner;
+import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.events.ModifyListener;
+import org.eclipse.swt.events.ModifyEvent;
 
 
 public class MainWindow {
@@ -39,6 +43,7 @@ public class MainWindow {
 	 static ProgressBar progressBar = null;
 	 static Display display = null;
 	 static Shell shell = null;
+	 static int numberOfSearchResults = 4;
 	
 	/**
 	 * Launch the application.
@@ -57,7 +62,7 @@ public class MainWindow {
 				search();
 			}
 		});
-		btnSk.setBounds(10, 86, 420, 28);
+		btnSk.setBounds(10, 86, 228, 28);
 		btnSk.setText("Search");
 		
 	    searchBox = new StyledText(shell, SWT.BORDER | SWT.WRAP | SWT.V_SCROLL);
@@ -97,8 +102,30 @@ public class MainWindow {
 				search(true);
 			}
 		});
-		searchTestCases.setBounds(437, 86, 157, 28);
+		searchTestCases.setBounds(244, 86, 170, 28);
 		searchTestCases.setText("Search example cases");
+		
+		Spinner spinner = new Spinner(shell, SWT.BORDER);
+	
+		spinner.setMaximum(10);
+		spinner.setMinimum(1);
+		spinner.setSelection(4);
+		spinner.addModifyListener(new ModifyListener() {
+			public void modifyText(ModifyEvent e) {
+				Spinner s = (Spinner)e.getSource();
+				int a = s.getSelection();
+				if (a >= s.getMinimum() && a <= s.getMaximum()){
+					numberOfSearchResults = a;
+				}
+				
+			}
+		});
+		spinner.setBounds(543, 88, 51, 22);
+		
+		Label lblNumberOfResults = new Label(shell, SWT.NONE);
+		lblNumberOfResults.setAlignment(SWT.RIGHT);
+		lblNumberOfResults.setBounds(420, 93, 117, 14);
+		lblNumberOfResults.setText("Number of results:");
 
 		shell.open();
 		shell.layout();
