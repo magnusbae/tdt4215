@@ -18,7 +18,6 @@ import datatypes.NLH;
 
 public class NLHParser {
 	private ArrayList<NLH> parsedNLH;
-
 	public NLHParser() {
 		parsedNLH = new ArrayList<NLH>();
 		try {
@@ -46,6 +45,7 @@ public class NLHParser {
 	boolean recordText = false;
 	boolean added = true;
 	boolean getName = false;
+	
 	private void parse(String name, String dir) throws IOException {
 		FileInputStream fs = new FileInputStream(dir+name);
 		Document doc = Jsoup.parse(fs, "UTF-8", "");

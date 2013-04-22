@@ -117,7 +117,7 @@ public class IndexFiles {
 		}
 		indexICD10();
 		indexAtc();
-		indexNLH();
+		indexNLH(-1);
 	}
 	public void indexICD10(){
 		try {
@@ -144,7 +144,7 @@ public class IndexFiles {
 		}
 	}
 
-	public void indexNLH(){
+	public void indexNLH(float weight){
 		try {
 			NLHParser parser = new NLHParser();
 			NLHs = parser.getParsedNLHs();
@@ -162,7 +162,7 @@ public class IndexFiles {
 					String syn = i.getSynonyms();
 					syn += findSyn(i.getSynonyms());
 					TextField synonymField = new TextField("synonyms", syn, Field.Store.YES);
-					synonymField.setBoost(0.3f);
+					synonymField.setBoost(weight);
 					doc.add(synonymField);
 				}
 				indexer.addDocument(doc);
@@ -250,5 +250,16 @@ public class IndexFiles {
 			indexer.close();
 		} catch (Exception e) {
 		}
+	}
+
+	public void index(float i) {
+//		try {
+////			FileUtils.deleteDirectory(new File("Index/"));
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+		indexICD10();
+		indexAtc();
+		indexNLH(i);
 	}
 }
