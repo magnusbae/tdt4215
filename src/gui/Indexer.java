@@ -117,7 +117,7 @@ public class Indexer extends Thread {
 					System.out.println("Case : " + caseNum);
 					String s = c.getCaseText();
 					int numHits = 4;
-					Document[] doc = sf.Search(s, dirNLH, ana, numHits);
+					Document[] doc = sf.Search(s, dirNLH, ana, m.numberOfSearchResults);
 					//				sf.Search(s, dirICD10, ana);
 					//				sf.Search(s, dirAtc, ana);
 					searchResults += "Case nr. " + caseNum + "\n"; 
@@ -134,7 +134,7 @@ public class Indexer extends Thread {
 			}else{
 				String s = m.getSearchText();
 				int numHits = 4;
-				Document[] doc = sf.Search(s, dirNLH, ana, numHits);
+				Document[] doc = sf.Search(s, dirNLH, ana, m.numberOfSearchResults);
 				if (doc != null && doc.length > 0){
 					for (int i = 0; i < doc.length; i++){
 						searchResults += doc[i].get("Chapter") + " -" + doc[i].get("Name") + "\n";
