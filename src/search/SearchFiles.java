@@ -49,14 +49,14 @@ import org.apache.lucene.util.Version;
 public class SearchFiles {
 
 	public SearchFiles() {}
-	public Document[] Search(String searchString, Directory index, Analyzer analyzer){
+	public Document[] Search(String searchString, Directory index, Analyzer analyzer, int numHits){
 
 		try {
 			QueryParser q = new MultiFieldQueryParser(Version.LUCENE_CURRENT
 					, new String[] {"label","synonyms"},
 					analyzer);
 
-			int hitsPerPage = 4;
+			int hitsPerPage = numHits;
 			IndexReader reader = DirectoryReader.open(index);
 			IndexSearcher searcher = new IndexSearcher(reader);
 
