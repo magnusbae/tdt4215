@@ -23,6 +23,10 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 
 import org.apache.lucene.analysis.Analyzer;
@@ -46,42 +50,57 @@ import org.apache.lucene.util.Version;
 public class SearchFiles {
 
 	public SearchFiles() {}
+
 	
 	QueryParser q;
-	public Document Search(String searchString, Directory index, Analyzer analyzer){
+
+	public Document[] Search(String searchString, Directory index, Analyzer analyzer){
+
 
 		try {
 			q = new MultiFieldQueryParser(Version.LUCENE_CURRENT
 					, new String[] {"label","synonyms"},
 					analyzer);
 
-			int hitsPerPage = 3;
-			IndexReader reader = IndexReader.open(index);
+			int hitsPerPage = 4;
+			IndexReader reader = DirectoryReader.open(index);
 			IndexSearcher searcher = new IndexSearcher(reader);
 
 			TopScoreDocCollector collector = TopScoreDocCollector.create(hitsPerPage, true);
 			searcher.search(q.parse(searchString), collector);
 			ScoreDoc[] hits = collector.topDocs().scoreDocs;
-			System.out.println("Found " + hits.length + " hits.");
-			if(hits.length<3){
-				for(int i=0;i<hits.length;++i) {
-					int docId = hits[i].doc;
-					Document d = searcher.doc(docId);
-					//					System.out.println(d.getField("synonyms"));
-					//					System.out.println(d.getField("label"));
-					//					System.out.println(d);
-					System.out.println(d.getField("Chapter") + "- " + d.getField("synonyms"));
-				}}
-			else{
-				for(int i=0;i<3;++i) {
-					int docId = hits[i].doc;
-					Document d = searcher.doc(docId);
-					//					System.out.println(d.getField("synonyms"));
-					//					System.out.println(d.getField("label"));
-					//					System.out.println(d);
-					System.out.println(d.getField("Chapter") + "- " + d.getField("synonyms"));
-				}
+//			System.out.println("");
+//			System.out.println("Found " + hits.length + " hits.");
+//			System.out.println("-----------------------------------");
+			ArrayList<Float> orgScores = new ArrayList<Float>();
+			
+			for(ScoreDoc c:hits){
+				float score = c.score;
+				orgScores.add(score);
+				if(searcher.doc(c.doc).get("Chapter").contains("L"))
+					score *=0.2;
+				if(searcher.doc(c.doc).get("Chapter").lastIndexOf('.') <= 7)
+					score *=0.4;
+				else if(searcher.doc(c.doc).get("Chapter").lastIndexOf('.') <= 5)
+					score *=0.7;
+				else if(searcher.doc(c.doc).get("Chapter").lastIndexOf('.') <= 3)
+					score *=0.8;
+				c.score = score;
 			}
+			Arrays.sort(hits, new Comparator<ScoreDoc>() {
+				@Override
+				public int compare(ScoreDoc o1, ScoreDoc o2) {
+					float score = (o2.score-o1.score);
+					score = score*10000;
+					return (int) score;
+				}
+			});
+			Document[] docs = new Document[hits.length];
+			for(int i = 0; i< hits.length;i++){
+
+				docs[i] = searcher.doc(hits[i].doc);
+			}
+			return docs;
 		} catch (ParseException | IOException e) {
 			e.printStackTrace();
 		}

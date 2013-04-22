@@ -16,6 +16,8 @@ public class NLH {
 		return chapter;
 	}
 	public void setChapter(String localName) {
+		if(localName.charAt(0)== '*')
+			localName = localName.substring(1);
 		if(localName.contains(""+((char)160))){
 			chapter = localName.substring(0, localName.indexOf(((char)160)));
 			synonyms += " " + localName.substring(localName.indexOf(((char)160)));

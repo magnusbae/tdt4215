@@ -29,6 +29,7 @@ import org.apache.lucene.document.FieldType;
 import org.apache.lucene.document.LongField;
 import org.apache.lucene.document.StringField;
 import org.apache.lucene.document.TextField;
+import org.apache.lucene.index.DirectoryReader;
 import org.apache.lucene.index.IndexReader;
 import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.IndexWriterConfig.OpenMode;
@@ -159,7 +160,9 @@ public class IndexFiles {
 				if(i.getSynonyms() != null){
 					String syn = i.getSynonyms();
 					syn += findSyn(i.getSynonyms());
-					doc.add(new TextField("synonyms", syn, Field.Store.YES));
+					TextField synonymField = new TextField("synonyms", syn, Field.Store.YES);
+//					synonymField.setBoost(1.3f);
+					doc.add(synonymField);
 				}
 				indexer.addDocument(doc);
 			}
@@ -174,13 +177,23 @@ public class IndexFiles {
 		String syn = "";
 		if(synonyms.length() < 3)
 			return "";
+		if(synonyms.contains("itt")){
+			syn += " " +synonyms.replace("itt", "ene");
+			syn += " " +synonyms.replace("itt", "er");
+			
+		}
+		synonyms = synonyms.trim();
+		if(synonyms.length() < 3)
+			return "";
+		
 		try {
 			QueryParser q = new MultiFieldQueryParser(Version.LUCENE_CURRENT
 					, new String[] {"label","synonyms"},
 					analyzer);
 
 			int hitsPerPage = 3;
-			IndexReader reader = IndexReader.open(dirAtc);
+			DirectoryReader reader = DirectoryReader.open(dirAtc);
+//			IndexReader reader = IndexReader.open(dirAtc);
 			IndexSearcher searcher = new IndexSearcher(reader);
 			TopScoreDocCollector collector = TopScoreDocCollector.create(hitsPerPage, true);
 			synonyms = synonyms.replaceAll("[^\\w\\s]"," ");
@@ -189,20 +202,24 @@ public class IndexFiles {
 			if(hits.length != 0){
 				int docId = hits[0].doc;
 				Document d = searcher.doc(docId);
-				syn = " " + d.get("Atccode") + " " +  d.get("label")+ " ";
+				syn += " " + d.get("Atccode") + " " +  d.get("label")+ " ";
 			}
 			collector = TopScoreDocCollector.create(hitsPerPage, true);
-			reader = IndexReader.open(dirICD);
+			reader.close();
+			reader = DirectoryReader.open(dirICD);
 			searcher = new IndexSearcher(reader);
 			synonyms = synonyms.replaceAll("[^\\w\\s]"," ");
 			searcher.search(q.parse(QueryParser.escape(synonyms)), collector);
 			hits = collector.topDocs().scoreDocs;
+			
 			if(hits.length != 0){
 				int docId = hits[0].doc;
 				Document d = searcher.doc(docId);
-				syn = " " + d.get("ICDCode") + d.get("synonyms") + " " +  d.get("label")+ " ";
+				syn += " " + d.get("ICDCode") + d.get("synonyms") + " " +  d.get("label")+ " ";
+				reader.close();
 				return syn;
 			}
+			reader.close();
 			return null;
 		} catch (ParseException | IOException e) {
 			e.printStackTrace();

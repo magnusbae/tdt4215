@@ -94,10 +94,12 @@ public class NLHParser {
 					if(((Element)node).tagName().equalsIgnoreCase("H3")){
 						chapter.setChapter(name);
 						getName = false;
-					}
-					if(((Element)node).tagName().equalsIgnoreCase("H2")){
+					}else if(((Element)node).tagName().equalsIgnoreCase("H2")){
 						mainChapter.setChapter(name);
 						getName = false;
+					}else if (((Element)node).tagName().equalsIgnoreCase("#root")){
+						chapter.addText(text);
+						mainChapter.addText(text);
 					}
 				}
 			}

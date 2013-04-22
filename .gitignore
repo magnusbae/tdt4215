@@ -10,6 +10,7 @@ tokenized.xml
 # folders #
 bin/
 .settings/
+Index/
 
 # Package Files #
 *.jar
