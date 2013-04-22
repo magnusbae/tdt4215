@@ -1,4 +1,6 @@
 package somepackage;
+import java.util.HashSet;
+import java.util.Set;
 
 import java.io.File;
 import java.io.IOException;
@@ -28,6 +30,38 @@ import org.eclipse.swt.widgets.ProgressBar;
 
 
 public class MainWindow {
+/**
+    * <pre>
+    *           0..*     0..*
+    * MainWindow ------------------------- Indexer
+    *           mainWindow        &gt;       indexer
+    * </pre>
+    */
+   private Set<Indexer> indexer;
+   
+   public Set<Indexer> getIndexer() {
+      if (this.indexer == null) {
+         this.indexer = new HashSet<Indexer>();
+      }
+      return this.indexer;
+   }
+   
+   /**
+    * <pre>
+    *           0..*     0..*
+    * MainWindow ------------------------- TextRunner
+    *           mainWindow        &gt;       textRunner
+    * </pre>
+    */
+   private Set<TextRunner> textRunner;
+   
+   public Set<TextRunner> getTextRunner() {
+      if (this.textRunner == null) {
+         this.textRunner = new HashSet<TextRunner>();
+      }
+      return this.textRunner;
+   }
+   
 
 	 static boolean textPreSet;
 	 static StyledText searchBox = null; 

@@ -4,7 +4,14 @@
     <eAnnotations xmi:id="_fep8kKsyEeKP9aZwcg51-Q" source="http://ns.yatta.de/umllab">
       <contents xmi:type="ecore:EAnnotation" xmi:id="_feqjoKsyEeKP9aZwcg51-Q" source="codegen">
         <details xmi:id="_feqjoasyEeKP9aZwcg51-Q" key="codegenDirectory" value="/tdt4215/src"/>
-        <details xmi:id="_gT7XsKsyEeKP9aZwcg51-Q" key="AssociatedSourceCode" value="/tdt4215/src/somepackage/Atc.java;1143948839/1;/tdt4215/src/somepackage/AtcParser.java;3760191029/1;/tdt4215/src/somepackage/Case.java;2281616359/1;/tdt4215/src/somepackage/CaseReader.java;1488340451/1;/tdt4215/src/somepackage/ICD10.java;1594120339/1;/tdt4215/src/somepackage/ICD10parser.java;3895146160/1;/tdt4215/src/somepackage/IndexFiles.java;1581143983/1;/tdt4215/src/somepackage/Indexer.java;2191849107/1;/tdt4215/src/somepackage/MainWindow.java;3405142199/1;/tdt4215/src/somepackage/NLH.java;968901482/1;/tdt4215/src/somepackage/NLHParser.java;2452710076/1;/tdt4215/src/somepackage/SearchFiles.java;1890146073/1;/tdt4215/src/somepackage/TextRunner.java;4122665328/1;"/>
+        <details xmi:id="_gT7XsKsyEeKP9aZwcg51-Q" key="AssociatedSourceCode" value="/tdt4215/src/somepackage/Atc.java;1143948839/1;/tdt4215/src/somepackage/AtcParser.java;3760191029/1;/tdt4215/src/somepackage/Case.java;117601912/1;/tdt4215/src/somepackage/CaseReader.java;3740671660/1;/tdt4215/src/somepackage/ICD10.java;1594120339/1;/tdt4215/src/somepackage/ICD10parser.java;3895146160/1;/tdt4215/src/somepackage/IndexFiles.java;4232997545/1;/tdt4215/src/somepackage/Indexer.java;2383422284/1;/tdt4215/src/somepackage/MainWindow.java;2224271380/1;/tdt4215/src/somepackage/NLH.java;2427613291/1;/tdt4215/src/somepackage/NLHParser.java;669013507/1;/tdt4215/src/somepackage/SearchFiles.java;488557639/1;/tdt4215/src/somepackage/TextRunner.java;3362346242/1;"/>
+      </contents>
+      <contents xmi:type="ecore:EAnnotation" xmi:id="_a0bKoKtJEeKsPeyVkhwFeg" source="preferences">
+        <contents xmi:type="ecore:EAnnotation" xmi:id="_a0bKoatJEeKsPeyVkhwFeg" source="com.yattasolutions.codegen.reverse">
+          <details xmi:id="_a0bxsKtJEeKsPeyVkhwFeg" key="com.yattasolutions.codegen.reverse.roundtrip.ReverseEngineerNewFiles" value="true"/>
+          <details xmi:id="_a0bxsatJEeKsPeyVkhwFeg" key="com.yattasolutions.codegen.reverse.roundtrip.ReverseEngineerChangedFiles" value="true"/>
+          <details xmi:id="_a0bxsqtJEeKsPeyVkhwFeg" key="com.yattasolutions.codegen.reverse.roundtrip.RemoveDeletedFiles" value="true"/>
+        </contents>
       </contents>
     </eAnnotations>
     <elementImport xmi:id="_f7_Y0KsyEeKP9aZwcg51-Q">
@@ -41,6 +48,8 @@
         <packagedElement xmi:type="uml:Class" xmi:id="_gJEykKsyEeKP9aZwcg51-Q" name="Arrays"/>
         <packagedElement xmi:type="uml:Class" xmi:id="_gJGAsKsyEeKP9aZwcg51-Q" name="Collections"/>
         <packagedElement xmi:type="uml:Interface" xmi:id="_gJHO0KsyEeKP9aZwcg51-Q" name="Comparator"/>
+        <packagedElement xmi:type="uml:Class" xmi:id="_ijAm8KtJEeKsPeyVkhwFeg" name="HashSet"/>
+        <packagedElement xmi:type="uml:Interface" xmi:id="_ijCcIKtJEeKsPeyVkhwFeg" name="Set"/>
       </packagedElement>
       <packagedElement xmi:type="uml:Package" xmi:id="_f8Jw4KsyEeKP9aZwcg51-Q" name="io">
         <packagedElement xmi:type="uml:Class" xmi:id="_gG4aMKsyEeKP9aZwcg51-Q" name="File"/>
@@ -338,12 +347,13 @@
         </ownedOperation>
       </packagedElement>
       <packagedElement xmi:type="uml:Class" xmi:id="_gAp2YKsyEeKP9aZwcg51-Q" name="CaseReader">
-        <ownedAttribute xmi:id="_tmyfc6szEeKP9aZwcg51-Q" name="case" type="_gAVGQKsyEeKP9aZwcg51-Q" aggregation="shared" association="_tmx4YKszEeKP9aZwcg51-Q">
-          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_tmzGgKszEeKP9aZwcg51-Q" value="*"/>
-          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_tmyfdKszEeKP9aZwcg51-Q"/>
+        <ownedAttribute xmi:id="_mlwqsKtJEeKsPeyVkhwFeg" name="indexer" type="_gB5zkKsyEeKP9aZwcg51-Q" association="_mlwDoKtJEeKsPeyVkhwFeg">
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_mlyf4atJEeKsPeyVkhwFeg" value="*"/>
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_mlyf4KtJEeKsPeyVkhwFeg"/>
         </ownedAttribute>
         <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_gKpf4KsyEeKP9aZwcg51-Q" name="readCases" specification="_gArEgKsyEeKP9aZwcg51-Q">
           <ownedParameter xmi:id="_gKpf4asyEeKP9aZwcg51-Q" type="_gAVGQKsyEeKP9aZwcg51-Q" direction="return">
+            <name xsi:nil="true"/>
             <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_gKpf4qsyEeKP9aZwcg51-Q" value="*"/>
           </ownedParameter>
           <language>java</language>
@@ -360,6 +370,7 @@
             <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
           </ownedParameter>
           <ownedParameter xmi:id="_gKpf5asyEeKP9aZwcg51-Q" direction="return">
+            <name xsi:nil="true"/>
             <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
           </ownedParameter>
           <language>java</language>
@@ -389,6 +400,7 @@
             <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_gKqG8qsyEeKP9aZwcg51-Q" value="*"/>
           </ownedParameter>
           <ownedParameter xmi:id="_gKqG86syEeKP9aZwcg51-Q" type="_gAVGQKsyEeKP9aZwcg51-Q" direction="return">
+            <name xsi:nil="true"/>
             <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_gKqG9KsyEeKP9aZwcg51-Q" value="*"/>
           </ownedParameter>
           <language>java</language>
@@ -625,12 +637,10 @@
         <ownedAttribute xmi:id="_gKOpIasyEeKP9aZwcg51-Q" name="parserNLH" visibility="package" type="_gCb_EKsyEeKP9aZwcg51-Q" association="_gLiQsasyEeKP9aZwcg51-Q"/>
         <ownedAttribute xmi:id="_gK8a0KsyEeKP9aZwcg51-Q" name="dirNLH" visibility="package" type="_gIJlgasyEeKP9aZwcg51-Q" association="_gLtP0KsyEeKP9aZwcg51-Q"/>
         <ownedAttribute xmi:id="_gK9o8KsyEeKP9aZwcg51-Q" name="dirICD" visibility="package" type="_gIJlgasyEeKP9aZwcg51-Q" association="_gLt24asyEeKP9aZwcg51-Q"/>
-        <ownedAttribute xmi:id="_fuLw4KszEeKP9aZwcg51-Q" name="indexer1" type="_gB5zkKsyEeKP9aZwcg51-Q" association="_fuLJ0KszEeKP9aZwcg51-Q">
-          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_fuMX8KszEeKP9aZwcg51-Q" value="1"/>
-          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_fuLw4aszEeKP9aZwcg51-Q" value="1"/>
-        </ownedAttribute>
         <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_gKtxUKsyEeKP9aZwcg51-Q" name="getAnalyzer" specification="_gBQTUKsyEeKP9aZwcg51-Q">
-          <ownedParameter xmi:id="_gKtxUasyEeKP9aZwcg51-Q" type="_gHfeMKsyEeKP9aZwcg51-Q" direction="return"/>
+          <ownedParameter xmi:id="_gKtxUasyEeKP9aZwcg51-Q" type="_gHfeMKsyEeKP9aZwcg51-Q" direction="return">
+            <name xsi:nil="true"/>
+          </ownedParameter>
           <language>java</language>
           <body>return analyzer;&#xD;
 	</body>
@@ -642,7 +652,9 @@
 	</body>
         </ownedBehavior>
         <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_gKuYYKsyEeKP9aZwcg51-Q" name="getIcd10s" specification="_gBRhcKsyEeKP9aZwcg51-Q">
-          <ownedParameter xmi:id="_gKuYYasyEeKP9aZwcg51-Q" type="_gG0v0KsyEeKP9aZwcg51-Q" direction="return"/>
+          <ownedParameter xmi:id="_gKuYYasyEeKP9aZwcg51-Q" type="_gG0v0KsyEeKP9aZwcg51-Q" direction="return">
+            <name xsi:nil="true"/>
+          </ownedParameter>
           <language>java</language>
           <body>return icd10s;&#xD;
 	</body>
@@ -654,7 +666,9 @@
 	</body>
         </ownedBehavior>
         <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_gKu_cKsyEeKP9aZwcg51-Q" name="getIndexer" specification="_gBUkwKsyEeKP9aZwcg51-Q">
-          <ownedParameter xmi:id="_gKu_casyEeKP9aZwcg51-Q" type="_gH7jEKsyEeKP9aZwcg51-Q" direction="return"/>
+          <ownedParameter xmi:id="_gKu_casyEeKP9aZwcg51-Q" type="_gH7jEKsyEeKP9aZwcg51-Q" direction="return">
+            <name xsi:nil="true"/>
+          </ownedParameter>
           <language>java</language>
           <body>return indexer;&#xD;
 	</body>
@@ -670,7 +684,9 @@
           <ownedParameter xmi:id="_gKvmgqsyEeKP9aZwcg51-Q" name="dirAtc" type="_gIJlgasyEeKP9aZwcg51-Q"/>
           <ownedParameter xmi:id="_gKvmg6syEeKP9aZwcg51-Q" name="dirNLH" type="_gIJlgasyEeKP9aZwcg51-Q"/>
           <ownedParameter xmi:id="_gKvmhKsyEeKP9aZwcg51-Q" name="ana" type="_gHfeMKsyEeKP9aZwcg51-Q"/>
-          <ownedParameter xmi:id="_gKvmhasyEeKP9aZwcg51-Q" type="_gBNQAKsyEeKP9aZwcg51-Q" direction="return"/>
+          <ownedParameter xmi:id="_gKvmhasyEeKP9aZwcg51-Q" type="_gBNQAKsyEeKP9aZwcg51-Q" direction="return">
+            <name xsi:nil="true"/>
+          </ownedParameter>
           <language>java</language>
           <body>this.dirAtc = dirAtc;&#xD;
 		this.dirNLH = dirNLH;&#xD;
@@ -750,6 +766,7 @@
             <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
           </ownedParameter>
           <ownedParameter xmi:id="_gKw0oqsyEeKP9aZwcg51-Q" direction="return">
+            <name xsi:nil="true"/>
             <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
           </ownedParameter>
           <language>java</language>
@@ -875,28 +892,18 @@
           <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
           <defaultValue xmi:type="uml:LiteralString" xmi:id="_gKRFYasyEeKP9aZwcg51-Q" value="false"/>
         </ownedAttribute>
-        <ownedAttribute xmi:id="_Ru5LgKszEeKP9aZwcg51-Q" name="mainWindow" type="_gB_TIKsyEeKP9aZwcg51-Q" association="_Ru4kcKszEeKP9aZwcg51-Q">
-          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Ru5LgqszEeKP9aZwcg51-Q" value="*"/>
-          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Ru5LgaszEeKP9aZwcg51-Q"/>
-        </ownedAttribute>
-        <ownedAttribute xmi:id="_fuMX8aszEeKP9aZwcg51-Q" name="indexFiles" type="_gBNQAKsyEeKP9aZwcg51-Q" aggregation="composite" association="_fuLJ0KszEeKP9aZwcg51-Q">
-          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_fuMX86szEeKP9aZwcg51-Q" value="*"/>
-          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_fuMX8qszEeKP9aZwcg51-Q"/>
-        </ownedAttribute>
-        <ownedAttribute xmi:id="_qTuzQaszEeKP9aZwcg51-Q" name="searchFiles" type="_gCozYKsyEeKP9aZwcg51-Q" association="_qTuzQKszEeKP9aZwcg51-Q">
-          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_qTvaUaszEeKP9aZwcg51-Q" value="*"/>
-          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_qTvaUKszEeKP9aZwcg51-Q"/>
-        </ownedAttribute>
-        <ownedAttribute xmi:id="_2DF9YaszEeKP9aZwcg51-Q" name="textRunner" type="_gCx9UKsyEeKP9aZwcg51-Q" association="_2DFWUKszEeKP9aZwcg51-Q">
-          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_2DF9Y6szEeKP9aZwcg51-Q" value="*"/>
-          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_2DF9YqszEeKP9aZwcg51-Q"/>
+        <ownedAttribute xmi:id="_mlyf4qtJEeKsPeyVkhwFeg" name="caseReader" type="_gAp2YKsyEeKP9aZwcg51-Q" association="_mlwDoKtJEeKsPeyVkhwFeg">
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_mlzG8atJEeKsPeyVkhwFeg" value="*"/>
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_mlzG8KtJEeKsPeyVkhwFeg"/>
         </ownedAttribute>
         <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_gKyCwKsyEeKP9aZwcg51-Q" name="Indexer" specification="_gJisoasyEeKP9aZwcg51-Q">
           <ownedParameter xmi:id="_gKyCwasyEeKP9aZwcg51-Q" name="display" type="_gIj1MasyEeKP9aZwcg51-Q"/>
           <ownedParameter xmi:id="_gKyCwqsyEeKP9aZwcg51-Q" name="testCases">
             <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
           </ownedParameter>
-          <ownedParameter xmi:id="_gKyCw6syEeKP9aZwcg51-Q" type="_gB5zkKsyEeKP9aZwcg51-Q" direction="return"/>
+          <ownedParameter xmi:id="_gKyCw6syEeKP9aZwcg51-Q" type="_gB5zkKsyEeKP9aZwcg51-Q" direction="return">
+            <name xsi:nil="true"/>
+          </ownedParameter>
           <language>java</language>
           <body>this.display = display;
 		this.testCases = testCases;
@@ -995,7 +1002,7 @@
 					if (doc != null){
 						
 						for (int i = 0; i &lt; (doc.length >= 4 ? 4 : doc.length); i++){
-							searchResults += doc[i].get(&quot;Chapter&quot;) + &quot;\n&quot;;
+							searchResults += doc[i].get(&quot;Chapter&quot;) + &quot; -&quot; + doc[i].get(&quot;Name&quot;) + &quot;\n&quot;;
 						}
 						searchResults += &quot;\n------\n&quot;;
 					}else{
@@ -1007,7 +1014,7 @@
 				Document[] doc = sf.Search(s, dirNLH, ana);
 				if (doc != null &amp;&amp; doc.length > 0){
 					for (int i = 0; i &lt; (doc.length >= 4 ? 4 : doc.length); i++){
-						searchResults += doc[i].get(&quot;Chapter&quot;) + &quot;\n&quot;;
+						searchResults += doc[i].get(&quot;Chapter&quot;) + &quot; -&quot; + doc[i].get(&quot;Name&quot;) + &quot;\n&quot;;
 					}
 					searchResults += &quot;\n------\n&quot;;
 				}else{
@@ -1223,10 +1230,6 @@
           <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
           <defaultValue xmi:type="uml:LiteralString" xmi:id="_gKZBMasyEeKP9aZwcg51-Q" value="&quot; &quot;"/>
         </ownedAttribute>
-        <ownedAttribute xmi:id="_wm4zYaszEeKP9aZwcg51-Q" name="nLHParser" type="_gCb_EKsyEeKP9aZwcg51-Q" association="_wm4zYKszEeKP9aZwcg51-Q">
-          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_wm5acaszEeKP9aZwcg51-Q" value="1"/>
-          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_wm5acKszEeKP9aZwcg51-Q"/>
-        </ownedAttribute>
         <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_gK1tIKsyEeKP9aZwcg51-Q" name="NLH" specification="_gCRnAKsyEeKP9aZwcg51-Q">
           <ownedParameter xmi:id="_gK1tIasyEeKP9aZwcg51-Q" name="c">
             <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
@@ -1237,7 +1240,9 @@
           <ownedParameter xmi:id="_gK1tI6syEeKP9aZwcg51-Q" name="s">
             <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
           </ownedParameter>
-          <ownedParameter xmi:id="_gK1tJKsyEeKP9aZwcg51-Q" type="_gCPx0KsyEeKP9aZwcg51-Q" direction="return"/>
+          <ownedParameter xmi:id="_gK1tJKsyEeKP9aZwcg51-Q" type="_gCPx0KsyEeKP9aZwcg51-Q" direction="return">
+            <name xsi:nil="true"/>
+          </ownedParameter>
           <language>java</language>
           <body>text = t;&#xD;
 		chapter = c;&#xD;
@@ -1246,6 +1251,7 @@
         </ownedBehavior>
         <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_gK2UMKsyEeKP9aZwcg51-Q" name="getChapter" specification="_gCUDQasyEeKP9aZwcg51-Q">
           <ownedParameter xmi:id="_gK2UMasyEeKP9aZwcg51-Q" direction="return">
+            <name xsi:nil="true"/>
             <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
           </ownedParameter>
           <language>java</language>
@@ -1290,6 +1296,7 @@
         </ownedBehavior>
         <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_gK3iUqsyEeKP9aZwcg51-Q" name="getText" specification="_gCWfgasyEeKP9aZwcg51-Q">
           <ownedParameter xmi:id="_gK3iU6syEeKP9aZwcg51-Q" direction="return">
+            <name xsi:nil="true"/>
             <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
           </ownedParameter>
           <language>java</language>
@@ -1298,6 +1305,7 @@
         </ownedBehavior>
         <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_gK4JYKsyEeKP9aZwcg51-Q" name="getSynonyms" specification="_gCXtoKsyEeKP9aZwcg51-Q">
           <ownedParameter xmi:id="_gK4JYasyEeKP9aZwcg51-Q" direction="return">
+            <name xsi:nil="true"/>
             <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
           </ownedParameter>
           <language>java</language>
@@ -1692,18 +1700,20 @@
       <packagedElement xmi:type="uml:Association" xmi:id="_gLt24asyEeKP9aZwcg51-Q" name="" memberEnd="_gLt24qsyEeKP9aZwcg51-Q _gK9o8KsyEeKP9aZwcg51-Q">
         <ownedEnd xmi:id="_gLt24qsyEeKP9aZwcg51-Q" name="" type="_gBNQAKsyEeKP9aZwcg51-Q" association="_gLt24asyEeKP9aZwcg51-Q"/>
       </packagedElement>
-      <packagedElement xmi:type="uml:Association" xmi:id="_Ru4kcKszEeKP9aZwcg51-Q" name="" memberEnd="_Ru5LgKszEeKP9aZwcg51-Q _Ru5Lg6szEeKP9aZwcg51-Q"/>
-      <packagedElement xmi:type="uml:Association" xmi:id="_fuLJ0KszEeKP9aZwcg51-Q" name="" memberEnd="_fuLw4KszEeKP9aZwcg51-Q _fuMX8aszEeKP9aZwcg51-Q"/>
-      <packagedElement xmi:type="uml:Association" xmi:id="_qTuzQKszEeKP9aZwcg51-Q" name="" memberEnd="_qTuzQaszEeKP9aZwcg51-Q _qTvaUqszEeKP9aZwcg51-Q"/>
-      <packagedElement xmi:type="uml:Association" xmi:id="_tmx4YKszEeKP9aZwcg51-Q" name="" memberEnd="_tmyfcKszEeKP9aZwcg51-Q _tmyfc6szEeKP9aZwcg51-Q"/>
-      <packagedElement xmi:type="uml:Association" xmi:id="_wm4zYKszEeKP9aZwcg51-Q" name="" memberEnd="_wm4zYaszEeKP9aZwcg51-Q _wm5acqszEeKP9aZwcg51-Q"/>
-      <packagedElement xmi:type="uml:Association" xmi:id="_063KAKszEeKP9aZwcg51-Q" name="" memberEnd="_063KAaszEeKP9aZwcg51-Q _063xEqszEeKP9aZwcg51-Q"/>
-      <packagedElement xmi:type="uml:Association" xmi:id="_2DFWUKszEeKP9aZwcg51-Q" name="" memberEnd="_2DFWUaszEeKP9aZwcg51-Q _2DF9YaszEeKP9aZwcg51-Q">
-        <ownedEnd xmi:id="_2DFWUaszEeKP9aZwcg51-Q" name="indexer" type="_gB5zkKsyEeKP9aZwcg51-Q" association="_2DFWUKszEeKP9aZwcg51-Q">
-          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_2DF9YKszEeKP9aZwcg51-Q" value="*"/>
-          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_2DFWUqszEeKP9aZwcg51-Q"/>
-        </ownedEnd>
+      <packagedElement xmi:type="uml:Association" xmi:id="_Ru4kcKszEeKP9aZwcg51-Q" name="" memberEnd="_Ru5LgKszEeKP9aZwcg51-Q _Ru5Lg6szEeKP9aZwcg51-Q">
+        <ownedEnd xmi:id="_Ru5LgKszEeKP9aZwcg51-Q" name="" type="_gB_TIKsyEeKP9aZwcg51-Q" association="_Ru4kcKszEeKP9aZwcg51-Q"/>
       </packagedElement>
+      <packagedElement xmi:type="uml:Association" xmi:id="_qTuzQKszEeKP9aZwcg51-Q" name="" memberEnd="_qTuzQaszEeKP9aZwcg51-Q _qTvaUqszEeKP9aZwcg51-Q">
+        <ownedEnd xmi:id="_qTuzQaszEeKP9aZwcg51-Q" name="" type="_gCozYKsyEeKP9aZwcg51-Q" association="_qTuzQKszEeKP9aZwcg51-Q"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Association" xmi:id="_tmx4YKszEeKP9aZwcg51-Q" name="" memberEnd="_tmyfcKszEeKP9aZwcg51-Q _tmyfc6szEeKP9aZwcg51-Q">
+        <ownedEnd xmi:id="_tmyfc6szEeKP9aZwcg51-Q" name="" type="_gAVGQKsyEeKP9aZwcg51-Q" aggregation="shared" association="_tmx4YKszEeKP9aZwcg51-Q"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Association" xmi:id="_wm4zYKszEeKP9aZwcg51-Q" name="" memberEnd="_wm4zYaszEeKP9aZwcg51-Q _wm5acqszEeKP9aZwcg51-Q">
+        <ownedEnd xmi:id="_wm4zYaszEeKP9aZwcg51-Q" name="" type="_gCb_EKsyEeKP9aZwcg51-Q" association="_wm4zYKszEeKP9aZwcg51-Q"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Association" xmi:id="_063KAKszEeKP9aZwcg51-Q" name="" memberEnd="_063KAaszEeKP9aZwcg51-Q _063xEqszEeKP9aZwcg51-Q"/>
+      <packagedElement xmi:type="uml:Association" xmi:id="_mlwDoKtJEeKsPeyVkhwFeg" name="" memberEnd="_mlwqsKtJEeKsPeyVkhwFeg _mlyf4qtJEeKsPeyVkhwFeg"/>
     </packagedElement>
     <packagedElement xmi:type="uml:Package" xmi:id="_f8KX8KsyEeKP9aZwcg51-Q" name="javax">
       <packagedElement xmi:type="uml:Package" xmi:id="_f8KX8asyEeKP9aZwcg51-Q" name="xml">
@@ -2049,4 +2059,6 @@
   <UMLLabProfile:Reference xmi:id="_gLsowKsyEeKP9aZwcg51-Q" base_Element="_gLsBsasyEeKP9aZwcg51-Q"/>
   <UMLLabProfile:Reference xmi:id="_gLt24KsyEeKP9aZwcg51-Q" base_Element="_gLtP0KsyEeKP9aZwcg51-Q"/>
   <UMLLabProfile:Reference xmi:id="_gLvFAKsyEeKP9aZwcg51-Q" base_Element="_gLt24asyEeKP9aZwcg51-Q"/>
+  <UMLLabProfile:Reference xmi:id="_ijB1EKtJEeKsPeyVkhwFeg" base_Element="_ijAm8KtJEeKsPeyVkhwFeg"/>
+  <UMLLabProfile:Reference xmi:id="_ijERUKtJEeKsPeyVkhwFeg" base_Element="_ijCcIKtJEeKsPeyVkhwFeg"/>
 </xmi:XMI>

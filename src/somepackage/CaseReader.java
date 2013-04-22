@@ -1,4 +1,6 @@
 package somepackage;
+import java.util.HashSet;
+import java.util.Set;
 
 
 
@@ -12,6 +14,8 @@ import org.apache.lucene.util.Version;
 
 
 public class CaseReader {
+
+   
 	
 	public static Case[] readCases(){
 		Case[] returns = new Case[8];

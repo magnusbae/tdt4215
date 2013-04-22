@@ -7,6 +7,23 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class Case {
+/**
+    * <pre>
+    *           0..*     0..1
+    * Case ------------------------- CaseReader
+    *           case        &lt;       caseReader
+    * </pre>
+    */
+   private CaseReader caseReader;
+   
+   public void setCaseReader(CaseReader value) {
+      this.caseReader = value;
+   }
+   
+   public CaseReader getCaseReader() {
+      return this.caseReader;
+   }
+   
 	String caseText = "";
 	ArrayList<String> sentences = new ArrayList<String>();
 	public Case(String caseText){

@@ -1,4 +1,6 @@
 package somepackage;
+import java.util.HashSet;
+import java.util.Set;
 
 
 
@@ -18,6 +20,22 @@ import org.jsoup.select.NodeVisitor;
 
 
 public class NLHParser {
+/**
+    * <pre>
+    *           0..1     0..*
+    * NLHParser ------------------------- NLH
+    *           nLHParser        &gt;       nLH
+    * </pre>
+    */
+   private Set<NLH> nLH;
+   
+   public Set<NLH> getNLH() {
+      if (this.nLH == null) {
+         this.nLH = new HashSet<NLH>();
+      }
+      return this.nLH;
+   }
+   
 	private ArrayList<NLH> parsedNLH;
 
 	public NLHParser() {

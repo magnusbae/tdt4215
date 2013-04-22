@@ -17,6 +17,8 @@ package somepackage;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import java.util.HashSet;
+import java.util.Set;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -48,6 +50,22 @@ import org.apache.lucene.store.FSDirectory;
 import org.apache.lucene.util.Version;
 
 public class SearchFiles {
+/**
+    * <pre>
+    *           0..*     0..*
+    * SearchFiles ------------------------- Indexer
+    *           searchFiles        &gt;       indexer
+    * </pre>
+    */
+   private Set<Indexer> indexer;
+   
+   public Set<Indexer> getIndexer() {
+      if (this.indexer == null) {
+         this.indexer = new HashSet<Indexer>();
+      }
+      return this.indexer;
+   }
+   
 
 	public SearchFiles() {}
 
