@@ -492,41 +492,6 @@
       </parameters>
     </operations>
   </nodes>
-  <nodes xsi:type="com.yattasolutions.uml.diagrams.classifier:ClassifierVisual" xmi:id="_F0Jl4Ks1EeKP9aZwcg51-Q" name="Search">
-    <modelElement href="pakkediagram.uml#_ETqqkKs1EeKP9aZwcg51-Q"/>
-    <visualProperties xmi:id="_F0Jl4as1EeKP9aZwcg51-Q" position="-323.0,437.0" size="-1.0,-1.0"/>
-    <visibility xmi:id="_F0Jl4qs1EeKP9aZwcg51-Q" label="+"/>
-    <operations xmi:id="_F0Jl46s1EeKP9aZwcg51-Q" name="Search">
-      <modelElement href="pakkediagram.uml#_ETrRoKs1EeKP9aZwcg51-Q"/>
-      <keywords xmi:id="_F0Jl5Ks1EeKP9aZwcg51-Q" keyword="create"/>
-      <stereotypes xmi:id="_F0Jl5as1EeKP9aZwcg51-Q" name="LegacyStyledElement">
-        <modelElement href="pakkediagram.uml#_ETr4sKs1EeKP9aZwcg51-Q"/>
-      </stereotypes>
-      <visibility xmi:id="_F0Jl5qs1EeKP9aZwcg51-Q" label="+"/>
-      <outParameters xmi:id="_F0Jl56s1EeKP9aZwcg51-Q">
-        <modelElement href="pakkediagram.uml#_ETr4sas1EeKP9aZwcg51-Q"/>
-        <type xmi:id="_F0Jl6Ks1EeKP9aZwcg51-Q" name="Search">
-          <modelElement href="pakkediagram.uml#_ETqqkKs1EeKP9aZwcg51-Q"/>
-        </type>
-      </outParameters>
-    </operations>
-    <operations xmi:id="_F0Jl6as1EeKP9aZwcg51-Q" name="basicSearch">
-      <modelElement href="pakkediagram.uml#_ETr4sqs1EeKP9aZwcg51-Q"/>
-      <visibility xmi:id="_F0Jl6qs1EeKP9aZwcg51-Q" label="+"/>
-      <outParameters xmi:id="_F0Jl66s1EeKP9aZwcg51-Q">
-        <modelElement href="pakkediagram.uml#_ETsfwKs1EeKP9aZwcg51-Q"/>
-        <type xmi:id="_F0Jl7Ks1EeKP9aZwcg51-Q" name="String">
-          <modelElement href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
-        </type>
-      </outParameters>
-      <parameters xmi:id="_F0Jl7as1EeKP9aZwcg51-Q" name="searchString">
-        <modelElement href="pakkediagram.uml#_ETr4s6s1EeKP9aZwcg51-Q"/>
-        <type xmi:id="_F0Jl7qs1EeKP9aZwcg51-Q" name="String">
-          <modelElement href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
-        </type>
-      </parameters>
-    </operations>
-  </nodes>
   <nodes xsi:type="com.yattasolutions.uml.diagrams.classifier:ClassifierVisual" xmi:id="_F0MCIKs1EeKP9aZwcg51-Q" name="SearchFiles">
     <modelElement href="pakkediagram.uml#_ETtG0Ks1EeKP9aZwcg51-Q"/>
     <visualProperties xmi:id="_F0MCIas1EeKP9aZwcg51-Q" position="662.0,437.0" size="-1.0,-1.0"/>

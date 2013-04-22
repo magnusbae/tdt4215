@@ -414,6 +414,17 @@
         <modelElement href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
       </type>
     </attributes>
+    <attributes xmi:id="_s53_AKtHEeKP9aZwcg51-Q" defaultValue="&quot; &quot;" name="name">
+      <modelElement href="pakkediagram.uml#_s5aE8KtHEeKP9aZwcg51-Q"/>
+      <stereotypes xmi:id="_s53_AatHEeKP9aZwcg51-Q" name="LegacyStyledElement">
+        <modelElement href="pakkediagram.uml#_s5bTEKtHEeKP9aZwcg51-Q"/>
+      </stereotypes>
+      <visibility xmi:id="_s53_AqtHEeKP9aZwcg51-Q" label="~"/>
+      <cardinality xmi:id="_s53_A6tHEeKP9aZwcg51-Q" label="1" max="1" min="1"/>
+      <type xmi:id="_s53_BKtHEeKP9aZwcg51-Q" name="String">
+        <modelElement href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </type>
+    </attributes>
     <operations xmi:id="_FFfJIqs1EeKP9aZwcg51-Q" name="NLH">
       <modelElement href="pakkediagram.uml#_ES0WAKs1EeKP9aZwcg51-Q"/>
       <keywords xmi:id="_FFfJI6s1EeKP9aZwcg51-Q" keyword="create"/>
@@ -513,6 +524,16 @@
       <outParameters xmi:id="_FFfJSas1EeKP9aZwcg51-Q">
         <modelElement href="pakkediagram.uml#_ES5OgKs1EeKP9aZwcg51-Q"/>
         <type xmi:id="_FFfJSqs1EeKP9aZwcg51-Q" name="String">
+          <modelElement href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        </type>
+      </outParameters>
+    </operations>
+    <operations xmi:id="_s52J0KtHEeKP9aZwcg51-Q" name="getName">
+      <modelElement href="pakkediagram.uml#_s4fe8KtHEeKP9aZwcg51-Q"/>
+      <visibility xmi:id="_s52J0atHEeKP9aZwcg51-Q" label="+"/>
+      <outParameters xmi:id="_s52J0qtHEeKP9aZwcg51-Q">
+        <modelElement href="pakkediagram.uml#_s5MpkKtHEeKP9aZwcg51-Q"/>
+        <type xmi:id="_s52J06tHEeKP9aZwcg51-Q" name="String">
           <modelElement href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
         </type>
       </outParameters>

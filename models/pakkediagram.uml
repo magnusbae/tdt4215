@@ -4,7 +4,7 @@
     <eAnnotations xmi:id="_D9PuoKs1EeKP9aZwcg51-Q" source="http://ns.yatta.de/umllab">
       <contents xmi:type="ecore:EAnnotation" xmi:id="_D9Puoas1EeKP9aZwcg51-Q" source="codegen">
         <details xmi:id="_D9Puoqs1EeKP9aZwcg51-Q" key="codegenDirectory" value="/tdt4215/src"/>
-        <details xmi:id="_Eh8-MKs1EeKP9aZwcg51-Q" key="AssociatedSourceCode" value="/tdt4215/src/datatypes/Atc.java;1197109170/1;/tdt4215/src/datatypes/Case.java;145536381/1;/tdt4215/src/datatypes/ICD10.java;2803399051/1;/tdt4215/src/datatypes/NLH.java;709366030/1;/tdt4215/src/gui/Indexer.java;2640499073/1;/tdt4215/src/gui/MainWindow.java;1106292892/1;/tdt4215/src/gui/TextRunner.java;1240899532/1;/tdt4215/src/parser/AtcParser.java;3075247684/1;/tdt4215/src/parser/CaseReader.java;1424726854/1;/tdt4215/src/parser/ICD10parser.java;633108053/1;/tdt4215/src/parser/NLHParser.java;18777970/1;/tdt4215/src/search/IndexFiles.java;4187062630/1;/tdt4215/src/search/Search.java;1111706784/1;/tdt4215/src/search/SearchFiles.java;2977017355/1;"/>
+        <details xmi:id="_Eh8-MKs1EeKP9aZwcg51-Q" key="AssociatedSourceCode" value="/tdt4215/src/datatypes/Atc.java;1197109170/1;/tdt4215/src/datatypes/Case.java;145536381/1;/tdt4215/src/datatypes/ICD10.java;2803399051/1;/tdt4215/src/datatypes/NLH.java;4250293870/1;/tdt4215/src/gui/Indexer.java;523343369/1;/tdt4215/src/gui/MainWindow.java;1106292892/1;/tdt4215/src/gui/TextRunner.java;1240899532/1;/tdt4215/src/parser/AtcParser.java;3075247684/1;/tdt4215/src/parser/CaseReader.java;1424726854/1;/tdt4215/src/parser/ICD10parser.java;633108053/1;/tdt4215/src/parser/NLHParser.java;18777970/1;/tdt4215/src/search/IndexFiles.java;1905120723/1;/tdt4215/src/search/SearchFiles.java;2977017355/1;"/>
       </contents>
     </eAnnotations>
     <elementImport xmi:id="_EQ1ZAKs1EeKP9aZwcg51-Q">
@@ -396,6 +396,10 @@
           <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
           <defaultValue xmi:type="uml:LiteralString" xmi:id="_EZEvAqs1EeKP9aZwcg51-Q" value="&quot; &quot;"/>
         </ownedAttribute>
+        <ownedAttribute xmi:id="_s5aE8KtHEeKP9aZwcg51-Q" name="name" visibility="package">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_s5asAKtHEeKP9aZwcg51-Q" value="&quot; &quot;"/>
+        </ownedAttribute>
         <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_EZdJhKs1EeKP9aZwcg51-Q" name="NLH" specification="_ES0WAKs1EeKP9aZwcg51-Q">
           <ownedParameter xmi:id="_EZdJhas1EeKP9aZwcg51-Q" name="c">
             <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
@@ -406,19 +410,23 @@
           <ownedParameter xmi:id="_EZdJh6s1EeKP9aZwcg51-Q" name="s">
             <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
           </ownedParameter>
-          <ownedParameter xmi:id="_EZdJiKs1EeKP9aZwcg51-Q" type="_ESzH4Ks1EeKP9aZwcg51-Q" direction="return"/>
+          <ownedParameter xmi:id="_EZdJiKs1EeKP9aZwcg51-Q" type="_ESzH4Ks1EeKP9aZwcg51-Q" direction="return">
+            <name xsi:nil="true"/>
+          </ownedParameter>
           <language>java</language>
-          <body>text = t;&#xD;
-		chapter = c;&#xD;
-		synonyms = s;&#xD;
+          <body>text = t;
+		chapter = c;
+		synonyms = s;
+		name = s; 
 	</body>
         </ownedBehavior>
         <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_EZdwkKs1EeKP9aZwcg51-Q" name="getChapter" specification="_ES2LM6s1EeKP9aZwcg51-Q">
           <ownedParameter xmi:id="_EZdwkas1EeKP9aZwcg51-Q" direction="return">
+            <name xsi:nil="true"/>
             <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
           </ownedParameter>
           <language>java</language>
-          <body>return chapter;&#xD;
+          <body>return chapter;
 	</body>
         </ownedBehavior>
         <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_EZdwkqs1EeKP9aZwcg51-Q" name="setChapter" specification="_ES2yQas1EeKP9aZwcg51-Q">
@@ -426,18 +434,19 @@
             <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
           </ownedParameter>
           <language>java</language>
-          <body>if(localName.charAt(0)== '*')&#xD;
-			localName = localName.substring(1);&#xD;
-		if(localName.contains(&quot;&quot;+((char)160))){&#xD;
-			chapter = localName.substring(0, localName.indexOf(((char)160)));&#xD;
-			synonyms += &quot; &quot; + localName.substring(localName.indexOf(((char)160)));&#xD;
-		}else if(localName.contains(&quot; &quot;)){&#xD;
-			chapter = localName.substring(0, localName.indexOf(&quot; &quot;));&#xD;
-			synonyms += &quot; &quot; + localName.substring(localName.indexOf(&quot; &quot;));&#xD;
-		} &#xD;
-		else {&#xD;
-			chapter = localName;&#xD;
-		}&#xD;
+          <body>if(localName.charAt(0)== '*')
+			localName = localName.substring(1);
+		if(localName.contains(&quot;&quot;+((char)160))){
+			chapter = localName.substring(0, localName.indexOf(((char)160)));
+			name += &quot; &quot; + localName.substring(localName.indexOf(((char)160)));
+			synonyms += &quot; &quot; + localName.substring(localName.indexOf(((char)160)));
+		}else if(localName.contains(&quot; &quot;)){
+			chapter = localName.substring(0, localName.indexOf(&quot; &quot;));
+			synonyms += &quot; &quot; + localName.substring(localName.indexOf(&quot; &quot;));
+		} 
+		else {
+			chapter = localName;
+		}
 	</body>
         </ownedBehavior>
         <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_EZdwlKs1EeKP9aZwcg51-Q" name="setText" specification="_ES3ZUas1EeKP9aZwcg51-Q">
@@ -445,7 +454,7 @@
             <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
           </ownedParameter>
           <language>java</language>
-          <body>text = value;&#xD;
+          <body>text = value;
 	</body>
         </ownedBehavior>
         <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_EZeXoKs1EeKP9aZwcg51-Q" name="addText" specification="_ES4AYKs1EeKP9aZwcg51-Q">
@@ -453,24 +462,34 @@
             <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
           </ownedParameter>
           <language>java</language>
-          <body>text+=ownText + &quot; &quot;;&#xD;
-&#xD;
+          <body>text+=ownText + &quot; &quot;;
+
 	</body>
         </ownedBehavior>
         <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_EZeXoqs1EeKP9aZwcg51-Q" name="getText" specification="_ES4ncKs1EeKP9aZwcg51-Q">
           <ownedParameter xmi:id="_EZeXo6s1EeKP9aZwcg51-Q" direction="return">
+            <name xsi:nil="true"/>
             <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
           </ownedParameter>
           <language>java</language>
-          <body>return text;&#xD;
+          <body>return text;
 	</body>
         </ownedBehavior>
         <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_EZeXpKs1EeKP9aZwcg51-Q" name="getSynonyms" specification="_ES4ncqs1EeKP9aZwcg51-Q">
           <ownedParameter xmi:id="_EZeXpas1EeKP9aZwcg51-Q" direction="return">
+            <name xsi:nil="true"/>
             <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
           </ownedParameter>
           <language>java</language>
-          <body>return synonyms;&#xD;
+          <body>return synonyms;
+	</body>
+        </ownedBehavior>
+        <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_s5jO4KtHEeKP9aZwcg51-Q" name="getName" specification="_s4fe8KtHEeKP9aZwcg51-Q">
+          <ownedParameter xmi:id="_s5jO4atHEeKP9aZwcg51-Q" direction="return">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+          </ownedParameter>
+          <language>java</language>
+          <body>return name;
 	</body>
         </ownedBehavior>
         <ownedOperation xmi:id="_ES0WAKs1EeKP9aZwcg51-Q" name="NLH" method="_EZdJhKs1EeKP9aZwcg51-Q">
@@ -521,6 +540,11 @@
         </ownedOperation>
         <ownedOperation xmi:id="_ES4ncqs1EeKP9aZwcg51-Q" name="getSynonyms" method="_EZeXpKs1EeKP9aZwcg51-Q">
           <ownedParameter xmi:id="_ES5OgKs1EeKP9aZwcg51-Q" direction="return">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+          </ownedParameter>
+        </ownedOperation>
+        <ownedOperation xmi:id="_s4fe8KtHEeKP9aZwcg51-Q" name="getName" method="_s5jO4KtHEeKP9aZwcg51-Q">
+          <ownedParameter xmi:id="_s5MpkKtHEeKP9aZwcg51-Q" direction="return">
             <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
           </ownedParameter>
         </ownedOperation>
@@ -1044,39 +1068,45 @@
         <ownedAttribute xmi:id="_EZtBIKs1EeKP9aZwcg51-Q" name="dirNLH" visibility="package" type="_EXRYMKs1EeKP9aZwcg51-Q" association="_EaENgKs1EeKP9aZwcg51-Q"/>
         <ownedAttribute xmi:id="_EZtoMas1EeKP9aZwcg51-Q" name="dirICD" visibility="package" type="_EXRYMKs1EeKP9aZwcg51-Q" association="_EaE0kKs1EeKP9aZwcg51-Q"/>
         <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_EZjQIqs1EeKP9aZwcg51-Q" name="getAnalyzer" specification="_ETaL4Ks1EeKP9aZwcg51-Q">
-          <ownedParameter xmi:id="_EZjQI6s1EeKP9aZwcg51-Q" type="_EXO78Ks1EeKP9aZwcg51-Q" direction="return"/>
+          <ownedParameter xmi:id="_EZjQI6s1EeKP9aZwcg51-Q" type="_EXO78Ks1EeKP9aZwcg51-Q" direction="return">
+            <name xsi:nil="true"/>
+          </ownedParameter>
           <language>java</language>
-          <body>return analyzer;&#xD;
+          <body>return analyzer;
 	</body>
         </ownedBehavior>
         <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_EZjQJKs1EeKP9aZwcg51-Q" name="setAnalyzer" specification="_EYs7kas1EeKP9aZwcg51-Q">
           <ownedParameter xmi:id="_EZjQJas1EeKP9aZwcg51-Q" name="analyzer" type="_EXO78Ks1EeKP9aZwcg51-Q"/>
           <language>java</language>
-          <body>this.analyzer = analyzer;&#xD;
+          <body>this.analyzer = analyzer;
 	</body>
         </ownedBehavior>
         <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_EZj3MKs1EeKP9aZwcg51-Q" name="getIcd10s" specification="_ETay8Ks1EeKP9aZwcg51-Q">
-          <ownedParameter xmi:id="_EZj3Mas1EeKP9aZwcg51-Q" type="_EXD80Ks1EeKP9aZwcg51-Q" direction="return"/>
+          <ownedParameter xmi:id="_EZj3Mas1EeKP9aZwcg51-Q" type="_EXD80Ks1EeKP9aZwcg51-Q" direction="return">
+            <name xsi:nil="true"/>
+          </ownedParameter>
           <language>java</language>
-          <body>return icd10s;&#xD;
+          <body>return icd10s;
 	</body>
         </ownedBehavior>
         <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_EZj3Mqs1EeKP9aZwcg51-Q" name="setIcd10s" specification="_EYuwwKs1EeKP9aZwcg51-Q">
           <ownedParameter xmi:id="_EZj3M6s1EeKP9aZwcg51-Q" name="icd10s" type="_EXD80Ks1EeKP9aZwcg51-Q"/>
           <language>java</language>
-          <body>this.icd10s = icd10s;&#xD;
+          <body>this.icd10s = icd10s;
 	</body>
         </ownedBehavior>
         <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_EZj3NKs1EeKP9aZwcg51-Q" name="getIndexer" specification="_ETcoIKs1EeKP9aZwcg51-Q">
-          <ownedParameter xmi:id="_EZj3Nas1EeKP9aZwcg51-Q" type="_EYDbUas1EeKP9aZwcg51-Q" direction="return"/>
+          <ownedParameter xmi:id="_EZj3Nas1EeKP9aZwcg51-Q" type="_EYDbUas1EeKP9aZwcg51-Q" direction="return">
+            <name xsi:nil="true"/>
+          </ownedParameter>
           <language>java</language>
-          <body>return indexer;&#xD;
+          <body>return indexer;
 	</body>
         </ownedBehavior>
         <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_EZj3Nqs1EeKP9aZwcg51-Q" name="setIndexer" specification="_EYwl8Ks1EeKP9aZwcg51-Q">
           <ownedParameter xmi:id="_EZj3N6s1EeKP9aZwcg51-Q" name="indexer" type="_EYDbUas1EeKP9aZwcg51-Q"/>
           <language>java</language>
-          <body>this.indexer = indexer;&#xD;
+          <body>this.indexer = indexer;
 	</body>
         </ownedBehavior>
         <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_EZkeQKs1EeKP9aZwcg51-Q" name="IndexFiles" specification="_EYzpQKs1EeKP9aZwcg51-Q">
@@ -1084,79 +1114,83 @@
           <ownedParameter xmi:id="_EZkeQqs1EeKP9aZwcg51-Q" name="dirAtc" type="_EXRYMKs1EeKP9aZwcg51-Q"/>
           <ownedParameter xmi:id="_EZkeQ6s1EeKP9aZwcg51-Q" name="dirNLH" type="_EXRYMKs1EeKP9aZwcg51-Q"/>
           <ownedParameter xmi:id="_EZkeRKs1EeKP9aZwcg51-Q" name="ana" type="_EXO78Ks1EeKP9aZwcg51-Q"/>
-          <ownedParameter xmi:id="_EZkeRas1EeKP9aZwcg51-Q" type="_ETY9wKs1EeKP9aZwcg51-Q" direction="return"/>
+          <ownedParameter xmi:id="_EZkeRas1EeKP9aZwcg51-Q" type="_ETY9wKs1EeKP9aZwcg51-Q" direction="return">
+            <name xsi:nil="true"/>
+          </ownedParameter>
           <language>java</language>
-          <body>this.dirAtc = dirAtc;&#xD;
-		this.dirNLH = dirNLH;&#xD;
-		this.dirICD = dir;&#xD;
-		this.analyzer = ana;&#xD;
+          <body>this.dirAtc = dirAtc;
+		this.dirNLH = dirNLH;
+		this.dirICD = dir;
+		this.analyzer = ana;
 	</body>
         </ownedBehavior>
         <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_EZkeRqs1EeKP9aZwcg51-Q" name="index" specification="_ETfrcKs1EeKP9aZwcg51-Q">
           <language>java</language>
-          <body>try {&#xD;
-			FileUtils.deleteDirectory(new File(&quot;Index/&quot;));&#xD;
-		} catch (IOException e) {&#xD;
-			e.printStackTrace();&#xD;
-		}&#xD;
-		indexICD10();&#xD;
-		indexAtc();&#xD;
-		indexNLH();&#xD;
+          <body>try {
+			FileUtils.deleteDirectory(new File(&quot;Index/&quot;));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		indexICD10();
+		indexAtc();
+		indexNLH();
 	</body>
         </ownedBehavior>
         <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_EZlFUKs1EeKP9aZwcg51-Q" name="indexICD10" specification="_ETfrcas1EeKP9aZwcg51-Q">
           <language>java</language>
-          <body>try {&#xD;
-			ICD10parser parser = new ICD10parser(&quot;Data/icd10no.owl&quot;);&#xD;
-			icd10s = parser.getParsedICDs();&#xD;
-			icd10Model = parser.getOnto();&#xD;
-			IndexWriterConfig iwc = new IndexWriterConfig(Version.LUCENE_CURRENT, analyzer);&#xD;
-			indexer = new IndexWriter(dirICD, iwc);&#xD;
-			for(ICD10 i:icd10s){&#xD;
-				Document doc = new Document();&#xD;
-				if(i.getICDCode()!=null)&#xD;
-					doc.add(new StringField(&quot;ICDCode&quot;, i.getICDCode(), Field.Store.YES));&#xD;
-				if(i.getLabel()!=null)&#xD;
-					doc.add(new TextField(&quot;label&quot;, i.getLabel(), Field.Store.YES));&#xD;
-				if(i.getSynonyms() != null){&#xD;
-					doc.add(new TextField(&quot;synonyms&quot;, i.getSynonyms(), Field.Store.YES));&#xD;
-				}&#xD;
-				indexer.addDocument(doc);&#xD;
-			}&#xD;
-			indexer.close();&#xD;
-		} catch (Exception e) {&#xD;
-			e.printStackTrace();&#xD;
-&#xD;
-		}&#xD;
+          <body>try {
+			ICD10parser parser = new ICD10parser(&quot;Data/icd10no.owl&quot;);
+			icd10s = parser.getParsedICDs();
+			icd10Model = parser.getOnto();
+			IndexWriterConfig iwc = new IndexWriterConfig(Version.LUCENE_CURRENT, analyzer);
+			indexer = new IndexWriter(dirICD, iwc);
+			for(ICD10 i:icd10s){
+				Document doc = new Document();
+				if(i.getICDCode()!=null)
+					doc.add(new StringField(&quot;ICDCode&quot;, i.getICDCode(), Field.Store.YES));
+				if(i.getLabel()!=null)
+					doc.add(new TextField(&quot;label&quot;, i.getLabel(), Field.Store.YES));
+				if(i.getSynonyms() != null){
+					doc.add(new TextField(&quot;synonyms&quot;, i.getSynonyms(), Field.Store.YES));
+				}
+				indexer.addDocument(doc);
+			}
+			indexer.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+
+		}
 	</body>
         </ownedBehavior>
         <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_EZlFUas1EeKP9aZwcg51-Q" name="indexNLH" specification="_ETgSgKs1EeKP9aZwcg51-Q">
           <language>java</language>
-          <body>try {&#xD;
-			NLHParser parser = new NLHParser();&#xD;
-			NLHs = parser.getParsedNLHs();&#xD;
-			IndexWriterConfig iwc = new IndexWriterConfig(Version.LUCENE_CURRENT, analyzer);&#xD;
-			indexer = new IndexWriter(dirNLH, iwc);&#xD;
-			for(NLH i:NLHs){&#xD;
-				Document doc = new Document();&#xD;
-				if(i.getChapter()!=null)&#xD;
-					doc.add(new StringField(&quot;Chapter&quot;, i.getChapter(), Field.Store.YES));&#xD;
-				if(i.getText()!=null)&#xD;
-					doc.add(new TextField(&quot;label&quot;, i.getText(), Field.Store.YES));&#xD;
-				if(i.getSynonyms() != null){&#xD;
-					String syn = i.getSynonyms();&#xD;
-					syn += findSyn(i.getSynonyms());&#xD;
-					TextField synonymField = new TextField(&quot;synonyms&quot;, syn, Field.Store.YES);&#xD;
-//					synonymField.setBoost(1.3f);&#xD;
-					doc.add(synonymField);&#xD;
-				}&#xD;
-				indexer.addDocument(doc);&#xD;
-			}&#xD;
-			indexer.close();&#xD;
-		} catch (Exception e) {&#xD;
-			e.printStackTrace();&#xD;
-&#xD;
-		}&#xD;
+          <body>try {
+			NLHParser parser = new NLHParser();
+			NLHs = parser.getParsedNLHs();
+			IndexWriterConfig iwc = new IndexWriterConfig(Version.LUCENE_CURRENT, analyzer);
+			indexer = new IndexWriter(dirNLH, iwc);
+			for(NLH i:NLHs){
+				Document doc = new Document();
+				if(i.getChapter()!=null)
+					doc.add(new StringField(&quot;Chapter&quot;, i.getChapter(), Field.Store.YES));
+				if(i.getText()!=null)
+					doc.add(new TextField(&quot;label&quot;, i.getText(), Field.Store.YES));
+				if(i.getText()!=null)
+					doc.add(new TextField(&quot;Name&quot;, i.getName(), Field.Store.YES));
+				if(i.getSynonyms() != null){
+					String syn = i.getSynonyms();
+					syn += findSyn(i.getSynonyms());
+					TextField synonymField = new TextField(&quot;synonyms&quot;, syn, Field.Store.YES);
+//					synonymField.setBoost(1.3f);
+					doc.add(synonymField);
+				}
+				indexer.addDocument(doc);
+			}
+			indexer.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+
+		}
 	</body>
         </ownedBehavior>
         <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_EZlFUqs1EeKP9aZwcg51-Q" name="findSyn" specification="_ETgSgas1EeKP9aZwcg51-Q">
@@ -1164,81 +1198,82 @@
             <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
           </ownedParameter>
           <ownedParameter xmi:id="_EZlFVKs1EeKP9aZwcg51-Q" direction="return">
+            <name xsi:nil="true"/>
             <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
           </ownedParameter>
           <language>java</language>
-          <body>String syn = &quot;&quot;;&#xD;
-		if(synonyms.length() &lt; 3)&#xD;
-			return &quot;&quot;;&#xD;
-		if(synonyms.contains(&quot;itt&quot;)){&#xD;
-			syn += &quot; &quot; +synonyms.replace(&quot;itt&quot;, &quot;ene&quot;);&#xD;
-			syn += &quot; &quot; +synonyms.replace(&quot;itt&quot;, &quot;er&quot;);&#xD;
-			&#xD;
-		}&#xD;
-		synonyms = synonyms.trim();&#xD;
-		if(synonyms.length() &lt; 3)&#xD;
-			return &quot;&quot;;&#xD;
-		&#xD;
-		try {&#xD;
-			QueryParser q = new MultiFieldQueryParser(Version.LUCENE_CURRENT&#xD;
-					, new String[] {&quot;label&quot;,&quot;synonyms&quot;},&#xD;
-					analyzer);&#xD;
-&#xD;
-			int hitsPerPage = 3;&#xD;
-			DirectoryReader reader = DirectoryReader.open(dirAtc);&#xD;
-//			IndexReader reader = IndexReader.open(dirAtc);&#xD;
-			IndexSearcher searcher = new IndexSearcher(reader);&#xD;
-			TopScoreDocCollector collector = TopScoreDocCollector.create(hitsPerPage, true);&#xD;
-			synonyms = synonyms.replaceAll(&quot;[^\\w\\s]&quot;,&quot; &quot;);&#xD;
-			searcher.search(q.parse(QueryParser.escape(synonyms)), collector);&#xD;
-			ScoreDoc[] hits = collector.topDocs().scoreDocs;&#xD;
-			if(hits.length != 0){&#xD;
-				int docId = hits[0].doc;&#xD;
-				Document d = searcher.doc(docId);&#xD;
-				syn += &quot; &quot; + d.get(&quot;Atccode&quot;) + &quot; &quot; +  d.get(&quot;label&quot;)+ &quot; &quot;;&#xD;
-			}&#xD;
-			collector = TopScoreDocCollector.create(hitsPerPage, true);&#xD;
-			reader.close();&#xD;
-			reader = DirectoryReader.open(dirICD);&#xD;
-			searcher = new IndexSearcher(reader);&#xD;
-			synonyms = synonyms.replaceAll(&quot;[^\\w\\s]&quot;,&quot; &quot;);&#xD;
-			searcher.search(q.parse(QueryParser.escape(synonyms)), collector);&#xD;
-			hits = collector.topDocs().scoreDocs;&#xD;
-			&#xD;
-			if(hits.length != 0){&#xD;
-				int docId = hits[0].doc;&#xD;
-				Document d = searcher.doc(docId);&#xD;
-				syn += &quot; &quot; + d.get(&quot;ICDCode&quot;) + d.get(&quot;synonyms&quot;) + &quot; &quot; +  d.get(&quot;label&quot;)+ &quot; &quot;;&#xD;
-				reader.close();&#xD;
-				return syn;&#xD;
-			}&#xD;
-			reader.close();&#xD;
-			return null;&#xD;
-		} catch (ParseException | IOException e) {&#xD;
-			e.printStackTrace();&#xD;
-		}&#xD;
-		return null;&#xD;
+          <body>String syn = &quot;&quot;;
+		if(synonyms.length() &lt; 3)
+			return &quot;&quot;;
+		if(synonyms.contains(&quot;itt&quot;)){
+			syn += &quot; &quot; +synonyms.replace(&quot;itt&quot;, &quot;ene&quot;);
+			syn += &quot; &quot; +synonyms.replace(&quot;itt&quot;, &quot;er&quot;);
+			
+		}
+		synonyms = synonyms.trim();
+		if(synonyms.length() &lt; 3)
+			return &quot;&quot;;
+		
+		try {
+			QueryParser q = new MultiFieldQueryParser(Version.LUCENE_CURRENT
+					, new String[] {&quot;label&quot;,&quot;synonyms&quot;},
+					analyzer);
+
+			int hitsPerPage = 3;
+			DirectoryReader reader = DirectoryReader.open(dirAtc);
+//			IndexReader reader = IndexReader.open(dirAtc);
+			IndexSearcher searcher = new IndexSearcher(reader);
+			TopScoreDocCollector collector = TopScoreDocCollector.create(hitsPerPage, true);
+			synonyms = synonyms.replaceAll(&quot;[^\\w\\s]&quot;,&quot; &quot;);
+			searcher.search(q.parse(QueryParser.escape(synonyms)), collector);
+			ScoreDoc[] hits = collector.topDocs().scoreDocs;
+			if(hits.length != 0){
+				int docId = hits[0].doc;
+				Document d = searcher.doc(docId);
+				syn += &quot; &quot; + d.get(&quot;Atccode&quot;) + &quot; &quot; +  d.get(&quot;label&quot;)+ &quot; &quot;;
+			}
+			collector = TopScoreDocCollector.create(hitsPerPage, true);
+			reader.close();
+			reader = DirectoryReader.open(dirICD);
+			searcher = new IndexSearcher(reader);
+			synonyms = synonyms.replaceAll(&quot;[^\\w\\s]&quot;,&quot; &quot;);
+			searcher.search(q.parse(QueryParser.escape(synonyms)), collector);
+			hits = collector.topDocs().scoreDocs;
+			
+			if(hits.length != 0){
+				int docId = hits[0].doc;
+				Document d = searcher.doc(docId);
+				syn += &quot; &quot; + d.get(&quot;ICDCode&quot;) + d.get(&quot;synonyms&quot;) + &quot; &quot; +  d.get(&quot;label&quot;)+ &quot; &quot;;
+				reader.close();
+				return syn;
+			}
+			reader.close();
+			return null;
+		} catch (ParseException | IOException e) {
+			e.printStackTrace();
+		}
+		return null;
 	</body>
         </ownedBehavior>
         <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_EZlsYKs1EeKP9aZwcg51-Q" name="indexAtc" specification="_ETg5kas1EeKP9aZwcg51-Q">
           <language>java</language>
-          <body>try {&#xD;
-			AtcParser parser = new AtcParser(&quot;Data/atc.owl&quot;);&#xD;
-			atcs = parser.getParsedAtcs();&#xD;
-			atcModel = parser.getOnto();&#xD;
-			IndexWriterConfig iwc = new IndexWriterConfig(Version.LUCENE_CURRENT, analyzer);&#xD;
-			indexer = new IndexWriter(dirAtc, iwc);&#xD;
-			for(Atc i:atcs){&#xD;
-				Document doc = new Document();&#xD;
-				if(i.getAtcCode()!=null)&#xD;
-					doc.add(new StringField(&quot;Atccode&quot;, i.getAtcCode(), Field.Store.YES));&#xD;
-				if(i.getLabel()!=null)&#xD;
-					doc.add(new TextField(&quot;label&quot;, i.getLabel(), Field.Store.YES));&#xD;
-				indexer.addDocument(doc);&#xD;
-			}&#xD;
-			indexer.close();&#xD;
-		} catch (Exception e) {&#xD;
-		}&#xD;
+          <body>try {
+			AtcParser parser = new AtcParser(&quot;Data/atc.owl&quot;);
+			atcs = parser.getParsedAtcs();
+			atcModel = parser.getOnto();
+			IndexWriterConfig iwc = new IndexWriterConfig(Version.LUCENE_CURRENT, analyzer);
+			indexer = new IndexWriter(dirAtc, iwc);
+			for(Atc i:atcs){
+				Document doc = new Document();
+				if(i.getAtcCode()!=null)
+					doc.add(new StringField(&quot;Atccode&quot;, i.getAtcCode(), Field.Store.YES));
+				if(i.getLabel()!=null)
+					doc.add(new TextField(&quot;label&quot;, i.getLabel(), Field.Store.YES));
+				indexer.addDocument(doc);
+			}
+			indexer.close();
+		} catch (Exception e) {
+		}
 	</body>
         </ownedBehavior>
         <ownedOperation xmi:id="_ETaL4Ks1EeKP9aZwcg51-Q" name="getAnalyzer" method="_EZjQIqs1EeKP9aZwcg51-Q">
@@ -1280,34 +1315,6 @@
           <ownedParameter xmi:id="_EY0QUas1EeKP9aZwcg51-Q" name="dirNLH" type="_EXRYMKs1EeKP9aZwcg51-Q"/>
           <ownedParameter xmi:id="_EY0QUqs1EeKP9aZwcg51-Q" name="ana" type="_EXO78Ks1EeKP9aZwcg51-Q"/>
           <ownedParameter xmi:id="_EY03Yas1EeKP9aZwcg51-Q" type="_ETY9wKs1EeKP9aZwcg51-Q" direction="return"/>
-        </ownedOperation>
-      </packagedElement>
-      <packagedElement xmi:type="uml:Class" xmi:id="_ETqqkKs1EeKP9aZwcg51-Q" name="Search">
-        <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_EZlsYas1EeKP9aZwcg51-Q" name="basicSearch" specification="_ETr4sqs1EeKP9aZwcg51-Q">
-          <ownedParameter xmi:id="_EZlsYqs1EeKP9aZwcg51-Q" name="searchString">
-            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
-          </ownedParameter>
-          <ownedParameter xmi:id="_EZlsY6s1EeKP9aZwcg51-Q" direction="return">
-            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
-          </ownedParameter>
-          <language>java</language>
-          <body>return searchString;&#xD;
-&#xD;
-	</body>
-        </ownedBehavior>
-        <ownedOperation xmi:id="_ETrRoKs1EeKP9aZwcg51-Q" name="Search">
-          <eAnnotations xmi:id="_ETrRoas1EeKP9aZwcg51-Q" source="http://www.eclipse.org/uml2/2.0.0/UML">
-            <details xmi:id="_ETrRoqs1EeKP9aZwcg51-Q" key="create"/>
-          </eAnnotations>
-          <ownedParameter xmi:id="_ETr4sas1EeKP9aZwcg51-Q" type="_ETqqkKs1EeKP9aZwcg51-Q" direction="return"/>
-        </ownedOperation>
-        <ownedOperation xmi:id="_ETr4sqs1EeKP9aZwcg51-Q" name="basicSearch" method="_EZlsYas1EeKP9aZwcg51-Q">
-          <ownedParameter xmi:id="_ETr4s6s1EeKP9aZwcg51-Q" name="searchString">
-            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
-          </ownedParameter>
-          <ownedParameter xmi:id="_ETsfwKs1EeKP9aZwcg51-Q" direction="return">
-            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
-          </ownedParameter>
         </ownedOperation>
       </packagedElement>
       <packagedElement xmi:type="uml:Class" xmi:id="_ETtG0Ks1EeKP9aZwcg51-Q" name="SearchFiles">
@@ -1434,7 +1441,9 @@
           <ownedParameter xmi:id="_EZe-sqs1EeKP9aZwcg51-Q" name="testCases">
             <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
           </ownedParameter>
-          <ownedParameter xmi:id="_EZe-s6s1EeKP9aZwcg51-Q" type="_ES51kKs1EeKP9aZwcg51-Q" direction="return"/>
+          <ownedParameter xmi:id="_EZe-s6s1EeKP9aZwcg51-Q" type="_ES51kKs1EeKP9aZwcg51-Q" direction="return">
+            <name xsi:nil="true"/>
+          </ownedParameter>
           <language>java</language>
           <body>this.display = display;
 		this.testCases = testCases;
@@ -1533,7 +1542,7 @@
 					if (doc != null){
 						
 						for (int i = 0; i &lt; (doc.length >= 4 ? 4 : doc.length); i++){
-							searchResults += doc[i].get(&quot;Chapter&quot;) + &quot;\n&quot;;
+							searchResults += doc[i].get(&quot;Chapter&quot;) + &quot; -&quot; + doc[i].get(&quot;Name&quot;) + &quot;\n&quot;;
 						}
 						searchResults += &quot;\n------\n&quot;;
 					}else{
@@ -1545,7 +1554,7 @@
 				Document[] doc = sf.Search(s, dirNLH, ana);
 				if (doc != null &amp;&amp; doc.length > 0){
 					for (int i = 0; i &lt; (doc.length >= 4 ? 4 : doc.length); i++){
-						searchResults += doc[i].get(&quot;Chapter&quot;) + &quot;\n&quot;;
+						searchResults += doc[i].get(&quot;Chapter&quot;) + &quot; -&quot; + doc[i].get(&quot;Name&quot;) + &quot;\n&quot;;
 					}
 					searchResults += &quot;\n------\n&quot;;
 				}else{
@@ -1845,7 +1854,6 @@
   <UMLLabProfile:Array xmi:id="_ETOlsKs1EeKP9aZwcg51-Q" base_Element="_ETN-oas1EeKP9aZwcg51-Q"/>
   <UMLLabProfile:Generics xmi:id="_ETXIkKs1EeKP9aZwcg51-Q" genericsValue="NLH" base_Element="_ETWhgKs1EeKP9aZwcg51-Q"/>
   <UMLLabProfile:Generics xmi:id="_ETcBEKs1EeKP9aZwcg51-Q" genericsValue="ICD10" base_Element="_ETay8Ks1EeKP9aZwcg51-Q"/>
-  <UMLLabProfile:LegacyStyledElement xmi:id="_ETr4sKs1EeKP9aZwcg51-Q" base_Element="_ETrRoKs1EeKP9aZwcg51-Q"/>
   <UMLLabProfile:LegacyStyledElement xmi:id="_ETtt4qs1EeKP9aZwcg51-Q" base_Element="_ETtG0as1EeKP9aZwcg51-Q"/>
   <UMLLabProfile:Reference xmi:id="_EXFK8Ks1EeKP9aZwcg51-Q" base_Element="_EXD80Ks1EeKP9aZwcg51-Q"/>
   <UMLLabProfile:Reference xmi:id="_EXHAIKs1EeKP9aZwcg51-Q" base_Element="_EXGZEKs1EeKP9aZwcg51-Q"/>
@@ -2001,4 +2009,5 @@
   <UMLLabProfile:Reference xmi:id="_EaDmcKs1EeKP9aZwcg51-Q" base_Element="_EaC_Yas1EeKP9aZwcg51-Q"/>
   <UMLLabProfile:Reference xmi:id="_EaENgqs1EeKP9aZwcg51-Q" base_Element="_EaENgKs1EeKP9aZwcg51-Q"/>
   <UMLLabProfile:Reference xmi:id="_EaFboKs1EeKP9aZwcg51-Q" base_Element="_EaE0kKs1EeKP9aZwcg51-Q"/>
+  <UMLLabProfile:LegacyStyledElement xmi:id="_s5bTEKtHEeKP9aZwcg51-Q" base_Element="_s5aE8KtHEeKP9aZwcg51-Q"/>
 </xmi:XMI>
