@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 
 import org.apache.log4j.PropertyConfigurator;
 import org.apache.lucene.analysis.Analyzer;
@@ -160,6 +161,14 @@ public class Indexer extends Thread {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	public int checkAnswer(Document[] answers, ArrayList<String> goldStandard){
+		int result = 0;
+		for(Document d:answers)
+			for(String s:goldStandard)
+				if(d.get("Chapter").contains(s))
+					result++;
+		return result;
 	}
 }
 

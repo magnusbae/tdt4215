@@ -162,10 +162,14 @@ public class IndexFiles {
 					String syn = i.getSynonyms();
 					syn += findSyn(i.getSynonyms());
 					TextField synonymField = new TextField("synonyms", syn, Field.Store.YES);
-//					synonymField.setBoost(1.3f);
+					synonymField.setBoost(0.3f);
 					doc.add(synonymField);
 				}
 				indexer.addDocument(doc);
+				if(i.getChapter().contains("T10.2.2") || i.getChapter().contains("T10.2.1")){
+					System.out.println(i.getChapter() + " - " + i.getName());
+					System.out.println(i.getText());
+				}
 			}
 			indexer.close();
 		} catch (Exception e) {
