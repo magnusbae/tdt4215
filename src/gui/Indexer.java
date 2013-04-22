@@ -21,6 +21,7 @@ import datatypes.Case;
 import search.IndexFiles;
 import search.SearchFiles;
 
+
 public class Indexer extends Thread {
 	
 	private Display display;
@@ -30,6 +31,16 @@ public class Indexer extends Thread {
 		this.display = display;
 		this.testCases = testCases;
 	}
+	
+	String[] case1 = {"T3.1", "L3.1.1"};
+	String[] case2 = {"T10.2", "T10.2.2"};
+	String[] case3 = {"T1.10"};
+	String[] case4 = {"T8.3", "T8.3.2", "T8.3.1"};
+	String[] case5 = {"T2.2.1.1", "T4.1", "T4.1.1"};
+	String[] case6 = {"T11.3.2", "T11.3.2", "T11.3.2.2", "T1.3"};
+	String[] case7 = {"T21", "T21.1.1", "T21.1.1.1", "L20.1.2.3"};
+	String[] case8 = {"T11.3.2", "T11.3.2.1", "T11.3.2.2", "T1.3"};
+	
 	
 	
 	public void run(){
@@ -162,6 +173,9 @@ public class Indexer extends Thread {
 			e.printStackTrace();
 		}
 	}
+	
+	
+	
 	public int checkAnswer(Document[] answers, ArrayList<String> goldStandard){
 		int result = 0;
 		for(Document d:answers)
