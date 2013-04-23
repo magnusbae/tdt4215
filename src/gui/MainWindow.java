@@ -44,6 +44,7 @@ public class MainWindow {
 	 static Display display = null;
 	 static Shell shell = null;
 	 static int numberOfSearchResults = 4;
+	 static boolean showStats = false;
 	
 	/**
 	 * Launch the application.
@@ -93,7 +94,7 @@ public class MainWindow {
 		resultText = new StyledText(shell, SWT.BORDER | SWT.WRAP | SWT.V_SCROLL);
 		resultText.setText("Result");
 		resultText.setEditable(false);
-		resultText.setBounds(10, 120, 584, 304);
+		resultText.setBounds(10, 143, 584, 281);
 		
 		Button searchTestCases = new Button(shell, SWT.NONE);
 		searchTestCases.addMouseListener(new MouseAdapter() {
@@ -126,6 +127,16 @@ public class MainWindow {
 		lblNumberOfResults.setAlignment(SWT.RIGHT);
 		lblNumberOfResults.setBounds(420, 93, 117, 14);
 		lblNumberOfResults.setText("Number of results:");
+		
+		Button btnShowRecallAnd = new Button(shell, SWT.CHECK);
+		btnShowRecallAnd.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				showStats = ((Button)e.getSource()).getSelection();
+			}
+		});
+		btnShowRecallAnd.setBounds(244, 113, 350, 18);
+		btnShowRecallAnd.setText("Show recall and precision for example cases");
 
 		shell.open();
 		shell.layout();

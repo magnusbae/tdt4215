@@ -41,7 +41,6 @@ public class Indexer extends Thread {
 		Directory dirAtc;
 		Directory dirNLH;
 		Analyzer ana = new NorwegianAnalyzer(Version.LUCENE_CURRENT);
-		boolean showPr = true;
 		try {
 			dirICD10 = new SimpleFSDirectory(new File("Index/icd10"));
 			dirAtc = new SimpleFSDirectory(new File("Index/atc"));
@@ -119,10 +118,10 @@ public class Indexer extends Thread {
 					caseNum++;
 					String s = c.getCaseText();
 					searchResults += "Case nr. " + caseNum + "\n"; 
-					searchResults += search(s, sf, showPr, ana, dirNLH, m, caseNum);
+					searchResults += search(s, sf, m.showStats, ana, dirNLH, m, caseNum);
 				}
 			}else{
-				searchResults += search(m.getSearchText(), sf, showPr, ana, dirNLH, m, -1);
+				searchResults += search(m.getSearchText(), sf, false, ana, dirNLH, m, -1);
 			}
 			final String sr = searchResults;
 			display.asyncExec(new Runnable(){
