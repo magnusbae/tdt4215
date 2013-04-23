@@ -160,7 +160,7 @@ public class IndexFiles {
 					doc.add(new TextField("Name", i.getName(), Field.Store.YES));
 				if(i.getSynonyms() != null){
 					String syn = i.getSynonyms();
-//					syn += findSyn(i.getSynonyms());
+					syn += findSyn(i.getSynonyms());
 					TextField synonymField = new TextField("synonyms", syn, Field.Store.YES);
 					synonymField.setBoost(weight);
 					doc.add(synonymField);
