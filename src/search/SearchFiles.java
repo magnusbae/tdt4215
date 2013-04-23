@@ -50,6 +50,9 @@ public class SearchFiles {
 
 	public SearchFiles() {}
 	public Document[] Search(String searchString, Directory index, Analyzer analyzer, int numHits){
+		return Search(searchString, index, analyzer, numHits, "Chapter");
+	}
+	public Document[] Search(String searchString, Directory index, Analyzer analyzer, int numHits, String result){
 
 		try {
 			QueryParser q = new MultiFieldQueryParser(Version.LUCENE_CURRENT
@@ -71,13 +74,13 @@ public class SearchFiles {
 			for(ScoreDoc c:hits){
 				float score = c.score;
 				orgScores.add(score);
-				if(searcher.doc(c.doc).get("Chapter").contains("L"))
+				if(searcher.doc(c.doc).get(result).contains("L"))
 					score *=0.2;
-				if(searcher.doc(c.doc).get("Chapter").lastIndexOf('.') <= 7)
+				if(searcher.doc(c.doc).get(result).lastIndexOf('.') <= 7)
 					score *=0.4;
-				else if(searcher.doc(c.doc).get("Chapter").lastIndexOf('.') <= 5)
+				else if(searcher.doc(c.doc).get(result).lastIndexOf('.') <= 5)
 					score *=0.7;
-				else if(searcher.doc(c.doc).get("Chapter").lastIndexOf('.') <= 3)
+				else if(searcher.doc(c.doc).get(result).lastIndexOf('.') <= 3)
 					score *=0.8;
 				c.score = score;
 			}
@@ -102,4 +105,5 @@ public class SearchFiles {
 		return null;
 
 	}
+	
 }
