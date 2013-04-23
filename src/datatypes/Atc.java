@@ -6,6 +6,7 @@ public class Atc {
 	
 	String atcCode;
 	String label;
+	String synoym;
 	public Atc(){
 		
 	};
@@ -24,5 +25,11 @@ public class Atc {
 	@Override
 	public String toString() {
 		return atcCode + ": " + label;
+	}
+	public void addSynonym(String value) {
+		synoym += value;
+	}
+	public String getSynonyms() {
+		return synoym;
 	}
 }

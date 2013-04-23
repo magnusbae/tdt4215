@@ -79,7 +79,6 @@ public class SearchFiles {
 				float score = c.score;
 				orgScores.add(score);
 				if(searcher.doc(c.doc).get("Chapter") != null){
-					
 					if(searcher.doc(c.doc).get("Chapter").contains("L"))
 					score *=0.;
 					if(searcher.doc(c.doc).get("Chapter").lastIndexOf('.') <= 7)
@@ -94,9 +93,7 @@ public class SearchFiles {
 			Arrays.sort(hits, new Comparator<ScoreDoc>() {
 				@Override
 				public int compare(ScoreDoc o1, ScoreDoc o2) {
-					float score = (o2.score-o1.score);
-					score = score*10000;
-					return (int) score;
+					return Float.compare(o1.score, o2.score);
 				}
 			});
 			Document[] docs = new Document[hits.length];

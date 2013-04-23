@@ -135,6 +135,9 @@ public class IndexFiles {
 				if(i.getSynonyms() != null){
 					doc.add(new TextField("synonyms", i.getSynonyms(), Field.Store.YES));
 				}
+				if(i.getParents() != null){
+					doc.add(new TextField("parents", i.getParents(), Field.Store.YES));
+				}
 				indexer.addDocument(doc);
 			}
 			indexer.close();
@@ -166,10 +169,6 @@ public class IndexFiles {
 					doc.add(synonymField);
 				}
 				indexer.addDocument(doc);
-				if(i.getChapter().contains("T10.2.2") || i.getChapter().contains("T10.2.1")){
-					System.out.println(i.getChapter() + " - " + i.getName());
-					System.out.println(i.getText());
-				}
 			}
 			indexer.close();
 		} catch (Exception e) {
@@ -207,7 +206,7 @@ public class IndexFiles {
 			if(hits.length != 0){
 				int docId = hits[0].doc;
 				Document d = searcher.doc(docId);
-				syn += " " + d.get("Atccode") + " " +  d.get("label")+ " ";
+				syn += " " + d.get("Atccode") + " " +  d.get("label")+ " " + d.get("synonyms");
 			}
 			collector = TopScoreDocCollector.create(hitsPerPage, true);
 			reader.close();
@@ -220,7 +219,7 @@ public class IndexFiles {
 			if(hits.length != 0){
 				int docId = hits[0].doc;
 				Document d = searcher.doc(docId);
-				syn += " " + d.get("ICDCode") + d.get("synonyms") + " " +  d.get("label")+ " ";
+				syn += " " + d.get("ICDCode") + d.get("synonyms") + " " +  d.get("label")+ " " + d.get("parents");
 				reader.close();
 				return syn;
 			}
@@ -245,6 +244,8 @@ public class IndexFiles {
 					doc.add(new StringField("Atccode", i.getAtcCode(), Field.Store.YES));
 				if(i.getLabel()!=null)
 					doc.add(new TextField("label", i.getLabel(), Field.Store.YES));
+				if(i.getSynonyms()!=null)
+					doc.add(new TextField("synoyms", i.getSynonyms(), Field.Store.YES));
 				indexer.addDocument(doc);
 			}
 			indexer.close();
