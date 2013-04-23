@@ -30,10 +30,13 @@ public class Case {
 		String input = "";
 		String sentence = "";
 		for(char ch:caseText.toCharArray()){
-			if ((!Character.isLetter(ch) && !Character.isDigit(ch))) {
+//			System.out.println(ch);
+//			System.out.println((int) ch);
+			if ((int)ch ==46 || ((!Character.isLetter(ch) && !Character.isDigit(ch) && ch != '/' && ch != '(' && ch != ')' && ch != '%' && ch != ',' ))) {
 				boolean sentenceStop = false;
 				if(!Character.isWhitespace(ch)){
 					sentenceStop = true;
+				}else{
 				}
 				if (input.length() > 0) {
 					boolean stopword = false;
@@ -43,23 +46,23 @@ public class Case {
 							input="";
 							break;
 						}
-
 					if(!stopword){
 						String current = input;
-							if(!sentenceStop){
-								sentence += current + " . ";
-								this.caseText += current + " . ";
-								
-							}else {
-								sentence += current;
-								sentences.add(sentence);
-								sentence = "";
-								this.caseText += current + "  ";
-							}
+						sentence += current + " . ";
+						this.caseText += current + " . ";
 						input="";
 					}
+					if(sentenceStop){
+						sentences.add(sentence);
+						sentence = "";
+//						System.out.println("--------------------");
+					}
 				}
-			} else {
+
+			}else if (!Character.isLetter(ch) && !Character.isDigit(ch))
+				input += " . ";
+			else {
+
 				input += Character.toLowerCase(ch);
 			}
 		}

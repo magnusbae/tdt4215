@@ -179,6 +179,33 @@ public class Indexer extends Thread {
 		return searchResults;
 	}
 
+	private static String search(String s, SearchFiles sf, boolean showPres, Analyzer ana, Directory dirNLH, MainWindow m, int caseNum, String input) {
+		String[] case1 = {"T3.1", "L3.1.1"};
+		String[] case2 = {"T10.2", "T10.2.2"};
+		String[] case3 = {"T1.10"};
+		String[] case4 = {"T8.3", "T8.3.2", "T8.3.1"};
+		String[] case5 = {"T2.2.1.1", "T4.1", "T4.1.1"};
+		String[] case6 = {"T11.3.2", "T11.3.2", "T11.3.2.2", "T1.3"};
+		String[] case7 = {"T21", "T21.1.1", "T21.1.1.1", "L20.1.2.3"};
+		String[] case8 = {"T11.3.2", "T11.3.2.1", "T11.3.2.2", "T1.3"};
+		String[][] goldStandard = {case1, case2, case3, case4, case5, case6, case7, case8};
+
+		String searchResults = "";
+		Document[] doc = sf.Search(s, dirNLH, ana, m.numberOfSearchResults);
+		//				sf.Search(s, dirICD10, ana);
+		//				sf.Search(s, dirAtc, ana);
+		int right = 0;
+		if (doc != null){
+			for (int i = 0; i < doc.length; i++){
+				searchResults += doc[i].get(input) +", ";
+			}
+			//			searchResults += "\n------\n";
+
+		}else{
+			searchResults += "No results found\n------\n";
+		}
+		return searchResults;
+	}
 
 
 	public static int checkAnswer(Document[] answers, String[] goldStandard){
@@ -214,28 +241,29 @@ public class Indexer extends Thread {
 			final IndexFiles index = new IndexFiles(dirICD10,dirAtc,dirNLH, ana);
 			index.index();
 
-			
-			for(float i = 0; i<3;i+= 0.2)
-				for(float j = 0; j<3;j+= 0.2)
-					for(float k = 0; k<3;k+= 0.2){
-						SearchFiles sf = new SearchFiles(i,j,k);
-						int caseNum = 0;
-						float pres = 0;
-						for(Case c:cases){
-							//			Case c = cases[0];
-							//		for(String s:c.getSentences()){
-							caseNum++;
-							String s = c.getCaseText();
-							float[] f = searchPres(s, sf, showPr, ana, dirNLH, null, caseNum);
-							pres += f[0]/8;
-						}
-						if(pres> bestRe){
-							bestRe = pres;
-							best1 = i;
-							bestk = k;
-							bestj = j;
-						}
+
+			//Searches sentence by sentence and outputs the hits in the ICD 
+			//In string f = search , change dirICD10 to dirAtc and "ICDCode" to "AtcCode"
+			//To get search in ATC 
+			 
+			SearchFiles sf = new SearchFiles();
+			int caseNum = 0;
+			for(Case c:cases){
+				int sentenceNum = 0; 
+				//			Case c = cases[0];
+				caseNum++;
+				System.out.println("case num: " + caseNum);
+				for(String s:c.getSentences()){
+					sentenceNum++;
+					//	String s = c.getCaseText();
+					String f = search(s, sf, showPr, ana, dirICD10, null, caseNum, "ICDCode");
+					f = f.trim();
+					if (f != null && !f.equals("")){
+						System.out.println("Sentence number: " +sentenceNum);
+						System.out.println(f);
 					}
+
+				}	}		
 			dirAtc.close();
 			dirICD10.close();
 			dirNLH.close();
@@ -243,7 +271,6 @@ public class Indexer extends Thread {
 			e.printStackTrace();
 		}
 
-		System.out.println("Best recall: " + bestRe);
 	}
 
 
