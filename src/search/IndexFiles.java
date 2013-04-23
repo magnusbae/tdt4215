@@ -117,7 +117,7 @@ public class IndexFiles {
 		}
 		indexICD10();
 		indexAtc();
-		indexNLH(-1);
+		indexNLH(0.2f);
 	}
 	public void indexICD10(){
 		try {
@@ -160,16 +160,12 @@ public class IndexFiles {
 					doc.add(new TextField("Name", i.getName(), Field.Store.YES));
 				if(i.getSynonyms() != null){
 					String syn = i.getSynonyms();
-//					syn += findSyn(i.getSynonyms());
+					syn += findSyn(i.getSynonyms());
 					TextField synonymField = new TextField("synonyms", syn, Field.Store.YES);
 					synonymField.setBoost(weight);
 					doc.add(synonymField);
 				}
 				indexer.addDocument(doc);
-				if(i.getChapter().contains("T10.2.2") || i.getChapter().contains("T10.2.1")){
-					System.out.println(i.getChapter() + " - " + i.getName());
-					System.out.println(i.getText());
-				}
 			}
 			indexer.close();
 		} catch (Exception e) {

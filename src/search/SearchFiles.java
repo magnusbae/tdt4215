@@ -70,30 +70,25 @@ public class SearchFiles {
 			TopScoreDocCollector collector = TopScoreDocCollector.create(hitsPerPage, true);
 			searcher.search(q.parse(searchString), collector);
 			ScoreDoc[] hits = collector.topDocs().scoreDocs;
-//			System.out.println("");
-//			System.out.println("Found " + hits.length + " hits.");
-//			System.out.println("-----------------------------------");
 			ArrayList<Float> orgScores = new ArrayList<Float>();
 			
 			for(ScoreDoc c:hits){
 				float score = c.score;
 				orgScores.add(score);
 				if(searcher.doc(c.doc).get("Chapter").contains("L"))
-					score *=0.;
+					score *=0.4;
 				if(searcher.doc(c.doc).get("Chapter").lastIndexOf('.') <= 7)
-					score *=0.;
+					score *=0.5;
 				else if(searcher.doc(c.doc).get("Chapter").lastIndexOf('.') <= 5)
-					score *=0.;
+					score *=0.7;
 				else if(searcher.doc(c.doc).get("Chapter").lastIndexOf('.') <= 3)
-					score *=0.;
+					score *=0.8;
 				c.score = score;
 			}
 			Arrays.sort(hits, new Comparator<ScoreDoc>() {
 				@Override
 				public int compare(ScoreDoc o1, ScoreDoc o2) {
-					float score = (o2.score-o1.score);
-					score = score*10000;
-					return (int) score;
+					return Float.compare(o1.score, o2.score);
 				}
 			});
 			Document[] docs = new Document[hits.length];
