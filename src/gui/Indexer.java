@@ -206,37 +206,47 @@ public class Indexer extends Thread {
 		Directory dirNLH;
 		Analyzer ana = new NorwegianAnalyzer(Version.LUCENE_CURRENT);
 		boolean showPr = true;
-		float best1=-1, best2 =-1, bestPres = 0,bestRe = 0;
-		
-		for(float i = 0; i<4;i+= 0.1)
-			try {
-				dirICD10 = new SimpleFSDirectory(new File("Index/icd10" + i));
-				dirAtc = new SimpleFSDirectory(new File("Index/atc" + i));
-				dirNLH = new SimpleFSDirectory(new File("Index/NLH" + i));
-				final IndexFiles index = new IndexFiles(dirICD10,dirAtc,dirNLH, ana);
-				index.index(i);
-				SearchFiles sf = new SearchFiles();
-				int caseNum = 0;
-				float pres = 0;
-				for(Case c:cases){
-					//			Case c = cases[0];
-					//		for(String s:c.getSentences()){
-					caseNum++;
-					String s = c.getCaseText();
-					float[] f = searchPres(s, sf, showPr, ana, dirNLH, null, caseNum);
-					pres += f[0]/8;
-				}
-				if(pres> bestRe){
-					bestRe = pres;
-					best1 = i;
-				}
-				dirAtc.close();
-				dirICD10.close();
-				dirNLH.close();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+		float best1=-1, bestRe = 0;
+		float bestj = 0, bestk=0;
+		try {
+			dirICD10 = new SimpleFSDirectory(new File("Index/icd10"));
+			dirAtc = new SimpleFSDirectory(new File("Index/atc"));
+			dirNLH = new SimpleFSDirectory(new File("Index/NLH"));
+			final IndexFiles index = new IndexFiles(dirICD10,dirAtc,dirNLH, ana);
+			index.index();
+
+			
+			for(float i = 0; i<3;i+= 0.5)
+				for(float j = 0; j<3;j+= 0.5)
+					for(float k = 0; k<3;k+= 0.5){
+						SearchFiles sf = new SearchFiles(i,j,k);
+						int caseNum = 0;
+						float pres = 0;
+						for(Case c:cases){
+							//			Case c = cases[0];
+							//		for(String s:c.getSentences()){
+							caseNum++;
+							String s = c.getCaseText();
+							float[] f = searchPres(s, sf, showPr, ana, dirNLH, null, caseNum);
+							pres += f[0]/8;
+						}
+						if(pres> bestRe){
+							bestRe = pres;
+							best1 = i;
+							bestk = k;
+							bestj = j;
+						}
+					}
+			dirAtc.close();
+			dirICD10.close();
+			dirNLH.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		System.out.println("Best i: " + best1);
+		System.out.println("Best j: " + bestj);
+		System.out.println("Best k: " + bestk);
+		
 		System.out.println("Best recall: " + bestRe);
 	}
 
@@ -255,7 +265,7 @@ public class Indexer extends Thread {
 		String[][] goldStandard = {case1, case2, case3, case4, case5, case6, case7, case8};
 
 		String searchResults = "";
-		Document[] doc = sf.Search(s, dirNLH, ana, 4);
+		Document[] doc = sf.WeightedSearch(s, dirNLH, ana, 4);
 		//				sf.Search(s, dirICD10, ana);
 		//				sf.Search(s, dirAtc, ana);
 		int right = checkAnswer(doc, goldStandard[caseNum-1]);

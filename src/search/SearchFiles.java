@@ -48,7 +48,14 @@ import org.apache.lucene.util.Version;
 
 public class SearchFiles {
 
-	public SearchFiles() {}
+	float weight1, weight2, weight3;
+	public SearchFiles() {
+	}
+	public SearchFiles(float i, float j, float k) {
+		weight1 = i;
+		weight2 = j;
+		weight3 = k;
+	}
 	public Document[] Search(String searchString, Directory index, Analyzer analyzer, int numHits){
 
 		try {
@@ -72,13 +79,13 @@ public class SearchFiles {
 				float score = c.score;
 				orgScores.add(score);
 				if(searcher.doc(c.doc).get("Chapter").contains("L"))
-					score *=0.2;
+					score *=0.;
 				if(searcher.doc(c.doc).get("Chapter").lastIndexOf('.') <= 7)
-					score *=0.4;
+					score *=0.;
 				else if(searcher.doc(c.doc).get("Chapter").lastIndexOf('.') <= 5)
-					score *=0.7;
+					score *=0.;
 				else if(searcher.doc(c.doc).get("Chapter").lastIndexOf('.') <= 3)
-					score *=0.8;
+					score *=0.;
 				c.score = score;
 			}
 			Arrays.sort(hits, new Comparator<ScoreDoc>() {
@@ -102,4 +109,60 @@ public class SearchFiles {
 		return null;
 
 	}
+	public Document[] WeightedSearch(String searchString, Directory index, Analyzer analyzer, int numHits){
+
+		try {
+			QueryParser q = new MultiFieldQueryParser(Version.LUCENE_CURRENT
+					, new String[] {"label","synonyms"},
+					analyzer);
+
+//			int hitsPerPage = numHits;
+			int hitsPerPage = 10;
+			IndexReader reader = DirectoryReader.open(index);
+			IndexSearcher searcher = new IndexSearcher(reader);
+
+			TopScoreDocCollector collector = TopScoreDocCollector.create(hitsPerPage, true);
+			searcher.search(q.parse(searchString), collector);
+			ScoreDoc[] hits = collector.topDocs().scoreDocs;
+//			System.out.println("");
+//			System.out.println("Found " + hits.length + " hits.");
+//			System.out.println("-----------------------------------");
+			ArrayList<Float> orgScores = new ArrayList<Float>();
+			
+			for(ScoreDoc c:hits){
+				float score = c.score;
+				System.out.println(score);
+				orgScores.add(score);
+				if(searcher.doc(c.doc).get("Chapter").contains("L"))
+					score *=weight1;
+				if(searcher.doc(c.doc).get("Chapter").lastIndexOf('.') <= 7)
+					score *=1;
+				else if(searcher.doc(c.doc).get("Chapter").lastIndexOf('.') <= 5)
+					score *=weight3;
+				else if(searcher.doc(c.doc).get("Chapter").lastIndexOf('.') <= 3)
+					score *=weight2;
+				c.score = score;
+				System.out.println(score);
+			}
+			Arrays.sort(hits, new Comparator<ScoreDoc>() {
+				@Override
+				public int compare(ScoreDoc o1, ScoreDoc o2) {
+					float score = (o2.score-o1.score);
+					score = score*10000;
+					return (int) score;
+				}
+			});
+			Document[] docs = new Document[4];
+			for(int i = 0; i< 4;i++){
+				docs[i] = searcher.doc(hits[i].doc);
+			}
+			return docs;
+		} catch (ParseException | IOException e) {
+			e.printStackTrace();
+		}
+
+		return null;
+
+	}
+
 }
