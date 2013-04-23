@@ -135,7 +135,7 @@ public class MainWindow {
 				showStats = ((Button)e.getSource()).getSelection();
 			}
 		});
-		btnShowRecallAnd.setBounds(244, 113, 350, 18);
+		btnShowRecallAnd.setBounds(249, 119, 350, 18);
 		btnShowRecallAnd.setText("Show recall and precision for example cases");
 
 		shell.open();
