@@ -77,6 +77,9 @@ public class AtcParser{
                     if (predicate.getLocalName().equals("label")){
                         atc.setLabel(value);
                     }
+                    if(predicate.getLocalName().equals("subClassOf")){
+                    	atc.addSynonym(value);
+                    }
                 }
             }
 

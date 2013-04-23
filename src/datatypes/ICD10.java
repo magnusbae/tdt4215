@@ -7,6 +7,7 @@ public class ICD10 {
 	ArrayList<String> synonyms = new ArrayList<>();
 	String ICDCode;
 	String label;
+	String parents;
 	public ICD10(){
 		
 	};
@@ -37,5 +38,11 @@ public class ICD10 {
 	@Override
 	public String toString() {
 		return ICDCode + ": " + label + ": " + synonyms;
+	}
+	public String getParents() {
+		return parents;
+	}
+	public void addParents(String value) {
+		parents+= value;
 	}
 }

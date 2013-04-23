@@ -77,6 +77,9 @@ public class ICD10parser{
                     else if (predicate.getLocalName().equals("synonym")||predicate.getLocalName().equals("seeAlso")||predicate.getLocalName().equals("underterm")){
                         icd10.addSynonym(value);
                     }
+                    if(predicate.getLocalName().equals("subClassOf")){
+                    	icd10.addParents(value);
+                    }
                 }
             }
 
