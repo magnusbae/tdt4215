@@ -117,7 +117,7 @@ public class IndexFiles {
 		}
 		indexICD10();
 		indexAtc();
-		indexNLH(-1);
+		indexNLH(0.2f);
 	}
 	public void indexICD10(){
 		try {
