@@ -110,14 +110,14 @@ public class IndexFiles {
 	}
 
 	public void index(){
-		try {
-			FileUtils.deleteDirectory(new File("Index/"));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+//		try {
+//			FileUtils.deleteDirectory(new File("Index/"));
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
 		indexICD10();
 		indexAtc();
-		indexNLH(0.2f);
+		indexNLH(0.4f);
 	}
 	public void indexICD10(){
 		try {
@@ -134,9 +134,6 @@ public class IndexFiles {
 					doc.add(new TextField("label", i.getLabel(), Field.Store.YES));
 				if(i.getSynonyms() != null){
 					doc.add(new TextField("synonyms", i.getSynonyms(), Field.Store.YES));
-				}
-				if(i.getParents() != null){
-					doc.add(new TextField("parents", i.getParents(), Field.Store.YES));
 				}
 				indexer.addDocument(doc);
 			}
@@ -197,7 +194,6 @@ public class IndexFiles {
 
 			int hitsPerPage = 3;
 			DirectoryReader reader = DirectoryReader.open(dirAtc);
-//			IndexReader reader = IndexReader.open(dirAtc);
 			IndexSearcher searcher = new IndexSearcher(reader);
 			TopScoreDocCollector collector = TopScoreDocCollector.create(hitsPerPage, true);
 			synonyms = synonyms.replaceAll("[^\\w\\s]"," ");
@@ -206,7 +202,7 @@ public class IndexFiles {
 			if(hits.length != 0){
 				int docId = hits[0].doc;
 				Document d = searcher.doc(docId);
-				syn += " " + d.get("Atccode") + " " +  d.get("label")+ " " + d.get("synonyms");
+				syn += " " + d.get("Atccode") + " " +  d.get("label")+ " ";
 			}
 			collector = TopScoreDocCollector.create(hitsPerPage, true);
 			reader.close();
@@ -219,7 +215,7 @@ public class IndexFiles {
 			if(hits.length != 0){
 				int docId = hits[0].doc;
 				Document d = searcher.doc(docId);
-				syn += " " + d.get("ICDCode") + d.get("synonyms") + " " +  d.get("label")+ " " + d.get("parents");
+				syn += " " + d.get("ICDCode") + d.get("synonyms") + " " +  d.get("label")+ " ";
 				reader.close();
 				return syn;
 			}
@@ -244,8 +240,6 @@ public class IndexFiles {
 					doc.add(new StringField("Atccode", i.getAtcCode(), Field.Store.YES));
 				if(i.getLabel()!=null)
 					doc.add(new TextField("label", i.getLabel(), Field.Store.YES));
-				if(i.getSynonyms()!=null)
-					doc.add(new TextField("synoyms", i.getSynonyms(), Field.Store.YES));
 				indexer.addDocument(doc);
 			}
 			indexer.close();

@@ -1,10 +1,12 @@
 package datatypes;
 
 public class NLH {
+	
 	String chapter;
 	String synonyms = " "; 
 	String text = " ";
 	String name = " ";
+	
 	public NLH(String c, String t, String s) {
 		text = t;
 		chapter = c;
@@ -46,5 +48,8 @@ public class NLH {
 	}
 	public String getName(){
 		return name;
+	}
+	public void addSynonym(String name2) {
+		synonyms+= name2;
 	}
 }

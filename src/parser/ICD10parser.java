@@ -62,23 +62,26 @@ public class ICD10parser{
                     icd10 = new ICD10();
                 }
                 // Add label and synonyms
-                if (predicate.getLocalName().equals("label") || predicate.getLocalName().equals("synonym")||predicate.getLocalName().equals("seeAlso")||predicate.getLocalName().equals("underterm")) {
+                if (predicate.getLocalName().equals("label") || predicate.getLocalName().equals("synonym")||predicate.getLocalName().equals("seeAlso")||predicate.getLocalName().equals("underterm")||predicate.getLocalName().equals("subClassOf")) {
                     
                 	String value = object.toString();
-
-                	if(value.contains("http")){
-                    	int i = value.indexOf("http");
-                    	value = value.substring(0, i - 2);
-                    }
+                	try{
+	                	if(value.contains("http")){
+	                    	int i = value.indexOf("http");
+	                    	value = value.substring(0, i - 2);
+	                    }
+                	}catch(Exception e){
+                		if(value.contains("http")){
+	                    	int i = value.indexOf("http");
+	                    	value = value.substring(0, i);
+	                    }
+                	}
                    
                     if (predicate.getLocalName().equals("label")){
                         icd10.setLabel(value);
                     }
                     else if (predicate.getLocalName().equals("synonym")||predicate.getLocalName().equals("seeAlso")||predicate.getLocalName().equals("underterm")){
                         icd10.addSynonym(value);
-                    }
-                    if(predicate.getLocalName().equals("subClassOf")){
-                    	icd10.addParents(value);
                     }
                 }
             }

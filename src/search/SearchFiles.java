@@ -90,12 +90,11 @@ public class SearchFiles {
 			Arrays.sort(hits, new Comparator<ScoreDoc>() {
 				@Override
 				public int compare(ScoreDoc o1, ScoreDoc o2) {
-					return Float.compare(o1.score, o2.score);
+					return Float.compare(o2.score, o1.score);
 				}
 			});
 			Document[] docs = new Document[hits.length];
 			for(int i = 0; i< hits.length;i++){
-
 				docs[i] = searcher.doc(hits[i].doc);
 			}
 			return docs;

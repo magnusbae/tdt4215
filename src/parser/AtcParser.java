@@ -65,20 +65,24 @@ public class AtcParser{
                     atc = new Atc();
                 }
                 // Add label and synonyms
-                if (predicate.getLocalName().equals("label") || predicate.getLocalName().equals("synonym")||predicate.getLocalName().equals("seeAlso")||predicate.getLocalName().equals("underterm")) {
+                if (predicate.getLocalName().equals("label") || predicate.getLocalName().equals("synonym")||predicate.getLocalName().equals("seeAlso")||predicate.getLocalName().equals("underterm")||predicate.getLocalName().equals("subClassOf")) {
                 	String value = object.toString();
 
-                	if(value.contains("http")){
-                    	int i = value.lastIndexOf("http");
-                    	value = value.substring(0, i - 2);
-                    }
+                	try{
+	                	if(value.contains("http")){
+	                    	int i = value.indexOf("http");
+	                    	value = value.substring(0, i - 2);
+	                    }
+                	}catch(Exception e){
+                		if(value.contains("http")){
+	                    	int i = value.indexOf("http");
+	                    	value = value.substring(0, i);
+	                    }
+                	}
 //                	System.out.println("added: " + value);
                    
                     if (predicate.getLocalName().equals("label")){
                         atc.setLabel(value);
-                    }
-                    if(predicate.getLocalName().equals("subClassOf")){
-                    	atc.addSynonym(value);
                     }
                 }
             }

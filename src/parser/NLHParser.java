@@ -91,6 +91,10 @@ public class NLHParser {
 				if(node instanceof Element){
 					if(((Element)node).tagName().equalsIgnoreCase("H3")){
 						chapter.setChapter(name);
+						if(mainChapter != null){
+							chapter.addSynonym(mainChapter.getName());
+//							System.out.println("added: " + mainChapter.getName() + " to " + chapter.getName());
+						}
 						getName = false;
 					}else if(((Element)node).tagName().equalsIgnoreCase("H2")){
 						mainChapter.setChapter(name);
