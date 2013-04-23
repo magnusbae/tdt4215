@@ -78,15 +78,18 @@ public class SearchFiles {
 			for(ScoreDoc c:hits){
 				float score = c.score;
 				orgScores.add(score);
-				if(searcher.doc(c.doc).get("Chapter").contains("L"))
+				if(searcher.doc(c.doc).get("Chapter") != null){
+					
+					if(searcher.doc(c.doc).get("Chapter").contains("L"))
 					score *=0.;
-				if(searcher.doc(c.doc).get("Chapter").lastIndexOf('.') <= 7)
+					if(searcher.doc(c.doc).get("Chapter").lastIndexOf('.') <= 7)
 					score *=0.;
-				else if(searcher.doc(c.doc).get("Chapter").lastIndexOf('.') <= 5)
+					else if(searcher.doc(c.doc).get("Chapter").lastIndexOf('.') <= 5)
 					score *=0.;
-				else if(searcher.doc(c.doc).get("Chapter").lastIndexOf('.') <= 3)
+					else if(searcher.doc(c.doc).get("Chapter").lastIndexOf('.') <= 3)
 					score *=0.;
-				c.score = score;
+					c.score = score;
+				}
 			}
 			Arrays.sort(hits, new Comparator<ScoreDoc>() {
 				@Override
