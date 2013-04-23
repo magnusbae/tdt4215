@@ -81,13 +81,13 @@ public class SearchFiles {
 				if(searcher.doc(c.doc).get("Chapter") != null){
 					
 					if(searcher.doc(c.doc).get("Chapter").contains("L"))
-					score *=0.;
+					score *=0.4;
 					if(searcher.doc(c.doc).get("Chapter").lastIndexOf('.') <= 7)
-					score *=0.;
+					score *=0.5;
 					else if(searcher.doc(c.doc).get("Chapter").lastIndexOf('.') <= 5)
-					score *=0.;
+					score *=0.7;
 					else if(searcher.doc(c.doc).get("Chapter").lastIndexOf('.') <= 3)
-					score *=0.;
+					score *=0.8;
 					c.score = score;
 				}
 			}
@@ -134,7 +134,6 @@ public class SearchFiles {
 			
 			for(ScoreDoc c:hits){
 				float score = c.score;
-				System.out.println(score);
 				orgScores.add(score);
 				if(searcher.doc(c.doc).get("Chapter").contains("L"))
 					score *=weight1;
@@ -145,7 +144,6 @@ public class SearchFiles {
 				else if(searcher.doc(c.doc).get("Chapter").lastIndexOf('.') <= 3)
 					score *=weight2;
 				c.score = score;
-				System.out.println(score);
 			}
 			Arrays.sort(hits, new Comparator<ScoreDoc>() {
 				@Override

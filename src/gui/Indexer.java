@@ -215,9 +215,9 @@ public class Indexer extends Thread {
 			index.index();
 
 			
-			for(float i = 0; i<3;i+= 0.5)
-				for(float j = 0; j<3;j+= 0.5)
-					for(float k = 0; k<3;k+= 0.5){
+			for(float i = 0; i<3;i+= 0.2)
+				for(float j = 0; j<3;j+= 0.2)
+					for(float k = 0; k<3;k+= 0.2){
 						SearchFiles sf = new SearchFiles(i,j,k);
 						int caseNum = 0;
 						float pres = 0;
